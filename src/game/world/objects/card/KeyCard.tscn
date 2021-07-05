@@ -12,6 +12,9 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6, 9.13123 )
+
 [sub_resource type="Animation" id=3]
 length = 2.0
 loop = true
@@ -28,32 +31,29 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -2 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 6.0
-height = 4.0
-
 [node name="KeyCard" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 0, -1.57094 )
+position = Vector2( 0, -0.726138 )
 texture = ExtResource( 1 )
 hframes = 5
+
+[node name="Area2D" type="Area2D" parent="Sprite"]
+visible = false
+position = Vector2( 0, 0.174906 )
+monitorable = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+position = Vector2( 0, -1.19884 )
+shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
 anims/idle = SubResource( 3 )
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-monitorable = false
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -2 )
-shape = SubResource( 4 )
-
-[connection signal="area_entered" from="Area2D" to="." method="Entered"]
-[connection signal="body_entered" from="Area2D" to="." method="Entered"]
+[connection signal="area_entered" from="Sprite/Area2D" to="." method="Entered"]
+[connection signal="body_entered" from="Sprite/Area2D" to="." method="Entered"]

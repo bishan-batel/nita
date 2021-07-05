@@ -108,6 +108,10 @@ namespace Parry2.managers.save
         {
             GD.Print($"Loading {path} save --");
 
+            Directory dir = new Directory();
+            if (!dir.DirExists(SavesDirAbsPath))
+                dir.MakeDir(SavesDirAbsPath);
+
             SaveFile file = SaveFile.Open(path);
             if (file == null)
             {

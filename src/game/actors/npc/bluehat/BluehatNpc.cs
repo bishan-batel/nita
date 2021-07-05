@@ -28,7 +28,9 @@ namespace Parry2.game.actors.npc.bluehat
             _timeInBurrow = save.TimeInBurrow;
 
             if (save.Playback == "") return;
-            this.GetPlayback().Start(save.Playback);
+            this
+                .GetPlayback()
+                .Start(save.Playback);
         }
 
         public override void _Process(float delta)

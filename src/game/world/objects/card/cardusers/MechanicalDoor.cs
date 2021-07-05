@@ -12,6 +12,9 @@ namespace Parry2.game.world.objects.card.cardusers
 
         public void OnCardCollected()
         {
+#if DEBUG
+            if (Engine.EditorHint) return;
+#endif
             GetNode<AnimationPlayer>(nameof(AnimationPlayer))
                 .Play("open");
         }

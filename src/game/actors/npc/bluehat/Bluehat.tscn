@@ -229,7 +229,7 @@ position = Vector2( -1, -16 )
 texture = ExtResource( 1 )
 hframes = 6
 vframes = 5
-frame = 4
+frame = 24
 
 [node name="Spore" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -12 )

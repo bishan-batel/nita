@@ -255,7 +255,7 @@ parameters/playback = SubResource( 18 )
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, -2 )
+position = Vector2( 0, -1 )
 shape = SubResource( 19 )
 
 [node name="AttackArea" type="Area2D" parent="."]

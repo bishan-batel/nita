@@ -13,7 +13,6 @@ radius = 11.0
 [node name="Saw" type="Node2D"]
 script = ExtResource( 2 )
 Duration = 0.1
-Speed = 22.5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

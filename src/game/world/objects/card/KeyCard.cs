@@ -29,6 +29,8 @@ namespace Parry2.game.world.objects.card
         {
             GetNode<AnimationPlayer>("AnimationPlayer")
                 .Play("idle");
+
+            Color = Color;
         }
 
         public void Entered(object param)
