@@ -1,0 +1,2 @@
+﻿40779
+/home/bishan/code/godot/build/latest/godot

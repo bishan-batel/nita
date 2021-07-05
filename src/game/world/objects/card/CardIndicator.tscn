@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/objects/keycard/keycard_indicator.png" type="Texture" id=1]
+[ext_resource path="res://src/game/world/objects/card/CardIndicator.cs" type="Script" id=2]
+
+[node name="CardIndicator" type="Sprite"]
+texture = ExtResource( 1 )
+hframes = 5
+script = ExtResource( 2 )

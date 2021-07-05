@@ -1,0 +1,15 @@
+<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>9</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\game\actors\npc" />
+    <Folder Include="src\game\actors\npc\bluehat" />
+    <Folder Include="src\game\world\objects\saw" />
+    <Folder Include="src\ui\menu" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="TiledCS" Version="2.1.1" />
+  </ItemGroup>
+</Project>

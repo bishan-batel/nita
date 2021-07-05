@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/textures/objects/sporevine/sporevine.png" type="Texture" id=1]
+[ext_resource path="res://src/game/world/objects/sporevine/Sporevine.cs" type="Script" id=2]
+[ext_resource path="res://src/game/mechanic/hostile/HostileArea.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SegmentShape2D" id=1]
+b = Vector2( 58, -12 )
+
+[node name="Sporevine" type="Line2D"]
+position = Vector2( 1, 0 )
+points = PoolVector2Array( 0, 0, 58, -12 )
+width = 16.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+script = ExtResource( 2 )
+
+[node name="HostileArea" parent="." instance=ExtResource( 3 )]
+collision_layer = 8
+collision_mask = 0
+TeleportToSafeSpot = true
+Damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HostileArea"]
+shape = SubResource( 1 )

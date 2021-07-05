@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/tilesets/hostile/hostile.tres" type="TileSet" id=1]
+[ext_resource path="res://src/game/world/tilemaps/SpikesMap.cs" type="Script" id=2]
+
+[node name="Spikes" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 64
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 852027, 0, 0, 852028, 0, 0, 852029, 0, 0, 852030, 0, 0, 852031, 0, 0, 852032, 0, 0 )
+script = ExtResource( 2 )
+TeleportToSafeSpot = true
+Damage = 1.0

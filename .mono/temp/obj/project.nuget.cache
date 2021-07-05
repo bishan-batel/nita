@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "9OpF9cF0G7TF8RhPAcZf/xd8o4+EymnTZuvmCum38LwSSXxJnOmGtlfiF7DkP1flqZ97jMY0JpH7F1Ojdx1x0A==",
+  "success": true,
+  "projectFilePath": "/home/bishan/code/godot/Parry2/Parry2.csproj",
+  "expectedPackageFiles": [
+    "/home/bishan/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.0/microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "/home/bishan/.nuget/packages/microsoft.netframework.referenceassemblies.net472/1.0.0/microsoft.netframework.referenceassemblies.net472.1.0.0.nupkg.sha512",
+    "/home/bishan/.nuget/packages/tiledcs/2.1.1/tiledcs.2.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

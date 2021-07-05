@@ -1,0 +1,82 @@
+[gd_resource type="Theme" load_steps=11 format=2]
+
+[ext_resource path="res://assets/fonts/monogram_extended.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.12549, 0.184314, 0.117647, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.454902, 0.623529, 0.427451, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.341176, 0.47451, 0.321569, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.223529, 0.321569, 0.211765, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.435294, 0.392157, 0.439216, 1 )
+corner_detail = 14
+anti_aliasing_size = 5
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 0.431373, 0.431373, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.478431, 0.909804, 0.615686, 1 )
+border_width_left = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 7
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.521569, 0.768627, 0.968627, 1 )
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 1 )
+
+[resource]
+default_font = SubResource( 9 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = null
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+Fonts/fonts/ = null
+ItemList/colors/font_color = Color( 0.0745098, 0.0862745, 0.0901961, 1 )
+ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = null
+ItemList/styles/bg = SubResource( 5 )
+ItemList/styles/bg_focus = SubResource( 5 )
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = SubResource( 6 )
+ItemList/styles/selected_focus = SubResource( 6 )
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/ = null
+VScrollBar/styles/grabber = SubResource( 7 )
+VScrollBar/styles/grabber_highlight = null
+VScrollBar/styles/grabber_pressed = null
+VScrollBar/styles/scroll = SubResource( 8 )
+VScrollBar/styles/scroll_focus = null
