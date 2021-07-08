@@ -7,7 +7,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.0
 
-[node name="ShroomvineWheel" type="Node2D"]
+[node name="ShroomvineWheel" type="Node2D" groups=[
+"Layered",
+]]
 script = ExtResource( 2 )
 AngleFriction = 0.95
 HitImpulse = 20.0

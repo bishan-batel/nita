@@ -16,8 +16,9 @@ namespace Parry2.game.actors.player
         [Export] public int Health { get; set; }
 
         // Snaps to every 5 degrees
-        public float AttackRotSnap = 15.0f * Mathf.Pi / 180.0f;
+        [Export] public float AttackRotSnap = Mathf.Deg2Rad(45);
 
+        // TODO simplify damage system away from combat / clean up obsolete code
         void _damageProcess()
         {
             if (_invulnerable)
@@ -56,6 +57,7 @@ namespace Parry2.game.actors.player
             // If no hostile areas, exit
             if (nearestHostile == null) return;
 
+            Input.StartJoyVibration(0, 1f, 1f, .5f);
             if (nearestHostile.TeleportToSafeSpot)
                 _rollbackToSafeSpot();
 
@@ -66,9 +68,11 @@ namespace Parry2.game.actors.player
         }
 
         // TODO Death animation
-        public void _rollbackToSafeSpot() =>
+        void _rollbackToSafeSpot()
+        {
             GetTree()
                 .ReloadCurrentScene();
+        }
         // GameplayScene
         //     .CurrentRoom
         //     ?.LoadFromSave(SaveManager.CurrentSaveFile);
@@ -149,7 +153,10 @@ namespace Parry2.game.actors.player
 
 
             _inKnockback = true;
+            IsJumpHold = true;
             hittable._onHit(new HitInformation(this, dir));
+
+            Input.StartJoyVibration(0, .8f, .8f, .2f);
         }
     }
 }

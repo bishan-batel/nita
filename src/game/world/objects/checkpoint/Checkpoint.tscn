@@ -39,6 +39,7 @@ tracks/0/keys = {
 }
 
 [node name="Checkpoint" type="Node2D" groups=[
+"Layered",
 "Persist",
 ]]
 script = ExtResource( 2 )

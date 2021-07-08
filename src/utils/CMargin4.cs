@@ -2,11 +2,11 @@ using Godot;
 
 namespace Parry2.utils
 {
-    public struct Margin4
+    public struct CMargin4
     {
         public float Top, Bottom, Left, Right;
 
-        public Margin4(Camera2D camera)
+        public CMargin4(Camera2D camera)
         {
             Bottom = camera.DragMarginBottom;
             Top = camera.DragMarginTop;
@@ -14,7 +14,7 @@ namespace Parry2.utils
             Right = camera.DragMarginRight;
         }
 
-        public Margin4(float top, float bottom, float left, float right)
+        public CMargin4(float top, float bottom, float left, float right)
         {
             Top = top;
             Bottom = bottom;
@@ -22,7 +22,7 @@ namespace Parry2.utils
             Right = right;
         }
 
-        public void Assign(Camera2D camera)
+        public void AssignToDragMargin(Camera2D camera)
         {
             camera.DragMarginTop = Top;
             camera.DragMarginBottom = Bottom;
@@ -30,9 +30,10 @@ namespace Parry2.utils
             camera.DragMarginRight = Right;
         }
 
-        public Margin4 Lerp(Margin4 to, float weight)
+
+        public CMargin4 Lerp(CMargin4 to, float weight)
         {
-            return new Margin4(
+            return new(
                 Mathf.Lerp(Top, to.Top, weight),
                 Mathf.Lerp(Bottom, to.Bottom, weight),
                 Mathf.Lerp(Left, to.Left, weight),

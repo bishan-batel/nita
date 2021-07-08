@@ -65,13 +65,13 @@ namespace Parry2.game.world.objects.checkpoint
 
         public void Entered(Node body) => Claimed = GetPath();
 
-        public ISerializable Save() => new CheckpointSave(Claimed == GetPath());
+        public ISerializable Save() => new CheckpointSave(Claimed != GetPath());
 
         public void LoadFrom(ISerializable obj)
         {
             if (!(obj is CheckpointSave save)) return;
 
-            GetNode<AnimationPlayer>("AnimationPlayer")
+            this.GetNode<AnimationPlayer>("AnimationPlayer")
                 .Play(save.IsClaimed ? "unclaim" : "claim");
         }
 

@@ -217,6 +217,7 @@ height = 14.0
 
 [node name="PlayerShroom" type="KinematicBody2D" groups=[
 "GlobalPersist",
+"Layered",
 "Persist",
 ]]
 collision_layer = 4

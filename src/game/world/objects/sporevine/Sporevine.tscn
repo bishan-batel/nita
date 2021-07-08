@@ -7,7 +7,9 @@
 [sub_resource type="SegmentShape2D" id=1]
 b = Vector2( 58, -12 )
 
-[node name="Sporevine" type="Line2D"]
+[node name="Sporevine" type="Line2D" groups=[
+"Layered",
+]]
 position = Vector2( 1, 0 )
 points = PoolVector2Array( 0, 0, 58, -12 )
 width = 16.0
@@ -17,6 +19,7 @@ texture_mode = 1
 script = ExtResource( 2 )
 
 [node name="HostileArea" parent="." instance=ExtResource( 3 )]
+monitoring = false
 collision_layer = 8
 collision_mask = 0
 TeleportToSafeSpot = true

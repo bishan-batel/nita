@@ -7,7 +7,7 @@ namespace Parry2.game.camera
 {
     public class FollowCamera : Area2D
     {
-        Margin4 _dragMargin, _targetMargin;
+        CMargin4 _dragMargin, _targetMargin;
 
         Vector2 _targetPos, _targetZoom;
         [Export] public float SmoothingSpeed, MaxSmoothVel, ZoomRoundAmt;
@@ -48,7 +48,7 @@ namespace Parry2.game.camera
             _targetZoom = Zoom;
 
             var camera = GetNode<Camera2D>("Camera");
-            _dragMargin = new Margin4(camera);
+            _dragMargin = new CMargin4(camera);
         }
 
         public override void _Process(float delta)
@@ -70,9 +70,9 @@ namespace Parry2.game.camera
                 camera.Zoom = new Vector2(ZoomRoundAmt, ZoomRoundAmt);
 
             // Smooths margin to target
-            new Margin4(camera)
+            new CMargin4(camera)
                 .Lerp(_targetMargin, SmoothingSpeed)
-                .Assign(camera);
+                .AssignToDragMargin(camera);
         }
 
         public override void _PhysicsProcess(float delta)
@@ -91,14 +91,16 @@ namespace Parry2.game.camera
 
             _targetPos = GetNode<Node2D>(TargetPath).GlobalPosition;
             _targetZoom = Zoom;
+            // GlobalRotation = GetNode<Node2D>(TargetPath).GlobalRotation;
         }
 
         void _controlByArea(CameraControlArea area)
         {
+            // GlobalRotation = Mathf.LerpAngle(GlobalRotation, 0, .1f);
             _targetPos = area.GetNodeOrNull<Node2D>(area.Point)?.GlobalPosition ??
                          GetNode<Node2D>(TargetPath).GlobalPosition;
 
-            _targetMargin = new Margin4(0f, 0f, 0f, 0f);
+            _targetMargin = new CMargin4(0f, 0f, 0f, 0f);
             if (area.CameraZoom != Vector2.Zero)
                 _targetZoom = area.CameraZoom;
         }

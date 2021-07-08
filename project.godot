@@ -47,7 +47,7 @@ _global_script_class_icons={
 config/name="Parry2"
 run/main_scene="res://src/menu/Menu.tscn"
 boot_splash/image="res://assets/textures/detail/backgrounds/mushroom_plains 0.png"
-config/icon="res://icon.png"
+config/icon="res://assets/textures/objects/saw/saw.png"
 
 [autoload]
 

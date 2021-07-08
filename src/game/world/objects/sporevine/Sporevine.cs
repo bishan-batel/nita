@@ -5,10 +5,7 @@ namespace Parry2.game.world.objects.sporevine
     [Tool]
     public class Sporevine : Line2D
     {
-        public override void _Ready()
-        {
-            UpdatePoints();
-        }
+        public override void _Ready() => UpdatePoints();
 
         public void UpdatePoints()
         {

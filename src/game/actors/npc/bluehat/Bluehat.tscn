@@ -219,6 +219,7 @@ start_node = "get_up"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [node name="BluehatNpc" type="Node2D" groups=[
+"Layered",
 "Persist",
 ]]
 script = ExtResource( 3 )

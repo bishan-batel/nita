@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
+using Parry2.editor;
 using Parry2.managers.save;
 using Parry2.managers.sound;
 using Array = Godot.Collections.Array;
@@ -12,13 +13,14 @@ namespace Parry2.game.rooms
 {
     public class Room : Node
     {
-        [Export] public string RoomName = "";
+        [Export] public string RoomName = string.Empty;
         [Export] public NodePath Player;
 
         [Export(PropertyHint.ResourceType, "MusicSettings")]
         public MusicSettings MusicSettings;
 
         [Export] public Array<NodePath> Gateways { set; get; }
+
 
         public override void _Ready()
         {
@@ -66,12 +68,14 @@ namespace Parry2.game.rooms
             roomSave
                 .Keys
                 .ToList()
-                .ForEach(path =>
-                    GetNodeOrNull<IPersistant>(path)
-                        ?.LoadFrom(roomSave[path])
+                .ForEach(nodePath =>
+                    GetNodeOrNull<IPersistant>(nodePath)
+                        ?.LoadFrom(roomSave[nodePath])
                 );
 
             // TODO Implement global loading
+
+            ObjectOrder.OrganizeLayersInTree(GetTree());
         }
 
         public void SaveData(SaveFile saveFile = null)

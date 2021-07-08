@@ -10,7 +10,9 @@ radius = 11.0
 
 [sub_resource type="CircleShape2D" id=2]
 
-[node name="Saw" type="Node2D"]
+[node name="Saw" type="Node2D" groups=[
+"Layered",
+]]
 script = ExtResource( 2 )
 Duration = 0.1
 

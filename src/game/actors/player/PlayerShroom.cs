@@ -29,14 +29,18 @@ namespace Parry2.game.actors.player
 
         public void _turnAnim()
         {
-            float target = _velocity.x / MaxSpeed * -TurnAngle;
-            RotationDegrees += (target - RotationDegrees) * TurnSpeed;
+            float target = 0;
+
+            if (!IsOnFloor())
+                target = _velocity.x / MaxSpeed * -TurnAngle;
+
+            var sprite = GetNode<Sprite>("Sprite");
+            sprite.RotationDegrees += (target - sprite.RotationDegrees) * TurnSpeed;
         }
 
 
         public override void _Process(float delta)
         {
-            _turnAnim();
             _attackProcess();
 
             var sprite = GetNode<Sprite>("Sprite");

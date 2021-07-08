@@ -22,6 +22,7 @@ namespace Parry2.game.actors.player
         public override void _PhysicsProcess(float delta)
         {
             _velocity = MoveAndSlide(_velocity, Vector2.Up);
+            _turnAnim();
             _processMovement(delta);
             _processJump(delta);
         }
