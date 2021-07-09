@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/textures/mushroom/player/mushroom.png" type="Texture" id=1]
 [ext_resource path="res://src/menu/Menu.cs" type="Script" id=2]
 [ext_resource path="res://assets/default.tres" type="Theme" id=3]
-[ext_resource path="res://src/game/effects/parallax/FungalPlainsParallax.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/detail/effects/parallax/FungalPlainsParallax.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/monogram_extended.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="Animation" id=1]

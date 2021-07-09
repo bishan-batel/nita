@@ -49,7 +49,7 @@
               "version": "[2.1.1, )"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/129/sdk/5.0.301/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/mono/msbuild/Current/bin/RuntimeIdentifierGraph.json"
         }
       }
     }

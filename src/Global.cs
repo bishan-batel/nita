@@ -3,6 +3,7 @@
 using System;
 using Godot;
 
+
 namespace Parry2
 {
     public class Global : CanvasLayer
@@ -24,6 +25,8 @@ namespace Parry2
         public override void _Input(InputEvent @event)
         {
             if (!(@event is InputEventKey eventKey)) return;
+
+            GD.Print(@event.AsText());
 
 #if DEBUG
             if (eventKey.IsActionPressed("debug_restart"))

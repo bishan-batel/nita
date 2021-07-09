@@ -58,6 +58,7 @@ namespace Parry2.game.actors.player
             if (nearestHostile == null) return;
 
             Input.StartJoyVibration(0, 1f, 1f, .5f);
+            Input.StartJoyVibration(1, 1f, 1f, .5f);
             if (nearestHostile.TeleportToSafeSpot)
                 _rollbackToSafeSpot();
 
@@ -157,6 +158,7 @@ namespace Parry2.game.actors.player
             hittable._onHit(new HitInformation(this, dir));
 
             Input.StartJoyVibration(0, .8f, .8f, .2f);
+            Input.StartJoyVibration(1, .8f, .8f, .2f);
         }
     }
 }

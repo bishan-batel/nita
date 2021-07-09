@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/detail/foliage/chloropom.png" type="Texture" id=1]
+
+[node name="Chloropom" type="Sprite"]
+texture = ExtResource( 1 )
+hframes = 2
+vframes = 2

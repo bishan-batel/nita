@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/textures/mushroom/npc/mushroom1.png" type="Texture" id=1]
 [ext_resource path="res://src/game/mechanic/hittable/HittableArea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/game/actors/npc/bluehat/BluehatNpc.cs" type="Script" id=3]
-[ext_resource path="res://src/game/effects/Spore.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/detail/effects/Spore.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.336957, 0.677536, 1 )

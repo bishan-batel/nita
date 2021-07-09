@@ -45,8 +45,10 @@ namespace Parry2.game.rooms
 
         public override void _Process(float delta)
         {
+#if DEBUG
             if (Input.IsActionJustPressed("debug_load_from_save"))
                 GetTree().ReloadCurrentScene();
+#endif 
             //  LoadFromSave(SaveManager.CurrentSaveFile);
 
             Node currentScene = GetTree().CurrentScene;
