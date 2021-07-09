@@ -20,6 +20,7 @@ namespace Parry2.game.world.objects.card
             set
             {
                 _color = value;
+                if (!IsInsideTree()) return;
                 GetNode<Sprite>("Sprite").Frame = (int) value;
 
                 Connections

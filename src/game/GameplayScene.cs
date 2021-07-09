@@ -7,7 +7,9 @@ namespace Parry2.game
 {
     public class GameplayScene : GameState
     {
-        [Export] public PackedScene DefaultChapter;
+        [Export] public string DefaultChapterName = "test_room";
+
+        public GameplayScene Singleton;
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
@@ -29,7 +31,11 @@ namespace Parry2.game
         {
             base._Ready();
 
-            CurrentRoom ??= SaveManager.CurrentSaveFile?.CurrentChapter?.Instance() as Room;
+            CurrentRoom ??= SaveManager
+                .CurrentSaveFile
+                ?.CurrentRoom
+                ?.Instance() as Room;
+
             // CurrentRoom ??= DefaultChapter.Instance<Room>();
 
             Node chapterContainer = GetNode("ChapterContainer");
@@ -41,17 +47,28 @@ namespace Parry2.game
             chapterContainer.AddChild(CurrentRoom);
         }
 
-        public static void LoadFromChapter(Room room)
+        public static void LoadRoom(string roomName)
         {
-            room.GetTree().ChangeSceneTo(PackedScene);
+        }
+
+        public static void LoadRoom(Room room)
+        {
+            room
+                .GetTree()
+                .ChangeSceneTo(PackedScene);
+
+            // stores in static variable as a mock constructor argument
             CurrentRoom = (Room) room.Duplicate();
-            room.Free();
+
+            // I'm like 50% sure this queue free is not required because you are changing the scene
+            // but I don't want to risk a memory leak so I'm gonna leave it in here
+            room.QueueFree();
         }
 
         public static void LoadFromSave(SceneTree tree, SaveFile file)
         {
             tree.ChangeSceneTo(PackedScene);
-            CurrentRoom = file.CurrentChapter.Instance<Room>();
+            CurrentRoom = file.CurrentRoom.Instance<Room>();
         }
     }
 }

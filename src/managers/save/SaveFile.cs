@@ -56,7 +56,7 @@ namespace Parry2.managers.save
         public Dictionary<string, ISerializable> GlobalData { get; }
 
 
-        public PackedScene CurrentChapter =>
+        public PackedScene CurrentRoom =>
             RoomList.GetChapterScene(CurrentRoomName);
 
         public string Name { get; }

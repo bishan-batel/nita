@@ -53,7 +53,7 @@ namespace Parry2.game.rooms
 
             Node currentScene = GetTree().CurrentScene;
             if (currentScene != this) return;
-            GameplayScene.LoadFromChapter(this);
+            GameplayScene.LoadRoom(this);
         }
 
         public void LoadFromSave(SaveFile saveFile = null)

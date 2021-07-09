@@ -26,8 +26,6 @@ namespace Parry2
         {
             if (!(@event is InputEventKey eventKey)) return;
 
-            GD.Print(@event.AsText());
-
 #if DEBUG
             if (eventKey.IsActionPressed("debug_restart"))
                 GetTree().ReloadCurrentScene();

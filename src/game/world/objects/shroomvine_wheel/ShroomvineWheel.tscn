@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/objects/shroomvine/shroomvine.png" type="Texture" id=1]
 [ext_resource path="res://src/game/world/objects/shroomvine_wheel/ShroomvineWheel.cs" type="Script" id=2]
 [ext_resource path="res://src/game/mechanic/hittable/HittableArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/textures/effects/light/circular.png" type="Texture" id=4]
+[ext_resource path="res://src/game/detail/effects/GameVisibleNode.cs" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.0
@@ -24,5 +26,21 @@ KnockbackStrength = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HittableArea"]
 shape = SubResource( 1 )
+
+[node name="Center" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0.1, 0.1 )
+texture = ExtResource( 4 )
+texture_scale = 0.01
+energy = 1.41
+script = ExtResource( 5 )
+
+[node name="Ambient" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, 1 )
+texture = ExtResource( 4 )
+texture_scale = 0.31
+energy = 0.69
+script = ExtResource( 5 )
 
 [connection signal="OnHit" from="HittableArea" to="." method="_on_HittableArea_OnHit"]

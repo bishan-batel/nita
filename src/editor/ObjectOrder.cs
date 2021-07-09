@@ -5,6 +5,7 @@ using Godot;
 using Parry2.game.actors.npc.bluehat;
 using Parry2.game.actors.npc.bullshroom;
 using Parry2.game.actors.player;
+using Parry2.game.detail.foliage.glowing.chloropom;
 using Parry2.game.tilemaps;
 using Parry2.game.world.objects.card;
 using Parry2.game.world.objects.card.cardusers;
@@ -26,13 +27,13 @@ namespace Parry2.editor
             typeof(BackgroundMap),
             typeof(KeyCard),
             typeof(ShroomvineWheel),
-            typeof(Ilkspring),
             typeof(BluehatNpc),
-            typeof(Ilkspring),
+            typeof(PlayerShroom),
             typeof(Bullshroom),
+            typeof(Ilkspring),
             typeof(Sporevine),
             typeof(Saw),
-            typeof(PlayerShroom),
+            typeof(Chloropom),
             typeof(Checkpoint),
             typeof(GroundMap),
             typeof(MechanicalDoor),
