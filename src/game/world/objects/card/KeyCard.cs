@@ -4,10 +4,11 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Parry2.editor;
-using Parry2.game.tilemaps;
+using Parry2.game.world.tilemaps;
 
 namespace Parry2.game.world.objects.card
 {
+    // TODO fix this class / add electricity arc effect
     [Tool]
     public class KeyCard : Node2D
     {
@@ -44,22 +45,23 @@ namespace Parry2.game.world.objects.card
             if (Engine.EditorHint) return;
 #endif
             _electricity = new Array<Node>();
-            Connections
-                .ToList()
-                .ForEach(path =>
-                {
-                    Node node = _createElectricity(GlobalPosition, GetNode<Node2D>(path).GlobalPosition);
 
-                    GetParent().CallDeferred("add_child", node);
-                    _electricity.Add(node);
-                });
+            // Connections
+            //     .ToList()
+            //     .ForEach(path =>
+            //     {
+            //         Node node = _createElectricity(GlobalPosition, GetNode<Node2D>(path).GlobalPosition);
+            //
+            //         GetParent().CallDeferred("add_child", node);
+            //         _electricity.Add(node);
+            //     });
         }
 
         public void Entered(object param)
         {
             GetNode<AnimationPlayer>(nameof(AnimationPlayer)).Play("collected");
             AddChild(_timer = new Timer());
-            _timer.Start(.5f);
+            _timer.Start(.1f);
             _timer.Connect("timeout", this, nameof(Timeout));
         }
 

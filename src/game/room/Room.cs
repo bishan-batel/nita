@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using Parry2.editor;
+using Parry2.game.room;
 using Parry2.managers.save;
 using Parry2.managers.sound;
 using Array = Godot.Collections.Array;
@@ -48,7 +49,7 @@ namespace Parry2.game.rooms
 #if DEBUG
             if (Input.IsActionJustPressed("debug_load_from_save"))
                 GetTree().ReloadCurrentScene();
-#endif 
+#endif
             //  LoadFromSave(SaveManager.CurrentSaveFile);
 
             Node currentScene = GetTree().CurrentScene;

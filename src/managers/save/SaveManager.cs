@@ -71,22 +71,20 @@ namespace Parry2.managers.save
         }
 #endif
 
-        public static void Save()
-        {
-            Singleton._save();
-        }
-
-        void _save()
-        {
-            CallDeferred(nameof(_saveDeferred));
-        }
+        public static void Save() =>
+            Singleton.CallDeferred(nameof(_saveDeferred));
 
         void _saveDeferred()
         {
             GD.Print($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
 
-            // TODO Make sure if it is okay to save data outside of flush thread, if it isn't then find way to copy instance of the current room before passing into flush thread
-            GameplayScene.CurrentRoom.SaveData(CurrentSaveFile);
+            // TODO figure out wtf this TODO is saying
+            // TODO Make sure if it is okay to save data outside of flush thread,
+            // if it isn't then find way to copy instance of the current room before passing
+            // into flush thread
+            GameplayScene
+                .CurrentRoom
+                .SaveData(CurrentSaveFile);
 
             GD.Print($"Flushing save '{CurrentSaveFile.Name}' to filesystem. . .");
 

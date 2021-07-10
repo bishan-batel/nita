@@ -61,6 +61,9 @@ SoundManager="*res://src/managers/sound/SoundManager.cs"
 
 window/size/width=286
 window/size/height=168
+window/size/fullscreen=true
+window/size/test_width=1430
+window/size/test_height=840
 window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"

@@ -1,7 +1,9 @@
 using Godot;
-using System;
-using Parry2.game;
 
-public class GroundMap : Node2D
+namespace Parry2.game.world.tilemaps
 {
+    [Tool]
+    public class GroundMap : Node2D
+    {
+    }
 }

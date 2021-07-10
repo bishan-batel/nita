@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
+using Parry2.game.room;
 using Parry2.game.rooms;
 using Directory =
     Godot.Directory;

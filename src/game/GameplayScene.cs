@@ -1,4 +1,5 @@
 using Godot;
+using Parry2.game.room;
 using Parry2.game.rooms;
 using Parry2.managers.game;
 using Parry2.managers.save;
@@ -9,21 +10,18 @@ namespace Parry2.game
     {
         [Export] public string DefaultChapterName = "test_room";
 
-        public GameplayScene Singleton;
-
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
+        // (maybe an issue to do with connecting the script to the node?)
         public GameplayScene() : this(null)
         {
         }
 
-        public GameplayScene(Room room) : base(nameof(GameplayScene))
-        {
+        public GameplayScene(Room room) : base(nameof(GameplayScene)) =>
             CurrentRoom = room;
-        }
 
-        public static PackedScene PackedScene
-            => ResourceLoader.Load<PackedScene>("res://src/game/GameplayScene.tscn");
+        public static PackedScene PackedScene =>
+            ResourceLoader.Load<PackedScene>("res://src/game/GameplayScene.tscn");
 
         public static Room CurrentRoom { set; get; }
 
@@ -36,8 +34,6 @@ namespace Parry2.game
                 ?.CurrentRoom
                 ?.Instance() as Room;
 
-            // CurrentRoom ??= DefaultChapter.Instance<Room>();
-
             Node chapterContainer = GetNode("ChapterContainer");
 
             // Clears Container
@@ -49,6 +45,14 @@ namespace Parry2.game
 
         public static void LoadRoom(string roomName)
         {
+            Global
+                .Singleton
+                .GetTree()
+                .ChangeSceneTo(PackedScene);
+
+            CurrentRoom = RoomList
+                .GetChapterScene(roomName)
+                .Instance<Room>();
         }
 
         public static void LoadRoom(Room room)

@@ -31,7 +31,7 @@ namespace Parry2.game.world.objects.card.cardusers
             float target = _triggered ? TransformRot : NormalRot;
 
             int dir = Mathf.Sign(target - _rot);
-            _rot += dir * Speed;
+            _rot += dir * Speed * (delta * 100);
             if (Mathf.Sign(target - _rot) != dir)
                 _rot = target;
 

@@ -10,7 +10,7 @@ monitorable = false
 collision_layer = 0
 collision_mask = 524288
 script = ExtResource( 1 )
-SmoothingSpeed = 0.045
+SmoothingSpeed = 0.066
 MaxSmoothVel = 2.0
 ZoomRoundAmt = 1.0
 

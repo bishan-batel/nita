@@ -6,7 +6,6 @@ using Parry2.game.actors.npc.bluehat;
 using Parry2.game.actors.npc.bullshroom;
 using Parry2.game.actors.player;
 using Parry2.game.detail.foliage.glowing.chloropom;
-using Parry2.game.tilemaps;
 using Parry2.game.world.objects.card;
 using Parry2.game.world.objects.card.cardusers;
 using Parry2.game.world.objects.checkpoint;
@@ -14,6 +13,8 @@ using Parry2.game.world.objects.ilkspring;
 using Parry2.game.world.objects.saw;
 using Parry2.game.world.objects.shroomvine_wheel;
 using Parry2.game.world.objects.sporevine;
+using Parry2.game.world.tilemaps;
+using Object = Godot.Object;
 
 namespace Parry2.editor
 {
@@ -51,7 +52,8 @@ namespace Parry2.editor
         {
             if (node is null) return;
             node.ZAsRelative = false;
-            node.ZIndex = GetLayer(node.GetType());
+            node.ZIndex = Mathf.Min(GetLayer(node.GetType()), 0);
+            GD.Print(node.GetType());
         }
 
         public static int GetLayer(object obj) => GetLayer(obj.GetType());

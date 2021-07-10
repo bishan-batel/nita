@@ -10,7 +10,7 @@ namespace Parry2.game.camera
         CMargin4 _dragMargin, _targetMargin;
 
         Vector2 _targetPos, _targetZoom;
-        [Export] public float SmoothingSpeed, MaxSmoothVel, ZoomRoundAmt;
+        [Export] public float SmoothingSpeed = .1f, MaxSmoothVel, ZoomRoundAmt;
 
         [Export]
         public NodePath TargetPath
@@ -60,18 +60,20 @@ namespace Parry2.game.camera
 
             var camera = GetNode<Camera2D>("Camera");
 
+            float smoothSpeedDelta = 1 - Mathf.Pow(SmoothingSpeed, delta);
+            
             // Smooths position to target
-            GlobalPosition = GlobalPosition.LinearInterpolate(_targetPos, SmoothingSpeed).Round();
+            GlobalPosition = GlobalPosition.LinearInterpolate(_targetPos, smoothSpeedDelta).Round();
 
             // Smooths camera to target
-            camera.Zoom = camera.Zoom.LinearInterpolate(_targetZoom, SmoothingSpeed);
+            camera.Zoom = camera.Zoom.LinearInterpolate(_targetZoom, smoothSpeedDelta);
             camera.Zoom = (camera.Zoom / ZoomRoundAmt).Round() * ZoomRoundAmt;
             if (camera.Zoom == Vector2.Zero)
                 camera.Zoom = new Vector2(ZoomRoundAmt, ZoomRoundAmt);
 
             // Smooths margin to target
             new CMargin4(camera)
-                .Lerp(_targetMargin, SmoothingSpeed)
+                .Lerp(_targetMargin, smoothSpeedDelta)
                 .AssignToDragMargin(camera);
         }
 

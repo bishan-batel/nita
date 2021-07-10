@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="RoomGateway" type="Area2D"]
+monitorable = false
+collision_layer = 0
+collision_mask = 4
