@@ -41,7 +41,7 @@ namespace Parry2.game.world.objects.checkpoint
                     player.GlobalPosition = checkpoint.GlobalPosition;
                 }
 
-                SaveManager.Save();
+                SaveManager.SaveDeferred();
 
                 // Swamps player position back
                 if (player is not null)

@@ -48,11 +48,7 @@ namespace Parry2.game
             Global
                 .Singleton
                 .GetTree()
-                .ChangeSceneTo(PackedScene);
-
-            CurrentRoom = RoomList
-                .GetChapterScene(roomName)
-                .Instance<Room>();
+                .ChangeSceneTo(RoomList.GetChapterScene(roomName));
         }
 
         public static void LoadRoom(Room room)
