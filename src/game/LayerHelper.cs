@@ -15,14 +15,6 @@ namespace Parry2.game
             get => false;
         }
 
-        [Export]
-        public bool StartOrganizeInterval
-        {
-            // ReSharper disable once ValueParameterNotUsed
-            set => ObjectOrder.OrganizeLayersInTree(IsInsideTree() ? GetTree() : null);
-            get => false;
-        }
-
         [Export] public float OrganizeInterval = 1.0f;
 
 #if DEBUG
