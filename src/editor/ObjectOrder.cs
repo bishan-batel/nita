@@ -53,7 +53,19 @@ namespace Parry2.editor
             if (node is null) return;
             node.ZAsRelative = false;
             node.ZIndex = Mathf.Min(GetLayer(node.GetType()), 0);
-            GD.Print(node.GetType());
+
+            // If the search failed, double check with script
+            if (node.ZIndex != -1) return;
+
+            Reference scriptRef = node.GetScript();
+            if (scriptRef is not CSharpScript script) return;
+
+            string name = script
+                .ResourcePath
+                .Split("/")
+                .Last()
+                .Replace(".cs", "");
+            node.ZIndex = Order.FindIndex(type => type.Name == name);
         }
 
         public static int GetLayer(object obj) => GetLayer(obj.GetType());
