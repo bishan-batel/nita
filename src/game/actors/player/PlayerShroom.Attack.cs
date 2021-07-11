@@ -74,9 +74,6 @@ namespace Parry2.game.actors.player
             GetTree()
                 .ReloadCurrentScene();
         }
-        // GameplayScene
-        //     .CurrentRoom
-        //     ?.LoadFromSave(SaveManager.CurrentSaveFile);
 
         void _attackProcess()
         {
