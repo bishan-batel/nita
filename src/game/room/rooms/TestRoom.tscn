@@ -234,250 +234,249 @@ z_as_relative = false
 
 [node name="Chloropom26" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 956, 217 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom27" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 909, 123 )
 flip_h = true
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom28" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 954, 96 )
 rotation = -1.5708
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom29" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 866, 123 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom30" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 851, 122 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom31" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 822, 201 )
 frame = 1
 Frame = 1
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom32" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 798, 202 )
 flip_h = true
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom33" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 736, 248 )
 flip_h = true
 frame = 1
 Frame = 1
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom34" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 697, 218 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom35" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 754, 250 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom36" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 744, 152 )
 frame = 5
 Frame = 5
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom37" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1203, 100 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom38" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1324, 112 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom39" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1486, 71 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom40" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1529, 75 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom41" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1599, 123 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom44" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1432, 186 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom45" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1262, 84 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom46" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1274, 183 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom47" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1146, 191 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom48" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1155, 116 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom49" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1103, 120 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom50" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 719, 152 )
 flip_h = true
 frame = 5
 Frame = 5
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom51" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1069, 121 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom52" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1015, 130 )
 rotation = 1.73137
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom53" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 993, 148 )
 rotation = 2.92517
-Energy = 0.94
 
 [node name="Chloropom54" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1489, 168 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom55" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1544, 152 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom56" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1526, 168 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom57" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1660, 132 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom58" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1718, 90 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom59" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1642, 4 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom60" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1560, -16 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom61" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1482, 1 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom62" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1537, 29 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom63" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1682, 33 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom64" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1623, 40 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom65" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1598, 79 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom66" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1757, 185 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom67" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1622, 135 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom68" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1801, 168 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom69" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1851, 61 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom70" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1710, 168 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom71" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1710, 168 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 147, 217 )
 offset = Vector2( 0, 1.319 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom14" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 355, 185 )
 offset = Vector2( 0, 1.319 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom25" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1049, 163 )
 rotation = -1.5708
-Energy = 0.94
+Energy = 0.314
 
 [node name="Chloropom16" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 504, 218 )
 frame = 5
 Frame = 5
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom19" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 425, 218 )
 flip_h = true
 frame = 5
 Frame = 5
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom20" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 457, 221 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom21" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 995, 217 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom22" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1041, 217 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom23" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1041, 217 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom17" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 431, 151 )
@@ -485,43 +484,43 @@ rotation = 3.26377
 offset = Vector2( 0, 1.346 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom18" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 509, 134 )
 rotation = 2.94612
 offset = Vector2( 0, 1.346 )
 flip_h = true
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom15" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 279, 215 )
 offset = Vector2( 0, 1.319 )
 frame = 4
 Frame = 4
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom3" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( -59, 217 )
 frame = 3
 Frame = 3
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom9" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( -9, 217 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom11" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 58, 218 )
 offset = Vector2( -0.2, 1.653 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom10" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( -20, 218 )
 offset = Vector2( 0, 1.258 )
 frame = 2
 Frame = 2
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom6" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 240, 217 )
@@ -529,14 +528,14 @@ offset = Vector2( 0, 0.004 )
 flip_h = true
 frame = 3
 Frame = 3
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom7" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 223, 218 )
 offset = Vector2( 0, 1.265 )
 frame = 2
 Frame = 2
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom8" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 180, 176 )
@@ -545,7 +544,7 @@ offset = Vector2( 0, -1.38 )
 flip_h = true
 frame = 1
 Frame = 1
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom5" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 377, 185 )
@@ -553,20 +552,20 @@ offset = Vector2( 0, 2.368 )
 flip_h = true
 frame = 2
 Frame = 2
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom2" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 283, 219 )
 frame = 2
 Frame = 2
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom4" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 249, 135 )
 rotation = 3.38594
 frame = 2
 Frame = 2
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom12" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 329, 116 )
@@ -574,133 +573,136 @@ rotation = 2.84314
 offset = Vector2( 0.05, -1.38 )
 frame = 3
 Frame = 3
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom13" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 311, 116 )
 rotation = 3.21315
 offset = Vector2( 0.05, 2.408 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom24" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 934, 174 )
 rotation = 1.5708
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom72" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1933, 91 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom73" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1973, 89 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom75" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1781, 56 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom76" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1789, 113 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom77" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1819, 87 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom78" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1825, 47 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom74" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1887, 90 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom80" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1590, 475 )
 frame = 1
 Frame = 1
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom" parent="Foliage/Chloropom80" instance=ExtResource( 23 )]
 position = Vector2( 123, -2 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom81" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1627, 377 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom79" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1912, 422 )
 rotation = 3.14159
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom82" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1863, 359 )
 rotation = 3.14159
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom83" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1804, 343 )
 rotation = 3.14159
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom84" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1800, 402 )
 rotation = 1.5708
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom85" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1814, 455 )
 rotation = 1.5708
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom86" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 1965, 457 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom87" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2009, 363 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom88" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2049, 444 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom89" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2240, 433 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom90" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2199, 341 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom91" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2368, 491 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom92" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 2449, 489 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom93" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 390, 42 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Chloropom94" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 528, 42 )
-Energy = 0.94
+Energy = 0.0
+
+[node name="Chloropom42" parent="Foliage" instance=ExtResource( 23 )]
+position = Vector2( 567, -61 )
+Energy = 0.0
+
+[node name="Chloropom43" parent="Foliage" instance=ExtResource( 23 )]
+position = Vector2( 567, -61 )
+
+[node name="Chloropom96" parent="Foliage" instance=ExtResource( 23 )]
+position = Vector2( 887, 29 )
+Energy = 0.0
 
 [node name="Chloropom95" parent="Foliage" instance=ExtResource( 23 )]
 position = Vector2( 459, 87 )
-Energy = 0.94
-
-[node name="Chloropom2" parent="Foliage/Chloropom95" instance=ExtResource( 23 )]
-position = Vector2( 115, -140 )
-Energy = 0.94
-
-[node name="Chloropom" parent="Foliage/Chloropom95/Chloropom2" instance=ExtResource( 23 )]
-position = Vector2( 313, 82 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Overlay text" type="Node2D" parent="."]
 z_index = 1
@@ -972,14 +974,14 @@ z_as_relative = false
 points = PoolVector2Array( -34, 8, 94, 8 )
 
 [node name="joao" type="Sprite" parent="."]
-position = Vector2( 2244, 441 )
+position = Vector2( 2241, 447 )
 scale = Vector2( 0.50679, 0.157407 )
 texture = ExtResource( 2 )
 
 [node name="Chloropom" parent="joao" instance=ExtResource( 23 )]
 show_behind_parent = true
 position = Vector2( -13.8135, -57.1768 )
-Energy = 0.94
+Energy = 0.0
 
 [node name="Saws" type="Node2D" parent="."]
 
@@ -1155,8 +1157,8 @@ rotation = 1.5708
 z_as_relative = false
 Speed = 1.0
 NormalRot = 90.0
-TransformRot = 270.0
 DegreeSnap = 5.625
+TransformRot = 270.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
 position = Vector2( -32, 0 )

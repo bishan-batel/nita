@@ -17,9 +17,10 @@ namespace Parry2.game.detail.foliage.glowing.chloropom
         {
             set
             {
+                _energy = value;
                 if (IsInsideTree()) GetNode<Light2D>(nameof(Light2D)).Energy = value;
             }
-            get => IsInsideTree() ? GetNode<Light2D>(nameof(Light2D)).Energy : 0;
+            get => _energy;
         }
 
         [Export]
@@ -32,15 +33,20 @@ namespace Parry2.game.detail.foliage.glowing.chloropom
             get => IsInsideTree() && GetNode<Light2D>(nameof(Light2D)).Visible;
         }
 
+        float _energy = .87f;
+
 
         public override void _Ready()
         {
             Frame = Frame;
+            Energy = Energy;
 #if DEBUG
             DisplayInEditor = !Engine.EditorHint;
 #else
             DisplayInEditor = true;
 #endif
+            if (Energy == 0)
+                Energy = .87f;
         }
     }
 }
