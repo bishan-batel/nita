@@ -67,14 +67,17 @@ namespace Parry2.managers.save
         public override void _Input(InputEvent @event)
         {
             if (Input.IsActionJustPressed("debug_save"))
-                Save();
+                SaveDeferred();
         }
 #endif
 
-        public static void Save() =>
-            Singleton.CallDeferred(nameof(_saveDeferred));
+        public static void SaveDeferred() =>
+            Singleton.CallDeferred(nameof(_save));
 
-        void _saveDeferred()
+        public static void Save() =>
+            Singleton._save();
+
+        void _save()
         {
             GD.Print($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
 
