@@ -16,8 +16,9 @@ namespace Parry2.game.world.objects.checkpoint
             set
             {
                 if (value?.ToString() == _claimed?.ToString()) return;
+                if (value is null) return;
 
-                // Unclaim animation for previous checkpoint if exists
+                // unclaim animation for previous checkpoint if exists
                 Global
                     .Singleton
                     .GetNodeOrNull<Checkpoint>(_claimed ?? "")
@@ -53,7 +54,10 @@ namespace Parry2.game.world.objects.checkpoint
             get => _claimed;
         }
 
-        static NodePath _claimed;
+#nullable enable
+        static NodePath? _claimed;
+
+        public static void ClearCheckpoint() => Claimed = null;
 
         public void Claim() =>
             GetNode<AnimationPlayer>("AnimationPlayer")

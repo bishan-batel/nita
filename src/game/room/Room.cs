@@ -6,6 +6,7 @@ using Godot;
 using Godot.Collections;
 using Parry2.editor;
 using Parry2.game.actors.player;
+using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
 using Parry2.managers.sound;
 using Array = Godot.Collections.Array;
@@ -34,12 +35,8 @@ namespace Parry2.game.room
                 .Cast<RoomGateway>()
                 .FirstOrDefault(gate => gate.Name == GameplayScene.EnteredGate);
 
-            if (gateway == null)
-            {
-                GD.Print($"[{RoomName}] unable to find {GameplayScene.EnteredGate}");
-                gateway = GetNodeOrNull<RoomGateway>(DefaultGateway);
-            }
-
+            if (Checkpoint.Claimed == null)
+                gateway ??= GetNodeOrNull<RoomGateway>(DefaultGateway);
             gateway?.EnteredCutscene(player);
 
             SaveData();

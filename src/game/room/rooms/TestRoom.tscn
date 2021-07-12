@@ -41,40 +41,40 @@ extents = Vector2( 104, 88 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 104, 88 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 114, 60 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 104, 80 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 153, 100 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 133, 136 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 101, 41 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 49, 16 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 56, 37 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 11, 88 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 118, 81 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 144, 99 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 169, 99 )
 
-[sub_resource type="Shader" id=15]
+[sub_resource type="Shader" id=16]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/god-rays
@@ -183,8 +183,8 @@ void fragment()
 	COLOR = vec4(shine, rays * color.a);
 }"
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = SubResource( 15 )
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
 shader_param/angle = 0.396
 shader_param/position = 0.062
 shader_param/spread = 0.611
@@ -199,7 +199,7 @@ shader_param/color = Color( 0.576471, 0.494118, 0.741176, 1 )
 shader_param/hdr = false
 shader_param/seed = 5.368
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 10, 22 )
 
 [node name="TestRoom" type="Node2D"]
@@ -1060,6 +1060,10 @@ z_as_relative = false
 position = Vector2( 1591, 24 )
 z_as_relative = false
 
+[node name="Saw17" parent="Saws" instance=ExtResource( 16 )]
+position = Vector2( 248, 3 )
+z_as_relative = false
+
 [node name="meat boris" type="Sprite" parent="."]
 position = Vector2( 2062, 41.0005 )
 scale = Vector2( 0.459059, 0.283008 )
@@ -1105,6 +1109,11 @@ position = Vector2( 188, 202 )
 
 [node name="Pit" parent="Checkpoints" instance=ExtResource( 13 )]
 position = Vector2( 700, -89 )
+z_index = 10
+z_as_relative = false
+
+[node name="Pit2" parent="Checkpoints" instance=ExtResource( 13 )]
+position = Vector2( 60, -153 )
 z_index = 10
 z_as_relative = false
 
@@ -1198,7 +1207,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraControlArea2"]
 position = Vector2( 20, 24 )
-shape = SubResource( 18 )
+shape = SubResource( 5 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/CameraControlArea2"]
 position = Vector2( 57, 0 )
@@ -1211,7 +1220,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/CameraControlArea3"]
 position = Vector2( 0, -24 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/CameraControlArea3"]
 position = Vector2( 0, -16 )
@@ -1224,7 +1233,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Spike Floor"]
 position = Vector2( 87, -16 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Spike Floor"]
 position = Vector2( 108, -25 )
@@ -1237,7 +1246,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Up Section"]
 position = Vector2( 18, -32 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Up Section"]
 position = Vector2( 19, 19 )
@@ -1250,11 +1259,11 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Up Section - Below"]
 position = Vector2( 13, 52 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CameraAreas/Up Section - Below"]
 position = Vector2( 63, -5 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Up Section - Below"]
 position = Vector2( 17, 5 )
@@ -1267,7 +1276,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Up Section - Secret"]
 position = Vector2( 28, -29 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Up Section - Secret"]
 position = Vector2( 47, -27 )
@@ -1280,7 +1289,7 @@ Point = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Trapdoor"]
 position = Vector2( 30, 4 )
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Basement" parent="CameraAreas" instance=ExtResource( 4 )]
 visible = false
@@ -1290,7 +1299,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Basement"]
 position = Vector2( 25, 13 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Basement"]
 position = Vector2( 33, 19 )
@@ -1303,7 +1312,7 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Hallway"]
 position = Vector2( -22, -6 )
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Hallway"]
 position = Vector2( -17, -33 )
@@ -1316,14 +1325,14 @@ Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/What"]
 position = Vector2( -25, -6 )
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/What"]
 position = Vector2( -22, -4 )
 
 [node name="godrays" type="Sprite" parent="."]
 visible = false
-material = SubResource( 16 )
+material = SubResource( 17 )
 position = Vector2( 616, -8 )
 scale = Vector2( 9.46875, 3.51563 )
 z_index = 8
@@ -1343,6 +1352,6 @@ TargetGate = "TestGateway"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
 position = Vector2( -15, 0 )
-shape = SubResource( 17 )
+shape = SubResource( 18 )
 
 [editable path="Saws/Saw21/Saw22"]

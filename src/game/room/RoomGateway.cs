@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using Parry2.game.actors.player;
+using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
 
 namespace Parry2.game.room
@@ -79,7 +80,8 @@ namespace Parry2.game.room
             if (_cooldownTimer?.IsInsideTree() ?? false) return;
             if (body is not PlayerShroom player) return;
             _player = player;
-
+            
+            Checkpoint.ClearCheckpoint();
             SaveManager.Save();
             GameplayScene.LoadRoom(TargetRoomName, TargetGate);
         }
