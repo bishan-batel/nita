@@ -39,7 +39,7 @@ namespace Parry2.game.actors.npc.bluehat
                 .CurrentRoom?
                 .GetNodeOrNull<PlayerShroom>(GameplayScene.CurrentRoom?.Player);
 
-            if (player is not null)
+            if (player is not null && player.IsInsideTree())
             {
                 var facing = new Vector2(Mathf.Sin(-Rotation), Mathf.Cos(-Rotation));
                 float angle = (player.GlobalPosition - GlobalPosition).AngleTo(facing) + Mathf.Pi;

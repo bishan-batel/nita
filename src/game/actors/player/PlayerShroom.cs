@@ -15,7 +15,7 @@ namespace Parry2.game.actors.player
         }
 
         public bool IsJumpHold { set; get; }
-
+        public bool ControlActive { get; set; } = true;
 
         public void Kill()
         {

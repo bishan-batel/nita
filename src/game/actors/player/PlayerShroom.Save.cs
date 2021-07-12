@@ -18,7 +18,7 @@ namespace Parry2.game.actors.player
 
         public ISerializable GlobalSave() => null;
 
-        // Normal Persistance
+        // Normal Persistence
         public ISerializable Save()
         {
             return new PlayerShroomData
@@ -32,7 +32,6 @@ namespace Parry2.game.actors.player
             if (!(obj is PlayerShroomData save)) return;
             Position = save.Position;
         }
-
 
         [Serializable]
         internal class PlayerShroomData : ISerializable

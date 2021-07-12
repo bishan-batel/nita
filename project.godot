@@ -61,7 +61,6 @@ SoundManager="*res://src/managers/sound/SoundManager.cs"
 
 window/size/width=286
 window/size/height=168
-window/size/fullscreen=true
 window/size/test_width=1430
 window/size/test_height=840
 window/dpi/allow_hidpi=true
@@ -202,6 +201,10 @@ attack_up={
 2d_physics/layer_6="hittable"
 2d_physics/layer_7="safe_position"
 2d_physics/layer_20="camera"
+
+[mono]
+
+debugger_agent/wait_timeout=10000
 
 [physics]
 

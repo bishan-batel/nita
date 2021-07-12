@@ -1,7 +1,6 @@
 using System;
 using Godot;
 using Parry2.game.room;
-using Parry2.game.rooms;
 
 namespace Parry2.game.world.objects
 {

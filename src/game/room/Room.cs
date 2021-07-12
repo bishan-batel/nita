@@ -1,27 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 using Godot;
 using Godot.Collections;
 using Parry2.editor;
-using Parry2.game.room;
+using Parry2.game.actors.player;
 using Parry2.managers.save;
 using Parry2.managers.sound;
 using Array = Godot.Collections.Array;
 
-namespace Parry2.game.rooms
+namespace Parry2.game.room
 {
     public class Room : Node
     {
         [Export] public string RoomName = string.Empty;
         [Export] public NodePath Player;
-
-        [Export(PropertyHint.ResourceType, "MusicSettings")]
-        public MusicSettings MusicSettings;
-
-        [Export] public Array<NodePath> Gateways { set; get; }
-
+        [Export] public NodePath DefaultGateway;
 
         public override void _Ready()
         {
@@ -29,19 +24,25 @@ namespace Parry2.game.rooms
                 throw new Exception("Unauthorized name");
 
             LoadFromSave(SaveManager.CurrentSaveFile);
+
+            var player = GetNode<PlayerShroom>(Player);
+
+            GD.Print($"[{RoomName}] {GameplayScene.EnteredGate}");
+
+            RoomGateway gateway = GetTree()
+                .GetNodesInGroup(RoomGateway.GatewayGroup)
+                .Cast<RoomGateway>()
+                .FirstOrDefault(gate => gate.Name == GameplayScene.EnteredGate);
+
+            if (gateway == null)
+            {
+                GD.Print($"[{RoomName}] unable to find {GameplayScene.EnteredGate}");
+                gateway = GetNodeOrNull<RoomGateway>(DefaultGateway);
+            }
+
+            gateway?.EnteredCutscene(player);
+
             SaveData();
-
-            if (!(MusicSettings is null))
-                SoundManager.Play(MusicSettings);
-
-            // TODO make gateways work
-            // if (Gateways is null) return;
-            // if (EnteredGate >= Gateways.Count) return;
-            //
-            // var gateway = GetNodeOrNull<ChapterGateway>(Gateways[EnteredGate]);
-            // if (gateway is null) return;
-            //
-            // GetNode<PlayerShroom>(Player).GlobalPosition = gateway.GlobalPosition;
         }
 
         public override void _Process(float delta)

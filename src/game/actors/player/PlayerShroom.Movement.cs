@@ -23,6 +23,7 @@ namespace Parry2.game.actors.player
         {
             _velocity = MoveAndSlide(_velocity, Vector2.Up);
             _turnAnim();
+
             _processMovement(delta);
             _processJump(delta);
         }
@@ -44,15 +45,13 @@ namespace Parry2.game.actors.player
             // Jump impulse and hold detection
             if (IsOnFloor())
             {
-                if (!Input.IsActionJustPressed("jump")) return;
+                if (!Input.IsActionJustPressed("jump") || !ControlActive) return;
                 _velocity.y = -JumpStrength;
                 IsJumpHold = true;
                 playback.Travel("jump");
             }
-            else if (IsJumpHold)
-            {
+            else if (IsJumpHold && ControlActive)
                 IsJumpHold = Input.IsActionPressed("jump");
-            }
         }
 
         void _processMovement(float delta)
@@ -61,14 +60,15 @@ namespace Parry2.game.actors.player
 
             float input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
 
-            if (input == 0)
+            if (input == 0 && ControlActive)
             {
                 _decelerate(delta);
                 if (IsOnFloor()) stateMachine.Travel("idle");
             }
             else
             {
-                GetNode<Sprite>("Sprite").FlipH = input < 0;
+                GetNode<Sprite>("Sprite").FlipH =
+                    (ControlActive ? Velocity.x : input) < 0;
                 if (IsOnFloor()) stateMachine.Travel("run");
             }
 
@@ -76,7 +76,7 @@ namespace Parry2.game.actors.player
                 _decelerate(delta);
 
             float force = input * delta * Accel;
-            
+
             if (Mathf.Abs(_velocity.x) < MaxSpeed)
                 _velocity.x += force;
             else
