@@ -32,7 +32,7 @@ namespace Parry2.game.camera
         {
             _timerData.timer = new Timer();
             AddChild(_timerData.timer);
-            _timerData.timer.Start(.01f);
+            _timerData.timer.Start(.5f);
             _timerData.timer.Connect("timeout", this, nameof(Timeout));
         }
 
@@ -41,19 +41,17 @@ namespace Parry2.game.camera
             RemoveChild(_timerData.timer);
             _timerData.respawnDone = true;
 
-            GlobalPosition =
-                _targetPos =
-                    GetNode<Node2D>(TargetPath).GlobalPosition;
-
-            _targetZoom = Zoom;
-
             var camera = GetNode<Camera2D>("Camera");
             _dragMargin = new CMargin4(camera);
         }
 
         public override void _Process(float delta)
         {
-            if (!_timerData.respawnDone) return;
+            if (!_timerData.respawnDone)
+            {
+                GlobalPosition = _targetPos;
+                _targetZoom = Zoom;
+            }
 
             GetNode<CollisionShape2D>("CollisionShape2D")
                 .GlobalPosition = GetNode<Node2D>(TargetPath).GlobalPosition;
@@ -61,7 +59,7 @@ namespace Parry2.game.camera
             var camera = GetNode<Camera2D>("Camera");
 
             float smoothSpeedDelta = 1 - Mathf.Pow(SmoothingSpeed, delta);
-            
+
             // Smooths position to target
             GlobalPosition = GlobalPosition.LinearInterpolate(_targetPos, smoothSpeedDelta).Round();
 
