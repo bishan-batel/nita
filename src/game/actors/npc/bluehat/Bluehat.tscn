@@ -220,7 +220,6 @@ start_node = "get_up"
 
 [node name="BluehatNpc" type="Node2D" groups=[
 "Layered",
-"Persist",
 ]]
 script = ExtResource( 3 )
 BurrowTime = 4.0

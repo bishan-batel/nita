@@ -54,27 +54,27 @@ z_as_relative = false
 
 [node name="Chloropom" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 248, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="Chloropom6" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 289, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="Chloropom3" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 312, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="Chloropom2" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 188, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="Chloropom4" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 153, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="Chloropom5" parent="Entrance Area/Foliage" instance=ExtResource( 11 )]
 position = Vector2( 217, 222 )
-Energy = 2.589
+Energy = 1.852
 
 [node name="TestGateway" parent="Entrance Area" instance=ExtResource( 8 )]
 position = Vector2( 359, 273 )
