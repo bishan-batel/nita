@@ -20,7 +20,7 @@ namespace Parry2
 
         public override void _Input(InputEvent @event)
         {
-            if (!(@event is InputEventKey eventKey)) return;
+            if (@event is not InputEventKey eventKey) return;
 
 #if DEBUG
             if (eventKey.IsActionPressed("debug_restart"))
