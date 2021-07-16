@@ -2,6 +2,7 @@ using System;
 using System.Runtime.Serialization;
 using Godot;
 using Parry2.game.actors.player;
+using Parry2.game.room;
 using Parry2.managers.save;
 
 namespace Parry2.game.world.objects.checkpoint
@@ -10,7 +11,9 @@ namespace Parry2.game.world.objects.checkpoint
     {
         public const string CheckpointGroup = "Checkpoint";
 
+
         // TODO give checkpoint functionality to the room instead of a static class
+        [Obsolete("", true)]
         public static NodePath Claimed
         {
             set
@@ -54,9 +57,9 @@ namespace Parry2.game.world.objects.checkpoint
             get => _claimed;
         }
 
-#nullable enable
-        static NodePath? _claimed;
+        static NodePath _claimed;
 
+        [Obsolete("", true)]
         public static void ClearCheckpoint() => Claimed = null;
 
         public void Claim() =>
@@ -67,9 +70,11 @@ namespace Parry2.game.world.objects.checkpoint
             GetNode<AnimationPlayer>("AnimationPlayer")
                 .Play("unclaim");
 
-        public void Entered(Node body) => Claimed = GetPath();
+        public void Entered(Node body) =>
+            Room.CheckpointManager.Claim(this);
 
-        public ISerializable Save() => new CheckpointSave(Claimed != GetPath());
+        // public ISerializable Save() => new CheckpointSave(ClaimedPath != GetPath());
+        public ISerializable Save() => null;
 
         public void LoadFrom(ISerializable obj)
         {

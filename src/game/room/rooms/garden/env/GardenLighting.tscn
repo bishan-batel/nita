@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/detail/effects/GameVisibleNode.cs" type="Script" id=1]
+
+[node name="Garden Lighting" type="CanvasModulate"]
+visible = false
+position = Vector2( -5, 18 )
+color = Color( 0.478431, 0.537255, 0.623529, 1 )
+script = ExtResource( 1 )

@@ -5,6 +5,16 @@ namespace Parry2.utils
 {
     public static class NodeExtensions
     {
+        public static void DebugPrint(this Node node, string msg) =>
+            GD.Print($"[{node.Name}] {msg}");
+
+        public static void DebugPrintErr(this Node node, string msg) =>
+            GD.PrintErr($"[{node.Name}] {msg}");
+
+#nullable enable
+        public static T? GetNodeOrNull<T>(this Node node, NodePath? path) where T : Node =>
+            path is null ? null : node.GetNodeOrNull<T>(path);
+
         public static AnimationNodeStateMachinePlayback GetPlayback(
             this Node parent, string path = "AnimationTree")
         {
@@ -23,7 +33,7 @@ namespace Parry2.utils
         public static T GetSibling<T>(this Node node, NodePath path) where T : Node =>
             (T) node.GetSibling(path);
 
-        public static T GetSiblingOrNull<T>(this Node node, NodePath path) where T : Node =>
+        public static T? GetSiblingOrNull<T>(this Node node, NodePath path) where T : Node =>
             node.GetSiblingOrNull(path) as T;
 
         public static Node GetSiblingOrNull(this Node node, NodePath path) =>

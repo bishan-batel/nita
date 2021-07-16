@@ -15,6 +15,7 @@ namespace Parry2.game.room
         {
             {"test_room", Format(@"TestRoom.tscn")},
             {"mycelium_entrance", Format(@"mycelium_junkpit/MyceliumEntrance.tscn")},
+            {"garden_entrance", Format(@"garden/GardenEntrance.tscn")},
         };
 
         public static PackedScene GetChapterScene(Room room) =>

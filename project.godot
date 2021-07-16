@@ -73,7 +73,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/vnen.tiled_importer/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
 
 [gui]
 
@@ -214,3 +214,7 @@ common/enable_pause_aware_picking=true
 
 environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false
+
+[tiled_importer]
+
+enable_json_format=true

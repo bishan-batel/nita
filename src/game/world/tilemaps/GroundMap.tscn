@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/textures/tilesets/ground/ground.tres" type="TileSet" id=1]
+[ext_resource path="res://assets/textures/tilemaps/garden/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://src/game/world/tilemaps/GroundMap.cs" type="Script" id=2]
 
 [node name="Ground" type="TileMap" groups=[

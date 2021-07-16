@@ -83,9 +83,9 @@ __meta__ = {
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer/UI"]
 margin_left = 8.0
-margin_top = 18.0
+margin_top = 17.0
 margin_right = 190.0
-margin_bottom = 184.0
+margin_bottom = 183.0
 theme = ExtResource( 3 )
 text = "fungus type beat
 fungus type beat

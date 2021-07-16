@@ -52,7 +52,7 @@ namespace Parry2.editor
         {
             if (node is null) return;
             node.ZAsRelative = false;
-            node.ZIndex = Mathf.Min(GetLayer(node.GetType()), 0);
+            node.ZIndex = GetLayer(node.GetType());
 
             // If the search failed, double check with script
             if (node.ZIndex != -1) return;
@@ -62,10 +62,12 @@ namespace Parry2.editor
 
             string name = script
                 .ResourcePath
+                .Replace(".cs", "")
                 .Split("/")
                 .Last()
-                .Replace(".cs", "");
-            node.ZIndex = Order.FindIndex(type => type.Name == name);
+                .ToLower()
+                .Trim();
+            node.ZIndex = Order.FindIndex(type => type.Name.ToLower() == name);
         }
 
         public static int GetLayer(object obj) => GetLayer(obj.GetType());

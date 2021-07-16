@@ -2,6 +2,7 @@
 
 using System;
 using Godot;
+using Parry2.utils;
 
 
 namespace Parry2
@@ -18,7 +19,7 @@ namespace Parry2
 
         public static Global Singleton { private set; get; }
 
-        public override void _Process(float delta)
+        public override void _Ready()
         {
         }
 

@@ -2,13 +2,15 @@ using Godot;
 using Parry2.game.room;
 using Parry2.managers.game;
 using Parry2.managers.save;
+using Parry2.utils;
 
 namespace Parry2.game
 {
     public class GameplayScene : GameState
     {
         [Export] public string DefaultChapterName = "test_room";
-        public static string EnteredGate = string.Empty;
+        public static GameplayScene Singleton;
+        public static string EnteredGate;
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
@@ -17,8 +19,11 @@ namespace Parry2.game
         {
         }
 
-        public GameplayScene(Room room) : base(nameof(GameplayScene)) =>
+        public GameplayScene(Room room) : base(nameof(GameplayScene))
+        {
             CurrentRoom = room;
+            Singleton = this;
+        }
 
         public static PackedScene PackedScene =>
             ResourceLoader.Load<PackedScene>("res://src/game/GameplayScene.tscn");
@@ -44,9 +49,9 @@ namespace Parry2.game
         }
 
 
-        public static void LoadRoom(string roomName, string gateway)
+        public static void LoadRoom(string roomName, string gateway = null)
         {
-            GD.Print($"[{nameof(GameplayScene)}] Switched gateway to {gateway}");
+            // Singleton.DebugPrint($"Loading into {roomName} through gateway {gateway ?? "[default]"}");
             EnteredGate = gateway;
 
             Global

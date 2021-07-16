@@ -4,8 +4,6 @@
     <LangVersion>9</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="src\game\actors\npc" />
-    <Folder Include="src\game\actors\npc\bluehat" />
     <Folder Include="src\game\world\objects\saw" />
     <Folder Include="src\ui\menu" />
   </ItemGroup>

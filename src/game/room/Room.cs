@@ -9,6 +9,7 @@ using Parry2.game.actors.player;
 using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
 using Parry2.managers.sound;
+using Parry2.utils;
 using Array = Godot.Collections.Array;
 
 namespace Parry2.game.room
@@ -19,8 +20,19 @@ namespace Parry2.game.room
         [Export] public NodePath Player;
         [Export] public NodePath DefaultGateway;
 
+
+        public static CheckpointManagerNode CheckpointManager => GameplayScene
+            .Singleton
+            .GetNode<CheckpointManagerNode>("CheckpointManager");
+
         public override void _Ready()
         {
+            if (GetTree().CurrentScene == this)
+            {
+                GameplayScene.LoadRoom(this);
+                return;
+            }
+
             if (!RoomList.IsValidRoomName(RoomName))
                 throw new Exception("Unauthorized name");
 
@@ -28,18 +40,40 @@ namespace Parry2.game.room
 
             var player = GetNode<PlayerShroom>(Player);
 
-            GD.Print($"[{RoomName}] {GameplayScene.EnteredGate}");
-
             RoomGateway gateway = GetTree()
                 .GetNodesInGroup(RoomGateway.GatewayGroup)
                 .Cast<RoomGateway>()
                 .FirstOrDefault(gate => gate.Name == GameplayScene.EnteredGate);
 
-            if (Checkpoint.Claimed == null)
-                gateway ??= GetNodeOrNull<RoomGateway>(DefaultGateway);
-            gateway?.EnteredCutscene(player);
+            // If gateway doesn't exist then try to load from checkpoint
+            if (gateway is not null)
+            {
+                this.DebugPrint($"Entering gateway [{gateway.Name}]");
+                gateway.EnteredCutscene(player);
+            }
+            else if (CheckpointManager.ClaimedPath is not null)
+            {
+                Vector2 location = CheckpointManager.GetSpawnLocation();
+                this.DebugPrint($"Using checkpoint @ {location}");
+                GetNode<PlayerShroom>(Player).GlobalPosition = location;
+            }
+            else
+            {
+                var @default = GetNodeOrNull<RoomGateway>(DefaultGateway);
+                @default?.EnteredCutscene(player);
+                this.DebugPrint($"Entering room through default gateway [{@default?.Name ?? "null"}]");
+            }
+
+
+            // if (Checkpoint.ClaimedPath == null)
+
 
             SaveData();
+        }
+
+        public void OnDeath()
+        {
+            GameplayScene.LoadRoom(RoomName);
         }
 
         public override void _Process(float delta)
@@ -49,10 +83,6 @@ namespace Parry2.game.room
                 GetTree().ReloadCurrentScene();
 #endif
             //  LoadFromSave(SaveManager.CurrentSaveFile);
-
-            Node currentScene = GetTree().CurrentScene;
-            if (currentScene != this) return;
-            GameplayScene.LoadRoom(this);
         }
 
         public void LoadFromSave(SaveFile saveFile = null)
@@ -64,15 +94,19 @@ namespace Parry2.game.room
             var roomSave = saveFile.RoomData[RoomName];
 
             if (roomSave is null) return;
-            GD.Print($"Loading {RoomName} from save file");
+            this.DebugPrint($"Loading {RoomName} from save file");
 
             roomSave
                 .Keys
                 .ToList()
-                .ForEach(nodePath =>
-                    GetNodeOrNull<IPersistant>(nodePath)
-                        ?.LoadFrom(roomSave[nodePath])
-                );
+                .ConvertAll(nodePath => (GetNodeOrNull<IPersistant>(nodePath), nodePath))
+                .FindAll(node => node.Item1 is not null)
+                .ForEach(node =>
+                {
+                    (IPersistant persistant, string nodePath) = node;
+                    // this.DebugPrint($"\tLoading {nodePath}");
+                    persistant.LoadFrom(roomSave[nodePath]);
+                });
 
             // TODO Implement global loading
 
@@ -81,6 +115,8 @@ namespace Parry2.game.room
 
         public void SaveData(SaveFile saveFile = null)
         {
+            this.DebugPrint("Getting Room Data...");
+
             saveFile ??= SaveManager.CurrentSaveFile;
 
             // Room-bound Persistent Node Saving
@@ -92,9 +128,10 @@ namespace Parry2.game.room
                 .ForEach(node =>
                 {
                     if (!(node is IPersistant persistant))
-                        throw new Exception($"Node not persistant {node.Name}");
+                        throw new Exception($"Node not persistant {node.Name}, {node.GetType()}");
                     ISerializable nodeSave = persistant.Save();
                     if (nodeSave is null) return;
+                    // this.DebugPrint($"\tSaved data from {node.Name}");
                     roomSaves[GetPathTo(node)] = nodeSave;
                 });
 

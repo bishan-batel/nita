@@ -58,9 +58,7 @@ namespace Parry2.managers.save
             CurrentSaveFile.Flush();
 
             if (OS.GetUserDataDir() == "user://")
-                GD.PrintErr("Unable to find user:// directory");
-            else
-                GD.Print("Found ");
+                this.DebugPrintErr("Unable to find user:// directory");
         }
 
 #if DEBUG
@@ -79,7 +77,7 @@ namespace Parry2.managers.save
 
         void _save()
         {
-            GD.Print($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
+            this.DebugPrint($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
 
             // TODO figure out wtf this TODO is saying
             // TODO Make sure if it is okay to save data outside of flush thread,
@@ -89,10 +87,10 @@ namespace Parry2.managers.save
                 .CurrentRoom
                 .SaveData(CurrentSaveFile);
 
-            GD.Print($"Flushing save '{CurrentSaveFile.Name}' to filesystem. . .");
+            this.DebugPrint($"Flushing save '{CurrentSaveFile.Name}' to filesystem. . .");
 
-            if (CurrentSaveFile.Flush()) GD.Print("Flushed save successfully");
-            else GD.PrintErr($"Failed to flush save '{CurrentSaveFile.Name}'");
+            if (CurrentSaveFile.Flush()) this.DebugPrint("Flushed save successfully");
+            else Singleton.DebugPrintErr($"Failed to flush save '{CurrentSaveFile.Name}'");
         }
 
 
@@ -107,27 +105,28 @@ namespace Parry2.managers.save
 
         public static bool OpenSave(string path)
         {
-            GD.Print($"Loading {path} save --");
+            Singleton.DebugPrint($"Loading {path} save --");
 
-            Directory dir = new Directory();
+            var dir = new Directory();
             if (!dir.DirExists(SavesDirAbsPath))
                 dir.MakeDir(SavesDirAbsPath);
 
             SaveFile file = SaveFile.Open(path);
-            if (file == null)
+            if (file is null)
             {
-                GD.PrintErr($"\tFailed to open file {path}");
+                Singleton.DebugPrintErr($"\tFailed to open file {path}");
                 return false;
             }
 
             CurrentSaveFile = file;
-            GD.Print($"\tLoaded {path} save successfully");
+            Singleton.DebugPrint($"\tLoaded {path} save successfully");
             return true;
         }
 
+
         public static bool CreateNewSave(string name = null)
         {
-            GD.Print($"Creating new save file {name}...");
+            Singleton.DebugPrint($"Creating new save file {name}...");
             SaveFile file;
 
             // Name checking
@@ -141,16 +140,16 @@ namespace Parry2.managers.save
             }
             else
             {
-                GD.PrintErr($"\tInvalid filename {name}");
+                Singleton.DebugPrintErr($"\tInvalid filename {name}");
                 return false;
             }
 
             // Flushes to filesystem and checks result
             bool result = file.Flush();
             if (result)
-                GD.Print($"\tCreated new save file {name}");
+                Singleton.DebugPrint($"\tCreated new save file {name}");
             else
-                GD.PrintErr($"\tFailed to create file {name}");
+                Singleton.DebugPrintErr($"\tFailed to create file {name}");
 
             return result;
         }

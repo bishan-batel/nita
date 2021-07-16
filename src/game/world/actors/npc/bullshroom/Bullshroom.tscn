@@ -1,0 +1,105 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/textures/mushroom/npc/bullshroom/bullshroom.png" type="Texture" id=1]
+[ext_resource path="res://src/game/world/actors/npc/bullshroom/Bullshroom.cs" type="Script" id=2]
+[ext_resource path="res://src/game/mechanic/hittable/HittableArea.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "run"
+length = 0.2
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/idle/node = SubResource( 3 )
+states/idle/position = Vector2( 118, 69.5 )
+states/run/node = SubResource( 4 )
+states/run/position = Vector2( 279, 68.25 )
+transitions = [ "idle", "run", SubResource( 5 ), "run", "idle", SubResource( 6 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 4.99998
+height = 12.0
+
+[node name="Bullshroom" type="KinematicBody2D" groups=[
+"Persist",
+]]
+collision_layer = 0
+script = ExtResource( 2 )
+MaxSpeed = 140.0
+Accel = 100.0
+DeAccel = 10.0
+Gravity = 800.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 1 )
+anims/run = SubResource( 2 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 7
+vframes = 2
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -1, 1 )
+rotation = 1.5708
+shape = SubResource( 9 )
+
+[node name="HittableArea" parent="." instance=ExtResource( 3 )]
+visible = false
+KnockbackStrength = 300.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HittableArea"]
+position = Vector2( -1, 1 )
+rotation = 1.5708
+shape = SubResource( 9 )

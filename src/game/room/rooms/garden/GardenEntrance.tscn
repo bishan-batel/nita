@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/game/room/Room.cs" type="Script" id=1]
+[ext_resource path="res://src/game/world/tilemaps/GroundMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/game/LayerHelper.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/game/world/actors/player/PlayerShroom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/world/tilemaps/BackgroundMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/game/camera/FollowCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/game/detail/effects/parallax/FungalPlainsParallax.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/game/room/RoomGateway.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/game/room/rooms/garden/env/GardenLighting.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/world/objects/checkpoint/Checkpoint.tscn" type="PackedScene" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 18 )
+
+[node name="GardenEntrance" type="Node2D"]
+script = ExtResource( 1 )
+RoomName = "garden_entrance"
+Player = NodePath("PlayerShroom")
+DefaultGateway = NodePath("Entrance Area/TestGateway")
+
+[node name="LayerHelper" parent="." instance=ExtResource( 3 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FungalPlainsParallax" parent="CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="FollowCamera" parent="CanvasLayer" instance=ExtResource( 6 )]
+TargetPath = NodePath("../../PlayerShroom")
+
+[node name="Garden Lighting" parent="." instance=ExtResource( 9 )]
+
+[node name="BackgroundMap" parent="." instance=ExtResource( 5 )]
+z_index = 0
+
+[node name="Ground" parent="." instance=ExtResource( 2 )]
+z_index = 11
+z_as_relative = false
+tile_data = PoolIntArray( 655362, 1, 0, 655363, 1, 1, 655364, 1, 2, 720898, 1, 65536, 720899, 1, 65537, 720900, 1, 65538, 786434, 1, 65536, 786435, 1, 65537, 786436, 1, 65538, 851970, 1, 65536, 851971, 1, 65537, 851972, 1, 65538, 917506, 1, 6, 917507, 1, 131073, 917508, 1, 131074, 983042, 1, 327680, 1048578, 1, 327680, 1114114, 1, 65542, 1114115, 1, 1, 1114116, 1, 1, 1114117, 1, 1, 1114118, 1, 1, 1114119, 1, 1, 1114120, 1, 1, 1114121, 1, 1, 1114122, 1, 1, 1114123, 1, 1, 1114124, 1, 1, 1114125, 1, 1, 1114126, 1, 1, 1114127, 1, 1, 1114128, 1, 2, 1179650, 1, 65536, 1179651, 1, 65537, 1179652, 1, 65537, 1179653, 1, 65537, 1179654, 1, 65537, 1179655, 1, 65537, 1179656, 1, 65537, 1179657, 1, 65537, 1179658, 1, 65537, 1179659, 1, 65537, 1179660, 1, 65537, 1179661, 1, 65537, 1179662, 1, 65537, 1179663, 1, 65537, 1179664, 1, 65538, 1245186, 1, 131072, 1245187, 1, 131073, 1245188, 1, 131073, 1245189, 1, 131073, 1245190, 1, 131073, 1245191, 1, 131073, 1245192, 1, 131073, 1245193, 1, 131073, 1245194, 1, 131073, 1245195, 1, 131073, 1245196, 1, 131073, 1245197, 1, 131073, 1245198, 1, 131073, 1245199, 1, 131073, 1245200, 1, 131074 )
+
+[node name="PlayerShroom" parent="." instance=ExtResource( 4 )]
+position = Vector2( 166, 264 )
+z_index = 4
+z_as_relative = false
+
+[node name="Entrance Area" type="Node2D" parent="."]
+
+[node name="Foliage" type="Node2D" parent="Entrance Area"]
+z_index = 8
+
+[node name="TestGateway" parent="Entrance Area" instance=ExtResource( 8 )]
+position = Vector2( 54, 264 )
+Direction = 1
+TargetRoomName = "garden_entrance"
+TargetGate = "TestGateway"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance Area/TestGateway"]
+position = Vector2( 0, -5 )
+shape = SubResource( 1 )
+
+[node name="Checkpoint" parent="Entrance Area" instance=ExtResource( 11 )]
+position = Vector2( 127, 256 )
+z_index = 10
+z_as_relative = false
