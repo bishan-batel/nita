@@ -2,7 +2,6 @@
 
 using System;
 using Godot;
-using Parry2.utils;
 
 
 namespace Parry2
@@ -18,10 +17,6 @@ namespace Parry2
         }
 
         public static Global Singleton { private set; get; }
-
-        public override void _Ready()
-        {
-        }
 
         public override void _Input(InputEvent @event)
         {
