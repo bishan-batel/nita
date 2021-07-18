@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Parry2.utils;
 using Object = Godot.Object;
 
 namespace Parry2.debug
@@ -81,6 +82,7 @@ namespace Parry2.debug
 
             public void Remove()
             {
+                Singleton.DebugPrint($"Removed Command {Name}");
                 Singleton.Call("remove_command", Name);
             }
         }
