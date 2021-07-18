@@ -2,6 +2,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 using Parry2.game;
+using Parry2.managers.game;
 using Parry2.utils;
 
 namespace Parry2.managers.save
@@ -80,9 +81,17 @@ namespace Parry2.managers.save
             this.DebugPrint($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
 
             // TODO figure out wtf this TODO is saying
+
             // TODO Make sure if it is okay to save data outside of flush thread,
             // if it isn't then find way to copy instance of the current room before passing
             // into flush thread
+
+            if (GameStateManager.CurrentState is not GameplayScene)
+            {
+                this.DebugPrintErr($"Unable to save state, wrong gamestate {GameStateManager.CurrentState}");
+                return;
+            }
+
             GameplayScene
                 .CurrentRoom
                 .SaveData(CurrentSaveFile);
