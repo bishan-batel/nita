@@ -5,6 +5,10 @@ namespace Parry2.game.world.objects.saw
     [Tool]
     public class Saw : Node2D
     {
+        bool _editorSpin;
+
+
+        Timer _timer;
         [Export] public float SpeedSnap = 15f / 2f, Duration = .25f;
 
         [Export]
@@ -19,10 +23,6 @@ namespace Parry2.game.world.objects.saw
                 _timer.Start(Duration);
             }
         }
-
-
-        Timer _timer;
-        bool _editorSpin;
 
         public override void _Ready()
         {

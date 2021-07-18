@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -12,6 +11,11 @@ namespace Parry2.game.world.objects.card
     [Tool]
     public class KeyCard : Node2D
     {
+        CardColor _color;
+
+        Array<Node> _electricity;
+        Timer _timer;
+
         public static Shader ElectricityShader =>
             ResourceLoader.Load<Shader>("res://assets/materials/shaders/electric.shader");
 
@@ -32,7 +36,6 @@ namespace Parry2.game.world.objects.card
         }
 
         [Export] public Array<NodePath> Connections { set; get; } = new();
-        CardColor _color;
 
         public override void _Ready()
         {
@@ -64,9 +67,6 @@ namespace Parry2.game.world.objects.card
             _timer.Start(.1f);
             _timer.Connect("timeout", this, nameof(Timeout));
         }
-
-        Array<Node> _electricity;
-        Timer _timer;
 
         public void Timeout()
         {

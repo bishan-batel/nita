@@ -1,14 +1,14 @@
 using Godot;
-using Parry2.game.actors.player;
 using Parry2.game.mechanic.hittable;
 using Parry2.utils;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.game.actors.npc.bluehat
 {
     public class BluehatNpc : Node2D
     {
-        [Export] public float BurrowTime;
         float _timeInBurrow;
+        [Export] public float BurrowTime;
 
         public override void _Process(float delta)
         {

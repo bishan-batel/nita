@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using Parry2.game.actors.player;
 using Parry2.utils;
 
 namespace Parry2.game.camera
@@ -8,9 +7,14 @@ namespace Parry2.game.camera
     public class FollowCamera : Area2D
     {
         CMargin4 _dragMargin, _targetMargin;
+        NodePath _targetPath;
 
         Vector2 _targetPos, _targetZoom;
+
+        (Timer timer, bool respawnDone) _timerData;
         [Export] public float SmoothingSpeed = .1f, MaxSmoothVel, ZoomRoundAmt;
+
+        [Export] public Vector2 Zoom = new(.9f, .9f);
 
         [Export]
         public NodePath TargetPath
@@ -22,11 +26,6 @@ namespace Parry2.game.camera
             }
             get => _targetPath;
         }
-
-        [Export] public Vector2 Zoom = new Vector2(.9f, .9f);
-
-        (Timer timer, bool respawnDone) _timerData;
-        NodePath _targetPath;
 
         public override void _Ready()
         {

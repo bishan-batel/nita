@@ -8,23 +8,33 @@ namespace Parry2.game.room
     {
         public const string RoomsFolder = "res://src/game/room/rooms";
 
-        static string Format(string path) => RoomsFolder.PlusFile(path);
-
         // List of all valid room names, need to manually sync with editor values for each node
         public static readonly Dictionary<string, string> Rooms = new()
         {
             {"test_room", Format(@"TestRoom.tscn")},
             {"mycelium_entrance", Format(@"mycelium_junkpit/MyceliumEntrance.tscn")},
-            {"garden_entrance", Format(@"garden/GardenEntrance.tscn")},
+            {"garden_entrance", Format(@"garden/GardenEntrance.tscn")}
         };
 
-        public static PackedScene GetChapterScene(Room room) =>
-            GetChapterScene(GetName(room.RoomName));
+        static string Format(string path)
+        {
+            return RoomsFolder.PlusFile(path);
+        }
 
-        public static PackedScene GetChapterScene(string name) =>
-            ResourceLoader.Load<PackedScene>(Rooms[GetName(name)]);
+        public static PackedScene GetChapterScene(Room room)
+        {
+            return GetChapterScene(GetName(room.RoomName));
+        }
 
-        public static bool IsValidRoomName(string name) => Rooms.ContainsKey(name);
+        public static PackedScene GetChapterScene(string name)
+        {
+            return ResourceLoader.Load<PackedScene>(Rooms[GetName(name)]);
+        }
+
+        public static bool IsValidRoomName(string name)
+        {
+            return Rooms.ContainsKey(name);
+        }
 
         // Used to throw exceptions if there are any unauthorized room names trying to be used
         // (for just simpler management in development)

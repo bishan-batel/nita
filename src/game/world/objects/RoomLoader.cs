@@ -7,6 +7,9 @@ namespace Parry2.game.world.objects
     // TODO implement in godot editor
     public class RoomLoader
     {
+        [Signal]
+        public delegate void OnRoomChange();
+
         [Export] public string RoomName { set; get; } = "";
         [Export] public bool Active { set; get; }
 
@@ -15,8 +18,5 @@ namespace Parry2.game.world.objects
             if (RoomName == "") throw new Exception("Target Room is not set");
             if (RoomList.IsValidRoomName(RoomName)) throw new Exception("Target Room has invalid name");
         }
-
-        [Signal]
-        public delegate void OnRoomChange();
     }
 }

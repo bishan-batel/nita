@@ -7,6 +7,8 @@ namespace Parry2.managers.sound
     {
         public static SoundManager Singleton;
 
+        static AudioStreamPlayer _currentMusicPlayerPlayer;
+
         public static AudioStreamPlayer CurrentMusicPlayer
         {
             private set
@@ -28,16 +30,17 @@ namespace Parry2.managers.sound
             get => _currentMusicPlayerPlayer;
         }
 
-        static AudioStreamPlayer _currentMusicPlayerPlayer;
-
-        public override void _Ready() => Singleton = this;
+        public override void _Ready()
+        {
+            Singleton = this;
+        }
 
         public static void Play(MusicSettings settings)
         {
-            var player = new AudioStreamPlayer()
+            var player = new AudioStreamPlayer
             {
                 Playing = true,
-                Autoplay = true,
+                Autoplay = true
             };
             settings.ApplySettings(player);
             CurrentMusicPlayer = player;
@@ -47,10 +50,13 @@ namespace Parry2.managers.sound
     public class MusicSettings : Resource
     {
         [Export] public readonly AudioStream Stream;
-        [Export] public float PitchScale = 1f, VolumeDb;
         [Export] [Obsolete] public bool Looping;
+        [Export] public float PitchScale = 1f, VolumeDb;
 
-        public MusicSettings(AudioStream stream) => Stream = stream;
+        public MusicSettings(AudioStream stream)
+        {
+            Stream = stream;
+        }
 
         public void ApplySettings(AudioStreamPlayer player)
         {

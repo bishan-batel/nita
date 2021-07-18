@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.Serialization;
 using Godot;
-using Parry2.game.room;
 using Parry2.managers.save;
 using Parry2.utils;
 
@@ -9,6 +8,8 @@ namespace Parry2.game.world.objects.checkpoint
 {
     public class CheckpointManagerNode : Node, IPersistant
     {
+        NodePath _claimedPath;
+
         public NodePath ClaimedPath
         {
             set
@@ -34,27 +35,16 @@ namespace Parry2.game.world.objects.checkpoint
             get => _claimedPath;
         }
 
-        NodePath _claimedPath;
-
         Checkpoint ClaimedNode =>
             _claimedPath is null
                 ? null
                 : GameplayScene.CurrentRoom.GetNode<Checkpoint>(_claimedPath);
 
-        public Vector2 GetSpawnLocation() => ClaimedNode?.GlobalPosition ?? Vector2.Zero;
-
-        public void OnLeftRoom() => ClaimedPath = null;
-
-        public void Claim(Checkpoint checkpoint) => Claim(checkpoint.GetPath());
-        public void Claim(NodePath checkpoint) => ClaimedPath = checkpoint;
-
-        public override void _Ready() => AddToGroup(SaveManager.PersistGroup);
-
         public ISerializable Save()
         {
             if (ClaimedPath is null) return null;
 
-            this.DebugPrint($"Saving checkpoint data");
+            this.DebugPrint("Saving checkpoint data");
             var save = new CheckpointManagerSave {Path = ClaimedPath};
             return save;
         }
@@ -66,16 +56,45 @@ namespace Parry2.game.world.objects.checkpoint
             ClaimedPath = save.Path;
         }
 
+        public Vector2 GetSpawnLocation()
+        {
+            return ClaimedNode?.GlobalPosition ?? Vector2.Zero;
+        }
+
+        public void OnLeftRoom()
+        {
+            ClaimedPath = null;
+        }
+
+        public void Claim(Checkpoint checkpoint)
+        {
+            Claim(checkpoint.GetPath());
+        }
+
+        public void Claim(NodePath checkpoint)
+        {
+            ClaimedPath = checkpoint;
+        }
+
+        public override void _Ready()
+        {
+            AddToGroup(SaveManager.PersistGroup);
+        }
+
         [Serializable]
         public struct CheckpointManagerSave : ISerializable
         {
             public string Path;
 
-            public CheckpointManagerSave(SerializationInfo info, StreamingContext context) =>
+            public CheckpointManagerSave(SerializationInfo info, StreamingContext context)
+            {
                 Path = info.GetString(nameof(Path));
+            }
 
-            public void GetObjectData(SerializationInfo info, StreamingContext context) =>
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
                 info.AddValue(nameof(Path), Path);
+            }
         }
     }
 }

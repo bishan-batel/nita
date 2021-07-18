@@ -1,15 +1,29 @@
 using System;
 using Godot;
-using Parry2.game.actors.player;
-using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
 using Parry2.utils;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.game.room
 {
     public class RoomGateway : Area2D
     {
+        public enum GateDirection
+        {
+            Right,
+            Left,
+            Up,
+            Down
+        }
+
         public const string GatewayGroup = "RoomGateway";
+        Vector2 _cutsceneDir;
+
+
+        bool _onCooldown = true;
+        PlayerShroom _player;
+
+        [Export] public bool Active = true;
 
         // Exports
         [Export] public float Cooldown = .63f,
@@ -19,13 +33,6 @@ namespace Parry2.game.room
 
         [Export] public string TargetRoomName = string.Empty,
             TargetGate = string.Empty;
-
-        [Export] public bool Active = true;
-
-
-        bool _onCooldown = true;
-        Vector2 _cutsceneDir;
-        PlayerShroom _player;
 
         public override void _Ready()
         {
@@ -88,21 +95,16 @@ namespace Parry2.game.room
             GameplayScene.LoadRoom(TargetRoomName, TargetGate);
         }
 
-        static Vector2 GateDirectionToVector2(GateDirection direction) => direction switch
+        static Vector2 GateDirectionToVector2(GateDirection direction)
         {
-            GateDirection.Right => Vector2.Right,
-            GateDirection.Left => Vector2.Left,
-            GateDirection.Down => Vector2.Down,
-            GateDirection.Up => Vector2.Up,
-            _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, string.Empty)
-        };
-
-        public enum GateDirection
-        {
-            Right,
-            Left,
-            Up,
-            Down
+            return direction switch
+            {
+                GateDirection.Right => Vector2.Right,
+                GateDirection.Left => Vector2.Left,
+                GateDirection.Down => Vector2.Down,
+                GateDirection.Up => Vector2.Up,
+                _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, string.Empty)
+            };
         }
     }
 }

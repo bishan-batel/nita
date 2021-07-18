@@ -5,15 +5,20 @@ namespace Parry2.utils
 {
     public static class NodeExtensions
     {
-        public static void DebugPrint(this Node node, string msg) =>
+        public static void DebugPrint(this Node node, string msg)
+        {
             GD.Print($"[{node.Name}] {msg}");
+        }
 
-        public static void DebugPrintErr(this Node node, string msg) =>
+        public static void DebugPrintErr(this Node node, string msg)
+        {
             GD.PrintErr($"[{node.Name}] {msg}");
-
+        }
 #nullable enable
-        public static T? GetNodeOrNull<T>(this Node node, NodePath? path) where T : Node =>
-            path is null ? null : node.GetNodeOrNull<T>(path);
+        public static T? GetNodeOrNull<T>(this Node node, NodePath? path) where T : Node
+        {
+            return path is null ? null : node.GetNodeOrNull<T>(path);
+        }
 
         public static AnimationNodeStateMachinePlayback GetPlayback(
             this Node parent, string path = "AnimationTree")
@@ -30,16 +35,24 @@ namespace Parry2.utils
 
 
         // Sibling node getters
-        public static T GetSibling<T>(this Node node, NodePath path) where T : Node =>
-            (T) node.GetSibling(path);
+        public static T GetSibling<T>(this Node node, NodePath path) where T : Node
+        {
+            return (T) node.GetSibling(path);
+        }
 
-        public static T? GetSiblingOrNull<T>(this Node node, NodePath path) where T : Node =>
-            node.GetSiblingOrNull(path) as T;
+        public static T? GetSiblingOrNull<T>(this Node node, NodePath path) where T : Node
+        {
+            return node.GetSiblingOrNull(path) as T;
+        }
 
-        public static Node GetSiblingOrNull(this Node node, NodePath path) =>
-            node.GetParent().GetNodeOrNull(path);
+        public static Node GetSiblingOrNull(this Node node, NodePath path)
+        {
+            return node.GetParent().GetNodeOrNull(path);
+        }
 
-        public static Node GetSibling(this Node node, NodePath path) =>
-            node.GetParent().GetNode(path);
+        public static Node GetSibling(this Node node, NodePath path)
+        {
+            return node.GetParent().GetNode(path);
+        }
     }
 }

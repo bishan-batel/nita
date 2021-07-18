@@ -1,19 +1,15 @@
-using System;
-using System.Runtime.Serialization;
 using Godot;
 using Parry2.game.mechanic.hittable;
-using Parry2.managers.save;
 
 namespace Parry2.game.world.objects.shroomvine_wheel
 {
     public class ShroomvineWheel : Node2D
     {
+        float _angle;
         float _angVel;
         [Export(PropertyHint.Range, "0,1")] public float AngleFriction = 0.8f;
         [Export] public float HitImpulse = 100f, SpeedSnap;
         [Export] public bool StartWithRandomAngle = true;
-
-        float _angle;
 
         public override void _Ready()
         {
@@ -34,7 +30,9 @@ namespace Parry2.game.world.objects.shroomvine_wheel
             RotationDegrees = Mathf.Round(_angle / SpeedSnap) * SpeedSnap;
         }
 
-        public void _on_HittableArea_OnHit(HitInformation hitInfo) =>
+        public void _on_HittableArea_OnHit(HitInformation hitInfo)
+        {
             _angVel -= HitImpulse;
+        }
     }
 }

@@ -5,9 +5,8 @@ namespace Parry2.game.world.objects.ilkspring
 {
     public class Ilkspring : Node2D
     {
-        [Export] public float DownTime = 3;
-
         Timer _timer;
+        [Export] public float DownTime = 3;
 
         public void Timeout()
         {

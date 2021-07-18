@@ -1,22 +1,20 @@
-using System;
 using System.Collections;
 using Godot;
+using Godot.Collections;
 using Parry2.game.mechanic.hittable;
 using Parry2.game.mechanic.hostile;
-using Parry2.managers.save;
-using Array = Godot.Collections.Array;
 
-namespace Parry2.game.actors.player
+namespace Parry2.game.world.actors.player
 {
     public partial class PlayerShroom
     {
         bool _inKnockback, _invulnerable;
         float _timeInvulnerable;
-        [Export] public int InvulnerabilityFrames;
-        [Export] public int Health { get; set; }
 
         // Snaps to every 5 degrees
         [Export] public float AttackRotSnap = Mathf.Deg2Rad(45);
+        [Export] public int InvulnerabilityFrames;
+        [Export] public int Health { get; set; }
 
         // TODO simplify damage system away from combat / clean up obsolete code
         void _damageProcess()
@@ -106,7 +104,10 @@ namespace Parry2.game.actors.player
                 yNeg = Input.GetActionStrength("attack_up");
 
             // Snaps rotation to multiple of AttackRotSnap
-            float SnapRot(float rot) => Mathf.Stepify(rot, AttackRotSnap);
+            float SnapRot(float rot)
+            {
+                return Mathf.Stepify(rot, AttackRotSnap);
+            }
 
             return SnapRot(
                 Mathf.Abs(xPos + xNeg + yPos + yNeg) == 0

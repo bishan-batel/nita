@@ -6,6 +6,12 @@ namespace Parry2.game
     [Tool]
     public class LayerHelper : Node
     {
+#if DEBUG
+        Timer _timer;
+#endif
+
+        [Export] public float OrganizeInterval = 1.0f;
+
         // Used as a sort of button within the godot editor
         [Export]
         public bool OrganizeLayers
@@ -15,11 +21,6 @@ namespace Parry2.game
             get => false;
         }
 
-        [Export] public float OrganizeInterval = 1.0f;
-
-#if DEBUG
-        Timer _timer;
-#endif
         public override void _Ready()
         {
             OrganizeLayers = true;

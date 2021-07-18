@@ -5,6 +5,8 @@ namespace Parry2.game.detail.foliage.glowing.chloropom
     [Tool]
     public class Chloropom : Sprite
     {
+        float _energy = .87f;
+
         [Export]
         public new int Frame
         {
@@ -32,8 +34,6 @@ namespace Parry2.game.detail.foliage.glowing.chloropom
             }
             get => IsInsideTree() && GetNode<Light2D>(nameof(Light2D)).Visible;
         }
-
-        float _energy = .87f;
 
 
         public override void _Ready()

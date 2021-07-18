@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -9,10 +8,25 @@ namespace Parry2.debug
     {
         public static Node Singleton => Global.Singleton.GetNode("/root/Console");
 
-        public static void WriteLine(string msg) => Singleton.Call("write_line", msg);
-        public static void Write(string msg) => Singleton.Call("write", msg);
-        public static void Clear() => Singleton.Call("clear");
-        public static void ToggleConsole() => Singleton.Call("toggle_console");
+        public static void WriteLine(string msg)
+        {
+            Singleton.Call("write_line", msg);
+        }
+
+        public static void Write(string msg)
+        {
+            Singleton.Call("write", msg);
+        }
+
+        public static void Clear()
+        {
+            Singleton.Call("clear");
+        }
+
+        public static void ToggleConsole()
+        {
+            Singleton.Call("toggle_console");
+        }
 
         public static void AddCommand(
             this Node instance,
@@ -28,13 +42,13 @@ namespace Parry2.debug
 
         public class Command : Node
         {
+            public readonly List<(string name, Variant.Type type)> Arguments;
             public readonly string Description;
             public readonly string FuncName;
-            public readonly Godot.Object Instance;
-            public readonly List<(string name, Variant.Type type)> Arguments;
+            public readonly Object Instance;
 
             public Command(
-                Godot.Object instance,
+                Object instance,
                 string funcName,
                 string name,
                 string description,
@@ -50,17 +64,24 @@ namespace Parry2.debug
 
             public void Register()
             {
-                var cmd = (Godot.Object) Singleton.Call("add_command", Name, Instance, FuncName);
-                cmd = (Godot.Object) cmd.Call("set_description", Description);
+                var cmd = (Object) Singleton.Call("add_command", Name, Instance, FuncName);
+                cmd = (Object) cmd.Call("set_description", Description);
 
                 Arguments
                     .Aggregate(cmd, (chain, arg) =>
-                        (Godot.Object) chain.Call("add_argument", arg.name, arg.type))
+                        (Object) chain.Call("add_argument", arg.name, arg.type))
                     .Call("register");
             }
 
-            public void Remove() => Singleton.Call("remove_command", Name);
-            public override void _ExitTree() => Remove();
+            public void Remove()
+            {
+                Singleton.Call("remove_command", Name);
+            }
+
+            public override void _ExitTree()
+            {
+                Remove();
+            }
         }
     }
 }

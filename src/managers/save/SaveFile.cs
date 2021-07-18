@@ -5,11 +5,9 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
 using Parry2.game.room;
-using Directory =
-    Godot.Directory;
-using RoomSaveData =
-    System.Collections.Generic.Dictionary<string, System.Runtime.Serialization.ISerializable>;
+using Directory = Godot.Directory;
 using File = System.IO.File;
+using RoomSaveData = System.Collections.Generic.Dictionary<string, System.Runtime.Serialization.ISerializable>;
 
 namespace Parry2.managers.save
 {

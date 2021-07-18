@@ -1,6 +1,6 @@
 using Godot;
-using Parry2.game.actors.player;
 using Parry2.utils;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.game.actors.npc.bullshroom
 {

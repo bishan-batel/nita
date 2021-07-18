@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Godot;
 
 namespace Parry2.utils
@@ -7,13 +6,16 @@ namespace Parry2.utils
     public static class Timeout
     {
         /// <summary>
-        /// Calls action after set time using godot's timer node 
+        ///     Calls action after set time using godot's timer node
         /// </summary>
         /// <param name="action">Action to be called once time is over</param>
         /// <param name="delay">Delay for action in seconds</param>
-        public static void Dispatch(Action action, float delay) => Global
-            .Singleton
-            .AddChild(new TimeoutTimer(action, delay));
+        public static void Dispatch(Action action, float delay)
+        {
+            Global
+                .Singleton
+                .AddChild(new TimeoutTimer(action, delay));
+        }
 
         class TimeoutTimer : Node
         {

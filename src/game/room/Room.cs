@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Godot;
-using Godot.Collections;
 using Parry2.editor;
-using Parry2.game.actors.player;
 using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
-using Parry2.managers.sound;
 using Parry2.utils;
-using Array = Godot.Collections.Array;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.game.room
 {
     public class Room : Node
     {
-        [Export] public string RoomName = string.Empty;
-        [Export] public NodePath Player;
         [Export] public NodePath DefaultGateway;
+        [Export] public NodePath Player;
+        [Export] public string RoomName = string.Empty;
 
 
         public static CheckpointManagerNode CheckpointManager => GameplayScene
@@ -120,7 +117,7 @@ namespace Parry2.game.room
             saveFile ??= SaveManager.CurrentSaveFile;
 
             // Room-bound Persistent Node Saving
-            var roomSaves = new System.Collections.Generic.Dictionary<string, ISerializable>();
+            var roomSaves = new Dictionary<string, ISerializable>();
             GetTree()
                 .GetNodesInGroup(SaveManager.PersistGroup)
                 .Cast<Node>()

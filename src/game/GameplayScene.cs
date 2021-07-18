@@ -2,15 +2,14 @@ using Godot;
 using Parry2.game.room;
 using Parry2.managers.game;
 using Parry2.managers.save;
-using Parry2.utils;
 
 namespace Parry2.game
 {
     public class GameplayScene : GameState
     {
-        [Export] public string DefaultChapterName = "test_room";
         public static GameplayScene Singleton;
         public static string EnteredGate;
+        [Export] public string DefaultChapterName = "test_room";
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it

@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 namespace Parry2.game.world.objects.card.cardusers
@@ -6,6 +5,11 @@ namespace Parry2.game.world.objects.card.cardusers
     [Tool]
     public class MechanicalRotate : MechanicalDoor, ICardUser
     {
+        float _normalRot, _rot;
+        bool _triggered;
+
+        [Export] public float TransformRot, Speed = .5f, DegreeSnap = 22.5f;
+
         [Export]
         public float NormalRot
         {
@@ -18,13 +22,15 @@ namespace Parry2.game.world.objects.card.cardusers
             get => _normalRot;
         }
 
-        [Export] public float TransformRot, Speed = .5f, DegreeSnap = 22.5f;
+        public new void OnCardCollected()
+        {
+            _triggered = true;
+        }
 
-        float _normalRot, _rot;
-        bool _triggered;
-
-        public override void _Ready() =>
+        public override void _Ready()
+        {
             _rot = NormalRot = NormalRot;
+        }
 
         public override void _Process(float delta)
         {
@@ -41,7 +47,5 @@ namespace Parry2.game.world.objects.card.cardusers
             GetNode<CardIndicator>(nameof(CardIndicator))
                 .GlobalRotation = 0;
         }
-
-        public new void OnCardCollected() => _triggered = true;
     }
 }

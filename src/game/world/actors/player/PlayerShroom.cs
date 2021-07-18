@@ -1,11 +1,7 @@
-using System;
-using System.Linq.Expressions;
-using System.Reflection;
 using Godot;
-using Parry2.debug;
 using Parry2.game.mechanic;
 
-namespace Parry2.game.actors.player
+namespace Parry2.game.world.actors.player
 {
     public partial class PlayerShroom : KinematicBody2D, IKillable
     {
@@ -25,13 +21,16 @@ namespace Parry2.game.actors.player
         {
         }
 
+
         public override void _Ready()
         {
-            _velocity = new Vector2();
+            _velocity = Vector2.Zero;
             GetNode<AnimationTree>("AnimationTree").Active = true;
+            _addDebugCommands();
         }
 
-        public void _turnAnim()
+
+        void _turnAnim()
         {
             float target = 0;
 
@@ -41,7 +40,6 @@ namespace Parry2.game.actors.player
             var sprite = GetNode<Sprite>("Sprite");
             sprite.RotationDegrees += (target - sprite.RotationDegrees) * TurnSpeed;
         }
-
 
         public override void _Process(float delta)
         {

@@ -1,15 +1,17 @@
 using System;
 using System.Runtime.Serialization;
 using Godot;
-using Parry2.game.actors.player;
 using Parry2.game.room;
 using Parry2.managers.save;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.game.world.objects.checkpoint
 {
     public class Checkpoint : Node2D, IPersistant
     {
         public const string CheckpointGroup = "Checkpoint";
+
+        static NodePath _claimed;
 
 
         // TODO give checkpoint functionality to the room instead of a static class
@@ -57,44 +59,62 @@ namespace Parry2.game.world.objects.checkpoint
             get => _claimed;
         }
 
-        static NodePath _claimed;
-
-        [Obsolete("", true)]
-        public static void ClearCheckpoint() => Claimed = null;
-
-        public void Claim() =>
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("claim");
-
-        public void UnClaim() =>
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("unclaim");
-
-        public void Entered(Node body) =>
-            Room.CheckpointManager.Claim(this);
-
         // public ISerializable Save() => new CheckpointSave(ClaimedPath != GetPath());
-        public ISerializable Save() => null;
+        public ISerializable Save()
+        {
+            return null;
+        }
 
         public void LoadFrom(ISerializable obj)
         {
             if (!(obj is CheckpointSave save)) return;
 
-            this.GetNode<AnimationPlayer>("AnimationPlayer")
+            GetNode<AnimationPlayer>("AnimationPlayer")
                 .Play(save.IsClaimed ? "unclaim" : "claim");
+        }
+
+        [Obsolete("", true)]
+        public static void ClearCheckpoint()
+        {
+            Claimed = null;
+        }
+
+        public void Claim()
+        {
+            GetNode<AnimationPlayer>("AnimationPlayer")
+                .Play("claim");
+        }
+
+        public void UnClaim()
+        {
+            GetNode<AnimationPlayer>("AnimationPlayer")
+                .Play("unclaim");
+        }
+
+        public void Entered(Node body)
+        {
+            Room.CheckpointManager.Claim(this);
         }
 
         [Serializable]
         internal struct CheckpointSave : ISerializable
         {
             public bool IsClaimed;
-            public CheckpointSave(bool claimed) => IsClaimed = claimed;
 
-            public CheckpointSave(SerializationInfo info, StreamingContext context) =>
+            public CheckpointSave(bool claimed)
+            {
+                IsClaimed = claimed;
+            }
+
+            public CheckpointSave(SerializationInfo info, StreamingContext context)
+            {
                 IsClaimed = info.GetBoolean(nameof(IsClaimed));
+            }
 
-            public void GetObjectData(SerializationInfo info, StreamingContext context) =>
+            public void GetObjectData(SerializationInfo info, StreamingContext context)
+            {
                 info.AddValue(nameof(IsClaimed), IsClaimed);
+            }
         }
     }
 }

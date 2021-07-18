@@ -1,22 +1,24 @@
 using System;
 using System.Runtime.Serialization;
-using Godot;
 using Parry2.managers.save;
 using Parry2.utils;
 
-namespace Parry2.game.actors.player
+namespace Parry2.game.world.actors.player
 {
     public partial class PlayerShroom : IPersistant, IGlobalPersistant
     {
         // Global Persistence 
-        public string UniqueName => nameof(PlayerShroom);
+        public string UniqueName => nameof(world.actors.player.PlayerShroom);
 
         // TODO Global persistence functionality for when player can get new abilities
         public void GlobalLoad(ISerializable data)
         {
         }
 
-        public ISerializable GlobalSave() => null;
+        public ISerializable GlobalSave()
+        {
+            return null;
+        }
 
         // Normal Persistence
         public ISerializable Save()
@@ -24,7 +26,7 @@ namespace Parry2.game.actors.player
             return null;
             return new PlayerShroomData
             {
-                Position = Position,
+                Position = Position
             };
         }
 

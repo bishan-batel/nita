@@ -1,7 +1,7 @@
 using Godot;
 using Parry2.utils;
 
-namespace Parry2.game.actors.player
+namespace Parry2.game.world.actors.player
 {
     public partial class PlayerShroom
     {
@@ -24,13 +24,27 @@ namespace Parry2.game.actors.player
             _velocity = MoveAndSlide(_velocity, Vector2.Up);
             _turnAnim();
 
+            if (NoClip)
+            {
+                _noClipMovement();
+                return;
+            }
+
             _processMovement(delta);
             _processJump(delta);
         }
 
+        void _noClipMovement()
+        {
+            Velocity = new Vector2(
+                Input.GetActionStrength("right") - Input.GetActionStrength("left"),
+                Input.GetActionStrength("down") - Input.GetActionStrength("up")
+            );
+        }
+
         void _processJump(float delta)
         {
-            AnimationNodeStateMachinePlayback playback = this.GetPlayback();
+            AnimationNodeStateMachinePlayback playback = NodeExtensions.GetPlayback(this);
 
             // Jump multiplier stuff to make it seem more dynamic
             float multiplier;
@@ -51,12 +65,14 @@ namespace Parry2.game.actors.player
                 playback.Travel("jump");
             }
             else if (IsJumpHold && ControlActive)
+            {
                 IsJumpHold = Input.IsActionPressed("jump");
+            }
         }
 
         void _processMovement(float delta)
         {
-            AnimationNodeStateMachinePlayback stateMachine = this.GetPlayback();
+            AnimationNodeStateMachinePlayback stateMachine = NodeExtensions.GetPlayback(this);
 
             float input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
 
@@ -72,12 +88,12 @@ namespace Parry2.game.actors.player
                 if (IsOnFloor()) stateMachine.Travel("run");
             }
 
-            if (Mathf.Sign(_velocity.x) != Mathf.Sign(input))
+            if (Mathf.Sign((float) _velocity.x) != Mathf.Sign(input))
                 _decelerate(delta);
 
             float force = input * delta * Accel;
 
-            if (Mathf.Abs(_velocity.x) < MaxSpeed)
+            if (Mathf.Abs((float) _velocity.x) < MaxSpeed)
                 _velocity.x += force;
             else
                 _decelerate(delta, true);
@@ -86,11 +102,11 @@ namespace Parry2.game.actors.player
         void _decelerate(float delta, bool altAccel = false)
         {
             float accel = altAccel ? FastDeAccel : DeAccel;
-            int prevSign = Mathf.Sign(_velocity.x);
+            int prevSign = Mathf.Sign((float) _velocity.x);
             _velocity.x += -prevSign * accel * delta;
 
             // Prevents overshooting / wobble effect
-            if (prevSign != Mathf.Sign(_velocity.x))
+            if (prevSign != Mathf.Sign((float) _velocity.x))
                 _velocity.x = 0f;
         }
 

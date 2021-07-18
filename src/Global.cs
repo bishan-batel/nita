@@ -3,8 +3,6 @@
 using System;
 using Godot;
 using Parry2.debug;
-using Parry2.utils;
-
 
 namespace Parry2
 {

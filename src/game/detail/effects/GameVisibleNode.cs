@@ -6,7 +6,10 @@ namespace Parry2.game.effects
     public class GameVisibleNode : Node2D
     {
 #if DEBUG
-        public override void _Ready() => Visible = !Engine.EditorHint;
+        public override void _Ready()
+        {
+            Visible = !Engine.EditorHint;
+        }
 #endif
     }
 }

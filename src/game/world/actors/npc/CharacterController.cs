@@ -1,16 +1,12 @@
-using System;
-using System.Runtime.Serialization;
 using Godot;
-using Parry2.managers.save;
-using Parry2.utils;
 
 namespace Parry2.game.actors.npc
 {
     public abstract class CharacterController : KinematicBody2D
     {
+        bool _onFloor;
         [Export] public float MaxSpeed, Accel, DeAccel, Gravity = 200f;
         protected Vector2 Velocity;
-        bool _onFloor;
 
 
         protected void Decelerate(float delta)

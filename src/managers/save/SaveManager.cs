@@ -70,11 +70,15 @@ namespace Parry2.managers.save
         }
 #endif
 
-        public static void SaveDeferred() =>
+        public static void SaveDeferred()
+        {
             Singleton.CallDeferred(nameof(_save));
+        }
 
-        public static void Save() =>
+        public static void Save()
+        {
             Singleton._save();
+        }
 
         void _save()
         {
@@ -163,7 +167,10 @@ namespace Parry2.managers.save
             return result;
         }
 
-        public static string FormatAbsPath(string name) => SavesDirAbsPath.PlusFile(name + SaveFileType);
+        public static string FormatAbsPath(string name)
+        {
+            return SavesDirAbsPath.PlusFile(name + SaveFileType);
+        }
 
         public static string GetSaveFileName(string path)
         {

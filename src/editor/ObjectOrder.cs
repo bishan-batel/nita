@@ -4,7 +4,6 @@ using System.Linq;
 using Godot;
 using Parry2.game.actors.npc.bluehat;
 using Parry2.game.actors.npc.bullshroom;
-using Parry2.game.actors.player;
 using Parry2.game.detail.foliage.glowing.chloropom;
 using Parry2.game.world.objects.card;
 using Parry2.game.world.objects.card.cardusers;
@@ -14,7 +13,7 @@ using Parry2.game.world.objects.saw;
 using Parry2.game.world.objects.shroomvine_wheel;
 using Parry2.game.world.objects.sporevine;
 using Parry2.game.world.tilemaps;
-using Object = Godot.Object;
+using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
 
 namespace Parry2.editor
 {
@@ -38,15 +37,17 @@ namespace Parry2.editor
             typeof(Checkpoint),
             typeof(GroundMap),
             typeof(MechanicalDoor),
-            typeof(MechanicalRotate),
+            typeof(MechanicalRotate)
         }.ToList();
 
-        public static void OrganizeLayersInTree(SceneTree tree) =>
+        public static void OrganizeLayersInTree(SceneTree tree)
+        {
             tree
                 ?.GetNodesInGroup(LayeredGroup)
                 .OfType<Node2D>()
                 .ToList()
                 .ForEach(Organize);
+        }
 
         public static void Organize(this Node2D node)
         {
@@ -70,8 +71,14 @@ namespace Parry2.editor
             node.ZIndex = Order.FindIndex(type => type.Name.ToLower() == name);
         }
 
-        public static int GetLayer(object obj) => GetLayer(obj.GetType());
+        public static int GetLayer(object obj)
+        {
+            return GetLayer(obj.GetType());
+        }
 
-        public static int GetLayer(Type type) => Order.IndexOf(type);
+        public static int GetLayer(Type type)
+        {
+            return Order.IndexOf(type);
+        }
     }
 }

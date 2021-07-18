@@ -22,12 +22,12 @@ namespace Parry2.utils
 
         public static implicit operator Vector2Serial(Vector2 v)
         {
-            return new Vector2Serial(v);
+            return new(v);
         }
 
         public static implicit operator Vector2(Vector2Serial s)
         {
-            return new Vector2(s.x, s.y);
+            return new(s.x, s.y);
         }
 
         public Vector2Serial(SerializationInfo info, StreamingContext context)

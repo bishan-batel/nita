@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
 using TiledCS;
+using File = System.IO.File;
 
 // TODO credit https://github.com/TheBoneJarmer/TiledCS
 // TODO uh actually fucking work on the level editor you lazy piece of shit
@@ -20,11 +21,6 @@ namespace Parry2.editor
 
         // Meta filesystem
         public readonly string Name, ParentDirectory;
-        public string FileName => Name + FileExtension;
-        public string Path => ParentDirectory.PlusFile(FileName);
-        public string TiledPath => ParentDirectory.PlusFile(Name) + TilemapFileExtension;
-
-        public TiledMap Map => new(TiledPath);
 
         /// <param name="path">Should be an absolute path with LevelData file extension</param>
         public LevelData(string path)
@@ -43,6 +39,24 @@ namespace Parry2.editor
             Name = name;
         }
 
+        public LevelData(SerializationInfo info, StreamingContext context = default)
+        {
+            ParentDirectory = info.GetString(nameof(ParentDirectory));
+            Name = info.GetString(nameof(Name));
+        }
+
+        public string FileName => Name + FileExtension;
+        public string Path => ParentDirectory.PlusFile(FileName);
+        public string TiledPath => ParentDirectory.PlusFile(Name) + TilemapFileExtension;
+
+        public TiledMap Map => new(TiledPath);
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(nameof(ParentDirectory), ParentDirectory);
+            info.AddValue(nameof(Name), Name);
+        }
+
         public void ApplyTo(Node root)
         {
             TiledMap map = Map;
@@ -54,33 +68,23 @@ namespace Parry2.editor
         // save filesystem garbo
 
         /// <summary>
-        /// Saves the file to system
+        ///     Saves the file to system
         /// </summary>
         void Flush()
         {
-            FileStream fs = System.IO.File.Open(Path, FileMode.Create);
+            FileStream fs = File.Open(Path, FileMode.Create);
             var bf = new BinaryFormatter();
             bf.Serialize(fs, this);
             fs.Close();
         }
 
-        public LevelData(SerializationInfo info, StreamingContext context = default)
+        public override string ToString()
         {
-            ParentDirectory = info.GetString(nameof(ParentDirectory));
-            Name = info.GetString(nameof(Name));
+            return $"[FullPath: '{Path}', " +
+                   $"Name: '{Name}', " +
+                   $"Parent Directory '{ParentDirectory}'" +
+                   $"TiledPath: '{TiledPath}'" +
+                   "]";
         }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue(nameof(ParentDirectory), ParentDirectory);
-            info.AddValue(nameof(Name), Name);
-        }
-
-        public override string ToString() =>
-            $"[FullPath: '{Path}', " +
-            $"Name: '{Name}', " +
-            $"Parent Directory '{ParentDirectory}'" +
-            $"TiledPath: '{TiledPath}'" +
-            "]";
     }
 }
