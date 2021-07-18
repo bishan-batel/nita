@@ -39,7 +39,7 @@ namespace Parry2.game.world.actors.player
             Velocity = new Vector2(
                 Input.GetActionStrength("right") - Input.GetActionStrength("left"),
                 Input.GetActionStrength("down") - Input.GetActionStrength("up")
-            );
+            ) * NoClipSpeed;
         }
 
         void _processJump(float delta)

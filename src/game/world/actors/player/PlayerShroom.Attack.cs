@@ -19,14 +19,15 @@ namespace Parry2.game.world.actors.player
         // TODO simplify damage system away from combat / clean up obsolete code
         void _damageProcess()
         {
-            if (_invulnerable)
+            if (_invulnerable || NoClip)
             {
                 _timeInvulnerable += GetProcessDeltaTime();
-                if (_timeInvulnerable > InvulnerabilityFrames * Engine.TargetFps)
-                {
-                    _timeInvulnerable = 0f;
-                    _invulnerable = false;
-                }
+
+                if (!(_timeInvulnerable > InvulnerabilityFrames * Engine.TargetFps)) return;
+                _timeInvulnerable = 0f;
+                _invulnerable = false;
+
+                return;
             }
 
             var damageArea = GetNode<Area2D>("DamageArea");

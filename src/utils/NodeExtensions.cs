@@ -15,6 +15,8 @@ namespace Parry2.utils
             GD.PrintErr($"[{node.Name}] {msg}");
         }
 #nullable enable
+
+        [Obsolete]
         public static T? GetNodeOrNull<T>(this Node node, NodePath? path) where T : Node
         {
             return path is null ? null : node.GetNodeOrNull<T>(path);
