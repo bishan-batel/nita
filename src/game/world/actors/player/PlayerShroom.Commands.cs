@@ -15,7 +15,8 @@ namespace Parry2.game.world.actors.player
 
         void _addDebugCommands()
         {
-            GConsole.AddCommand(this, "noclip",
+            this.AddCommand(
+                "noclip",
                 "Puts player in noclip mode",
                 nameof(CmdNoClip)
             );
