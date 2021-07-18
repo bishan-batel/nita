@@ -48,10 +48,10 @@ namespace Parry2.debug
             public readonly Object Instance;
 
             public Command(
-                Object instance,
-                string funcName,
-                string name,
-                string description,
+                Object instance = null,
+                string funcName = null,
+                string name = null,
+                string description = null,
                 params (string, Variant.Type)[] args
             )
             {
