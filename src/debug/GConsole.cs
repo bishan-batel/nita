@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Object = Godot.Object;
 
 namespace Parry2.debug
 {
@@ -35,27 +37,31 @@ namespace Parry2.debug
             string funcName,
             params (string name, Variant.Type type)[] args)
         {
-            var cmd = new Command(instance, funcName, name, description, args);
-            instance.AddChild(cmd);
-            cmd.Register();
+            new Command(instance, funcName, name, description, args)
+                .Register();
         }
 
-        public class Command : Node
+        public class Command : Object
         {
             public readonly List<(string name, Variant.Type type)> Arguments;
-            public readonly string Description;
+            public readonly string Description, Name;
             public readonly string FuncName;
             public readonly Object Instance;
 
+            public Command() : this(null, null, null, null)
+            {
+            }
+
             public Command(
-                Object instance = null,
-                string funcName = null,
-                string name = null,
-                string description = null,
+                Object instance,
+                string funcName,
+                string name,
+                string description,
                 params (string, Variant.Type)[] args
             )
             {
                 Instance = instance;
+                instance.Connect("tree_exited", this, nameof(Remove));
                 FuncName = funcName;
                 Name = name;
                 Arguments = args.ToList();
@@ -76,11 +82,6 @@ namespace Parry2.debug
             public void Remove()
             {
                 Singleton.Call("remove_command", Name);
-            }
-
-            public override void _ExitTree()
-            {
-                Remove();
             }
         }
     }
