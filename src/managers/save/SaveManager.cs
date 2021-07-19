@@ -82,7 +82,7 @@ namespace Parry2.managers.save
 
         void _save()
         {
-            this.DebugPrint($"Saving room to save '{CurrentSaveFile.Name}' in memory. . .");
+            this.DebugPrint($"Saving to file [{CurrentSaveFile.Name}]");
 
             // TODO figure out wtf this TODO is saying
 
@@ -92,7 +92,7 @@ namespace Parry2.managers.save
 
             if (GameStateManager.CurrentState is not GameplayScene)
             {
-                this.DebugPrintErr($"Unable to save state, wrong gamestate {GameStateManager.CurrentState}");
+                this.DebugPrintErr($"\tUnable to save state, wrong gamestate {GameStateManager.CurrentState}");
                 return;
             }
 
@@ -100,10 +100,10 @@ namespace Parry2.managers.save
                 .CurrentRoom
                 .SaveData(CurrentSaveFile);
 
-            this.DebugPrint($"Flushing save '{CurrentSaveFile.Name}' to filesystem. . .");
+            this.DebugPrint($"\tFlushing save file ['{CurrentSaveFile.Name}'] to filesystem");
 
-            if (CurrentSaveFile.Flush()) this.DebugPrint("Flushed save successfully");
-            else Singleton.DebugPrintErr($"Failed to flush save '{CurrentSaveFile.Name}'");
+            if (CurrentSaveFile.Flush()) this.DebugPrint("\tFlushed save successfully");
+            else Singleton.DebugPrintErr($"\tFailed to flush save '{CurrentSaveFile.Name}'");
         }
 
 
