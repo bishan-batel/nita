@@ -1,4 +1,5 @@
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 using Parry2.game.mechanic.hittable;
@@ -12,7 +13,7 @@ namespace Parry2.game.world.actors.player
         float _timeInvulnerable;
 
         // Snaps to every 5 degrees
-        [Export] public float AttackRotSnap = Mathf.Deg2Rad(45);
+        [Export] public float AttackRotSnap = Mathf.Deg2Rad(45 * (1 / 4.0f));
         [Export] public int InvulnerabilityFrames;
         [Export] public int Health { get; set; }
 
@@ -84,7 +85,10 @@ namespace Parry2.game.world.actors.player
 
             if (attackAnim.IsPlaying())
             {
-                _processHit(area2D.GetOverlappingAreas());
+                Array overlappingAreas = area2D.GetOverlappingAreas();
+                if (overlappingAreas.Count == 0) return;
+
+                _processHit(overlappingAreas[0] as IHittable);
                 return;
             }
 
@@ -105,31 +109,23 @@ namespace Parry2.game.world.actors.player
                 yNeg = Input.GetActionStrength("attack_up");
 
             // Snaps rotation to multiple of AttackRotSnap
-            float SnapRot(float rot)
-            {
-                return Mathf.Stepify(rot, AttackRotSnap);
-            }
+            float SnapRot(float rot) => Mathf.Stepify(rot, AttackRotSnap);
 
-            return SnapRot(
-                Mathf.Abs(xPos + xNeg + yPos + yNeg) == 0
-                    // if analog stick is not being used, calculate angle from mouse position
-                    ? GlobalPosition.AngleToPoint(GetGlobalMousePosition()) + Mathf.Pi - Rotation
-
-                    // else, use analog stick for input
-                    : new Vector2(xPos - xNeg, yPos - yNeg).Angle() - Rotation
-            );
+            return Input.GetConnectedJoypads().Count == 0
+                ? SnapRot(GlobalPosition.AngleToPoint(GetGlobalMousePosition()) + Mathf.Pi - Rotation)
+                : SnapRot(new Vector2(xPos - xNeg, yPos - yNeg).Angle() - Rotation);
         }
 
-        void _processHit(IList bodies)
+        void _processHit(IHittable hittable)
         {
-            if (_inKnockback || bodies.Count == 0) return;
+            if (_inKnockback || hittable is null) return;
 
-            var hittable = (IHittable) bodies[0];
             var area2D = GetNode<Area2D>("AttackArea");
 
             // Angle away from where attack was clicked
             float angle = area2D.Rotation + Mathf.Pi;
             var dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            dir = Vector2.Right.Rotated(angle);
 
             var bounce = 0f;
 

@@ -9,6 +9,7 @@ monitorable = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 1 )
-Cooldown = 0.4
+Cooldown = 0.2
+CutsceneWalkTime = 0.2
 
 [connection signal="body_entered" from="." to="." method="OnEntered"]

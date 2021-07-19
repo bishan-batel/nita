@@ -914,6 +914,66 @@ position = Vector2( 417, 81 )
 z_index = 3
 z_as_relative = false
 
+[node name="BluehatNpc2" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc8" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc9" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc10" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc11" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc12" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc13" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc14" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc15" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc16" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc17" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
+[node name="BluehatNpc18" parent="Blue Hats" instance=ExtResource( 20 )]
+position = Vector2( 309, 49 )
+z_index = 3
+z_as_relative = false
+
 [node name="BluehatNpc3" parent="Blue Hats" instance=ExtResource( 20 )]
 position = Vector2( 442, 97 )
 z_index = 3
@@ -1183,10 +1243,10 @@ position = Vector2( 1847, 472 )
 rotation = 1.5708
 z_index = 13
 z_as_relative = false
-DegreeSnap = 5.625
 Speed = 1.0
-TransformRot = 270.0
+DegreeSnap = 5.625
 NormalRot = 90.0
+TransformRot = 270.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
 position = Vector2( -32, 0 )
