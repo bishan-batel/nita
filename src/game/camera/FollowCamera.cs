@@ -7,7 +7,6 @@ namespace Parry2.game.camera
     public class FollowCamera : Area2D
     {
         CMargin4 _dragMargin, _targetMargin;
-        NodePath _targetPath;
 
         Vector2 _targetPos, _targetZoom;
 
@@ -16,16 +15,7 @@ namespace Parry2.game.camera
 
         [Export] public Vector2 Zoom = new(.9f, .9f);
 
-        [Export]
-        public NodePath TargetPath
-        {
-            set
-            {
-                _targetPath = value;
-                if (!IsInsideTree()) return;
-            }
-            get => _targetPath;
-        }
+        [Export] public NodePath TargetPath { set; get; }
 
         public override void _Ready()
         {
