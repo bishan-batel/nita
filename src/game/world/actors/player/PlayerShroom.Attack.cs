@@ -34,37 +34,48 @@ namespace Parry2.game.world.actors.player
             var damageArea = GetNode<Area2D>("DamageArea");
 
             // Get all overlapping areas and bodies
-            Array overlapping = damageArea.GetOverlappingAreas();
-            foreach (object body in damageArea.GetOverlappingBodies())
-                if (body is IHostile)
-                    overlapping.Add(body);
 
-            // Locate nearest hostile in damage area
-            IHostile nearestHostile = null;
-            float nearestDist = Mathf.Inf;
-            foreach (object overlap in overlapping)
-            {
-                var hostile = (IHostile) overlap;
-                if (hostile.Disabled) continue;
+            static bool IsHostile(object obj) => obj is IHostile;
 
-                var node = (Node2D) overlap;
-                float dist = node.GlobalPosition.DistanceTo(GlobalPosition);
-                if (dist >= nearestDist) continue;
-                nearestDist = dist;
-                nearestHostile = hostile;
-            }
+            // Get all overlapping bodies and areas of IHostile
+            var overlapping = damageArea.GetOverlappingAreas().Cast<object>()
+                // .Where(IsHostile)
+                .Cast<IHostile>()
+                .Concat(
+                    damageArea
+                        .GetOverlappingBodies().Cast<object>()
+                        // .Where(IsHostile)
+                        .Cast<IHostile>()
+                ).ToList();
+
+            if (overlapping.Count is 0) return;
+
+            // // Locate nearest hostile in damage area
+            // IHostile nearestHostile = null;
+            // float nearestDist = Mathf.Inf;
+            // foreach (IHostile hostile in overlapping)
+            // {
+            //     if (hostile.Disabled) continue;
+            //
+            //     float dist = ((Node2D) hostile).GlobalPosition.DistanceTo(GlobalPosition);
+            //     if (dist >= nearestDist) continue;
+            //     nearestDist = dist;
+            //     nearestHostile = hostile;
+            // }
 
             // If no hostile areas, exit
-            if (nearestHostile == null) return;
+            // if (nearestHostile == null) return;
+
+            IHostile hostile = overlapping.First();
+            if (_invulnerable) return;
 
             Input.StartJoyVibration(0, 1f, 1f, .5f);
-            if (nearestHostile.TeleportToSafeSpot)
+            if (hostile.TeleportToSafeSpot)
                 _rollbackToSafeSpot();
 
-            if (_invulnerable) return;
             // Enable invulnerability frames
             _invulnerable = true;
-            Health -= nearestHostile.Damage;
+            Health -= hostile.Damage;
         }
 
         // TODO Death animation
@@ -123,8 +134,7 @@ namespace Parry2.game.world.actors.player
 
             // Angle away from where attack was clicked
             float angle = area2D.Rotation + Mathf.Pi;
-            var dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            dir = Vector2.Right.Rotated(angle);
+            Vector2 dir = Vector2.Right.Rotated(angle);
 
             var bounce = 0f;
 
