@@ -9,7 +9,7 @@ namespace Parry2.debug
 {
     public static class GConsole
     {
-        public static Node Singleton => Global.Singleton.GetNode("/root/Console");
+        public static Node Singleton => Global.Singleton?.GetNode("/root/Console");
 
         public static void WriteLine(string msg)
         {
@@ -45,8 +45,7 @@ namespace Parry2.debug
         public class Command : Object
         {
             public readonly List<(string name, Variant.Type type)> Arguments;
-            public readonly string Description, Name;
-            public readonly string FuncName;
+            public readonly string Name, Description, FuncName;
             public readonly Object Instance;
 
             public Command() : this(null, null, null, null)
@@ -82,6 +81,7 @@ namespace Parry2.debug
 
             public void Remove()
             {
+                if (Singleton is null || !Singleton.IsInsideTree()) return;
                 Singleton.DebugPrint($"Removed Command {Name}");
                 Singleton.Call("remove_command", Name);
             }
