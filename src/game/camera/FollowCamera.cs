@@ -9,8 +9,8 @@ namespace Parry2.game.camera
         CMargin4 _dragMargin, _targetMargin;
 
         Vector2 _targetPos, _targetZoom;
+        bool _respawnDone;
 
-        (Timer timer, bool respawnDone) _timerData;
         [Export] public float SmoothingSpeed = .1f, MaxSmoothVel, ZoomRoundAmt;
 
         [Export] public Vector2 Zoom = new(.9f, .9f);
@@ -19,27 +19,20 @@ namespace Parry2.game.camera
 
         public override void _Ready()
         {
-            _timerData.timer = new Timer();
-            AddChild(_timerData.timer);
-            _timerData.timer.Start(.5f);
-            _timerData.timer.Connect("timeout", this, nameof(Timeout));
-        }
-
-        public void Timeout()
-        {
-            RemoveChild(_timerData.timer);
-            _timerData.respawnDone = true;
-
-            var camera = GetNode<Camera2D>("Camera");
-            _dragMargin = new CMargin4(camera);
+            Timeout.Dispatch(() =>
+            {
+                _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
+                _respawnDone = true;
+            }, .1f);
         }
 
         public override void _Process(float delta)
         {
-            if (!_timerData.respawnDone)
+            if (!_respawnDone)
             {
                 GlobalPosition = _targetPos;
                 _targetZoom = Zoom;
+                return;
             }
 
             GetNode<CollisionShape2D>("CollisionShape2D")
