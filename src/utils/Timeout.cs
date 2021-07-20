@@ -1,4 +1,6 @@
 using System;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using GodotRx;
 using Object = Godot.Object;
@@ -18,6 +20,8 @@ namespace Parry2.utils
             node.AddChild(new TimeoutTimer(action, delay));
         }
 
+
+        [Group(nameof(TimeoutTimer))]
         class TimeoutTimer : Node
         {
             readonly Action _action;
@@ -28,14 +32,16 @@ namespace Parry2.utils
             {
             }
 
-            public TimeoutTimer(Action action, float delay = 0)
+            public TimeoutTimer(Action action, float delay)
             {
-                _action = action ?? (() => { });
+                _action = action;
                 _delay = delay;
             }
 
             public override void _Ready()
             {
+                this.Wire();
+
                 AddChild(_timer = new Timer {OneShot = true});
                 _timer.Start(_delay);
 
@@ -43,8 +49,7 @@ namespace Parry2.utils
                     .OnTimeout()
                     .Subscribe(_ =>
                     {
-                        _action.Invoke();
-                        _timer.QueueFree();
+                        _action?.Invoke();
                         QueueFree();
                     }).DisposeWith(this);
             }

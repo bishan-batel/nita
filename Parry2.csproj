@@ -4,12 +4,15 @@
         <LangVersion>9</LangVersion>
     </PropertyGroup>
     <ItemGroup>
-        <Folder Include="src\game\world\objects\saw"/>
-        <Folder Include="src\ui\menu"/>
+        <Folder Include="src\game\world\objects\saw" />
+        <Folder Include="src\ui\menu" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="TiledCS" Version="2.1.1"/>
-        <PackageReference Include="System.Reactive" Version="4.4.1"/>
-        <Reference Include="System"/>
+        <PackageReference Include="GDMechanic" Version="1.0.0-alpha4" />
+        <PackageReference Include="GodotOnReady" Version="1.1.1" />
+        <PackageReference Include="GodotTools.IdeMessaging" Version="1.1.1" />
+        <PackageReference Include="TiledCS" Version="2.1.1" />
+        <PackageReference Include="System.Reactive" Version="4.4.1" />
+        <Reference Include="System" />
     </ItemGroup>
 </Project>

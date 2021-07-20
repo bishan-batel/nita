@@ -57,6 +57,7 @@ DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
 SaveManager="*res://src/managers/save/SaveManager.cs"
 SoundManager="*res://src/managers/sound/SoundManager.cs"
 Console="*res://addons/quentincaffeino/console/src/Console.tscn"
+GodotRx="*res://addons/godotrx/Internal/Singleton.cs"
 
 [display]
 
@@ -74,7 +75,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/quentincaffeino/console/plugin.cfg", "res://addons/vnen.tiled_importer/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/godotrx/plugin.cfg", "res://addons/quentincaffeino/console/plugin.cfg", "res://addons/vnen.tiled_importer/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
 
 [gui]
 

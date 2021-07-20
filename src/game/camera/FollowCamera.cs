@@ -38,9 +38,7 @@ namespace Parry2.game.camera
 
             GetNode<CollisionShape2D>("CollisionShape2D")
                 .GlobalPosition = GetNode<Node2D>(TargetPath).GlobalPosition;
-
             var camera = GetNode<Camera2D>("Camera");
-
             float smoothSpeedDelta = 1 - Mathf.Pow(SmoothingSpeed, delta);
 
             // Smooths position to target
