@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -13,8 +12,8 @@ namespace Parry2.game.world.actors.player
         float _timeInvulnerable;
 
         // Snaps to every 5 degrees
-        [Export] public float AttackRotSnap = Mathf.Deg2Rad(45 * (1 / 4.0f));
-        [Export] public int InvulnerabilityFrames;
+        [Export] public float AttackRotSnap { get; set; } = Mathf.Deg2Rad(45 * (1 / 4.0f));
+        [Export] public int InvulnerabilityFrames { get; set; }
         [Export] public int Health { get; set; }
 
         // TODO simplify damage system away from combat / clean up obsolete code
@@ -35,7 +34,6 @@ namespace Parry2.game.world.actors.player
 
             // Get all overlapping areas and bodies
 
-            static bool IsHostile(object obj) => obj is IHostile;
 
             // Get all overlapping bodies and areas of IHostile
             var overlapping = damageArea.GetOverlappingAreas().Cast<object>()
@@ -43,7 +41,8 @@ namespace Parry2.game.world.actors.player
                 .Cast<IHostile>()
                 .Concat(
                     damageArea
-                        .GetOverlappingBodies().Cast<object>()
+                        .GetOverlappingBodies()
+                        .Cast<object>()
                         // .Where(IsHostile)
                         .Cast<IHostile>()
                 ).ToList();

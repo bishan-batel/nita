@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using GodotRx;
 using Parry2.managers.save;
 using Parry2.utils;
 using PlayerShroom = Parry2.game.world.actors.player.PlayerShroom;
@@ -34,10 +35,12 @@ namespace Parry2.game.room
         [Export] public string TargetRoomName = string.Empty,
             TargetGate = string.Empty;
 
-        public override void _Ready()
+        public override async void _Ready()
         {
-            Timeout.Dispatch(() => _onCooldown = false, Cooldown);
             SetProcess(false);
+
+            await this.WaitForSeconds(Cooldown, false);
+            _onCooldown = false;
         }
 
 
@@ -64,22 +67,19 @@ namespace Parry2.game.room
                 case GateDirection.Up:
                 case GateDirection.Down:
                     throw new NotImplementedException();
-                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        void Horizontal()
+        async void Horizontal()
         {
             SetProcess(true);
             _player.ControlActive = false;
 
-            Timeout.Dispatch(() =>
-            {
-                SetProcess(false);
-                _player.ControlActive = true;
-            }, CutsceneWalkTime);
+            await this.WaitForSeconds(CutsceneWalkTime, false);
+            SetProcess(false);
+            _player.ControlActive = true;
         }
 
         public void OnEntered(Node body)

@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using GodotRx;
 using Parry2.utils;
 
 namespace Parry2.game.camera
@@ -17,13 +18,11 @@ namespace Parry2.game.camera
 
         [Export] public NodePath TargetPath { set; get; }
 
-        public override void _Ready()
+        public override async void _Ready()
         {
-            Timeout.Dispatch(() =>
-            {
-                _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
-                _respawnDone = true;
-            }, .1f);
+            await this.WaitForSeconds(.1f);
+            _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
+            _respawnDone = true;
         }
 
         public override void _Process(float delta)

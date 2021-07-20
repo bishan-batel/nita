@@ -76,7 +76,7 @@ namespace Parry2.game
         public static void LoadFromSave(SceneTree tree, SaveFile file)
         {
             tree.ChangeSceneTo(PackedScene);
-            CurrentRoom = file.CurrentRoom.Instance<Room>();
+            CurrentRoom = (Room) file.CurrentRoom.Instance();
         }
     }
 }
