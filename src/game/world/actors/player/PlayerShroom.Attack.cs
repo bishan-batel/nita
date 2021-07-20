@@ -49,22 +49,6 @@ namespace Parry2.game.world.actors.player
 
             if (overlapping.Count is 0) return;
 
-            // // Locate nearest hostile in damage area
-            // IHostile nearestHostile = null;
-            // float nearestDist = Mathf.Inf;
-            // foreach (IHostile hostile in overlapping)
-            // {
-            //     if (hostile.Disabled) continue;
-            //
-            //     float dist = ((Node2D) hostile).GlobalPosition.DistanceTo(GlobalPosition);
-            //     if (dist >= nearestDist) continue;
-            //     nearestDist = dist;
-            //     nearestHostile = hostile;
-            // }
-
-            // If no hostile areas, exit
-            // if (nearestHostile == null) return;
-
             IHostile hostile = overlapping.First();
             if (_invulnerable) return;
 
