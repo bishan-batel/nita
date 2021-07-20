@@ -18,11 +18,13 @@ namespace Parry2.game.camera
 
         [Export] public NodePath TargetPath { set; get; }
 
-        public override async void _Ready()
+        public override void _Ready()
         {
-            await this.WaitForSeconds(.1f);
-            _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
-            _respawnDone = true;
+            this.Dispatch(() =>
+            {
+                _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
+                _respawnDone = true;
+            }, .1f);
         }
 
         public override void _Process(float delta)

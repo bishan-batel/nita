@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Parry2.game.room;
 using Parry2.managers.game;
@@ -10,6 +11,8 @@ namespace Parry2.game
         public static GameplayScene Singleton;
         public static string EnteredGate;
         [Export] public string DefaultChapterName = "test_room";
+
+        public Node ChapterContainer;
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
@@ -52,6 +55,18 @@ namespace Parry2.game
         {
             // Singleton.DebugPrint($"Loading into {roomName} through gateway {gateway ?? "[default]"}");
             EnteredGate = gateway;
+
+            // Singleton
+            //     .ChapterContainer
+            //     .GetChildren()
+            //     .Cast<Node>()
+            //     .ToList()
+            //     .ForEach(node => node.Free());
+            //
+            // Singleton.ChapterContainer.AddChild(
+            //     CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>()
+            // );
+
 
             Global
                 .Singleton

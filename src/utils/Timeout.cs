@@ -13,16 +13,13 @@ namespace Parry2.utils
         /// <param name="disposeWith">Godot object that the action is linked too</param>
         /// <param name="action">Action to be called once time is over</param>
         /// <param name="delay">Delay for action in seconds</param>
-        /// 
-        [Obsolete("Use GodotRX WaitFor instead", true)]
+        // [Obsolete("Use GodotRX WaitFor instead", true)]
         public static void Dispatch(this Node disposeWith, Action action, float delay)
         {
-            Global
-                .Singleton
-                .AddChild(new TimeoutTimer(disposeWith, action, delay));
+            disposeWith.AddChild(new TimeoutTimer(disposeWith, action, delay));
         }
 
-        [Obsolete("Use GodotRX WaitFor instead", true)]
+        // [Obsolete("Use GodotRX WaitFor instead", true)]
         class TimeoutTimer : Node
         {
             readonly Action _action;
@@ -30,24 +27,30 @@ namespace Parry2.utils
             Object _disposeWith;
             Timer _timer;
 
-            public TimeoutTimer(Object disposeWith = null, Action action = null, float delay = 0)
+            public TimeoutTimer() : this(null, null, 0)
+            {
+            }
+
+            public TimeoutTimer(Object disposeWith, Action action, float delay = 0)
             {
                 _action = action ?? (() => { });
                 _delay = delay;
                 _disposeWith = disposeWith;
             }
 
-            public override async void _Ready()
+            public override void _Ready()
             {
                 AddChild(_timer = new Timer {OneShot = true});
                 _timer.Start(_delay);
 
-                await this.WaitForSeconds(_delay, false);
-                if (_disposeWith is not null && !_disposeWith.IsQueuedForDeletion())
-                    _action.Invoke();
-
-                _timer.QueueFree();
-                QueueFree();
+                _timer
+                    .OnTimeout()
+                    .Subscribe(_ =>
+                    {
+                        _action.Invoke();
+                        _timer.QueueFree();
+                        QueueFree();
+                    }).DisposeWith(this);
             }
         }
     }

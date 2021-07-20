@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using GodotRx;
 using Parry2.utils;
 using Object = Godot.Object;
 
@@ -42,48 +43,49 @@ namespace Parry2.debug
                 .Register();
         }
 
-        public class Command : Object
+        class Command : Object
         {
-            public readonly List<(string name, Variant.Type type)> Arguments;
-            public readonly string Name, Description, FuncName;
-            public readonly Object Instance;
+            readonly List<(string name, Variant.Type type)> _arguments;
+            readonly string _name, _description, _funcName;
+            readonly Object _instance;
 
             public Command() : this(null, null, null, null)
             {
             }
 
             public Command(
-                Object instance,
+                Node instance,
                 string funcName,
                 string name,
                 string description,
                 params (string, Variant.Type)[] args
             )
             {
-                Instance = instance;
-                instance.Connect("tree_exited", this, nameof(Remove));
-                FuncName = funcName;
-                Name = name;
-                Arguments = args.ToList();
-                Description = description ?? string.Empty;
+                _instance = instance;
+                _funcName = funcName;
+                _name = name;
+                _arguments = args.ToList();
+                _description = description ?? string.Empty;
+
+                instance
+                    .OnTreeExiting()
+                    .Subscribe(_ =>
+                    {
+                        Singleton.DebugPrint($"Removed Command {_name}");
+                        Singleton.Call("remove_command", _name);
+                    })
+                    .DisposeWith(this);
             }
 
             public void Register()
             {
-                var cmd = (Object) Singleton.Call("add_command", Name, Instance, FuncName);
-                cmd = (Object) cmd.Call("set_description", Description);
+                var cmd = (Object) Singleton.Call("add_command", _name, _instance, _funcName);
+                cmd = (Object) cmd.Call("set_description", _description);
 
-                Arguments
+                _arguments
                     .Aggregate(cmd, (chain, arg) =>
                         (Object) chain.Call("add_argument", arg.name, arg.type))
                     .Call("register");
-            }
-
-            public void Remove()
-            {
-                if (Singleton is null || !Singleton.IsInsideTree()) return;
-                Singleton.DebugPrint($"Removed Command {Name}");
-                Singleton.Call("remove_command", Name);
             }
         }
     }
