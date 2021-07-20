@@ -122,7 +122,7 @@ namespace Parry2.game.world.actors.player
             var bounce = 0f;
 
             // calculates bounce strength if object hitting has a bounce strength factor
-            if (hittable.BounceStrength != 0f)
+            if (hittable.BounceStrength is not 0f)
             {
                 float bounceMag = hittable.BounceStrength * _velocity.Length();
 
