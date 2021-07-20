@@ -3,12 +3,19 @@
 [ext_resource path="res://src/game/GameplayScene.cs" type="Script" id=1]
 [ext_resource path="res://src/game/world/objects/checkpoint/CheckpointManagerNode.cs" type="Script" id=2]
 
-[node name="GameplayScene" type="Node2D"]
+[node name="GameplayScene" type="ViewportContainer"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ChapterContainer" type="Node" parent="."]
+[node name="ChapterContainer" type="Viewport" parent="."]
+size = Vector2( 286, 168 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="CheckpointManager" type="Node" parent="."]
 script = ExtResource( 2 )
