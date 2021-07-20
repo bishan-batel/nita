@@ -77,9 +77,14 @@ namespace Parry2.game.room
             SetProcess(true);
             _player.ControlActive = false;
 
-            await this.WaitForSeconds(CutsceneWalkTime, false);
-            SetProcess(false);
-            _player.ControlActive = true;
+            this.Dispatch(() =>
+            {
+                SetProcess(false);
+                _player.ControlActive = true;
+            }, CutsceneWalkTime);
+            // await this.WaitForSeconds(CutsceneWalkTime, false);
+            // SetProcess(false);
+            // _player.ControlActive = true;
         }
 
         public void OnEntered(Node body)
