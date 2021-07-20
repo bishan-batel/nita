@@ -44,7 +44,7 @@ namespace Parry2.game.world.actors.player
 
         void _processJump(float delta)
         {
-            AnimationNodeStateMachinePlayback playback = NodeExtensions.GetPlayback(this);
+            AnimationNodeStateMachinePlayback playback = this.GetPlayback();
 
             // Jump multiplier stuff to make it seem more dynamic
             float multiplier;
