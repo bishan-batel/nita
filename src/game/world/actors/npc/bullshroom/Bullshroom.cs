@@ -9,7 +9,7 @@ namespace Parry2.game.actors.npc.bullshroom
         public override void _PhysicsProcess(float delta)
         {
             base._PhysicsProcess(delta);
-            AnimationNodeStateMachinePlayback playback = this.GetPlayback();
+            AnimationNodeStateMachinePlayback playback = this.GetPlaybackFrom();
             playback.Travel("run");
         }
 

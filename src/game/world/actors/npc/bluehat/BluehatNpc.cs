@@ -23,7 +23,7 @@ namespace Parry2.game.actors.npc.bluehat
                 GetNode<Sprite>("Sprite").FlipH = angle < Mathf.Pi;
             }
 
-            AnimationNodeStateMachinePlayback playback = this.GetPlayback();
+            AnimationNodeStateMachinePlayback playback = this.GetPlaybackFrom();
 
             if (playback.GetCurrentNode() == "get_up")
                 _timeInBurrow = 0f;
@@ -38,7 +38,7 @@ namespace Parry2.game.actors.npc.bluehat
         {
             if (info.Attacker is PlayerShroom)
                 this
-                    .GetPlayback()
+                    .GetPlaybackFrom()
                     .Travel("damage");
         }
     }

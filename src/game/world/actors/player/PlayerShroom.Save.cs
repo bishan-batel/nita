@@ -8,7 +8,7 @@ namespace Parry2.game.world.actors.player
     public partial class PlayerShroom : IPersistant, IGlobalPersistant
     {
         // Global Persistence 
-        public string UniqueName => nameof(world.actors.player.PlayerShroom);
+        public string UniqueName => nameof(PlayerShroom);
 
         // TODO Global persistence functionality for when player can get new abilities
         public void GlobalLoad(ISerializable data)
@@ -24,10 +24,6 @@ namespace Parry2.game.world.actors.player
         public ISerializable Save()
         {
             return null;
-            return new PlayerShroomData
-            {
-                Position = Position
-            };
         }
 
         public void LoadFrom(ISerializable obj)

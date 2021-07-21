@@ -1,4 +1,8 @@
+using System.Runtime.Serialization;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
+using GodotOnReady.Attributes;
 using Parry2.game.mechanic;
 
 namespace Parry2.game.world.actors.player
@@ -7,6 +11,14 @@ namespace Parry2.game.world.actors.player
     {
         Vector2 _velocity;
         [Export] public float TurnAngle = 10f, TurnSpeed = .5f;
+
+        [Node("Sprite")] readonly Sprite _sprite = null;
+        [Node("AttackArea/AnimationPlayer")] readonly AnimationPlayer _attackPlayer = null;
+        [Node("AnimationTree")] readonly AnimationTree _animationTree = null;
+
+        [OnReadyGet("AnimationTree", Property = "parameters/playback")]
+        AnimationNodeStateMachinePlayback _animPlayback;
+
 
         public Vector2 Velocity
         {
@@ -22,10 +34,12 @@ namespace Parry2.game.world.actors.player
         }
 
 
-        public override void _Ready()
+        [OnReady]
+        public void OnReady()
         {
+            this.Wire();
             _velocity = Vector2.Zero;
-            GetNode<AnimationTree>("AnimationTree").Active = true;
+            _animationTree.Active = true;
             _addDebugCommands();
         }
 
@@ -37,16 +51,13 @@ namespace Parry2.game.world.actors.player
             if (!IsOnFloor())
                 target = _velocity.x / MaxSpeed * -TurnAngle;
 
-            var sprite = GetNode<Sprite>("Sprite");
-            sprite.RotationDegrees += (target - sprite.RotationDegrees) * TurnSpeed;
+            _sprite.RotationDegrees += (target - _sprite.RotationDegrees) * TurnSpeed;
         }
 
         public override void _Process(float delta)
         {
             _attackProcess();
-
-            var sprite = GetNode<Sprite>("Sprite");
-            sprite.GlobalScale = Vector2.One;
+            _sprite.GlobalScale = Vector2.One;
         }
     }
 }

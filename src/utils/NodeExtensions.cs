@@ -22,7 +22,7 @@ namespace Parry2.utils
             return path is null ? null : node.GetNodeOrNull<T>(path);
         }
 
-        public static AnimationNodeStateMachinePlayback GetPlayback(
+        public static AnimationNodeStateMachinePlayback GetPlaybackFrom(
             this Node parent, string path = "AnimationTree")
         {
             var player = parent.GetNode<AnimationTree>(path);

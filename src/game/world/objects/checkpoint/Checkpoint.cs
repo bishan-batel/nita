@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.Serialization;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using Parry2.game.room;
 using Parry2.managers.save;
@@ -11,6 +13,7 @@ namespace Parry2.game.world.objects.checkpoint
     {
         public const string CheckpointGroup = "Checkpoint";
 
+        [Node("AnimationPlayer")] readonly AnimationPlayer _player = null;
         static NodePath _claimed;
 
 
@@ -59,7 +62,11 @@ namespace Parry2.game.world.objects.checkpoint
             get => _claimed;
         }
 
-        // public ISerializable Save() => new CheckpointSave(ClaimedPath != GetPath());
+        public override void _Ready()
+        {
+            this.Wire();
+        }
+
         public ISerializable Save()
         {
             return null;
@@ -69,8 +76,7 @@ namespace Parry2.game.world.objects.checkpoint
         {
             if (!(obj is CheckpointSave save)) return;
 
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play(save.IsClaimed ? "unclaim" : "claim");
+            _player.Play(save.IsClaimed ? "unclaim" : "claim");
         }
 
         [Obsolete("", true)]
@@ -81,14 +87,12 @@ namespace Parry2.game.world.objects.checkpoint
 
         public void Claim()
         {
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("claim");
+            _player.Play("claim");
         }
 
         public void UnClaim()
         {
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("unclaim");
+            _player.Play("unclaim");
         }
 
         public void Entered(Node body)

@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using Godot.Collections;
 using Parry2.editor;
@@ -14,6 +16,7 @@ namespace Parry2.game.world.objects.card
         CardColor _color;
 
         Array<Node> _electricity;
+        [Node("AnimationPlayer")] readonly AnimationPlayer _player = null;
         Timer _timer;
 
         public static Shader ElectricityShader =>
@@ -39,8 +42,8 @@ namespace Parry2.game.world.objects.card
 
         public override void _Ready()
         {
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("idle");
+            this.Wire();
+            _player.Play("idle");
 
             Color = Color;
 
@@ -62,7 +65,7 @@ namespace Parry2.game.world.objects.card
 
         public void Entered(object param)
         {
-            GetNode<AnimationPlayer>(nameof(AnimationPlayer)).Play("collected");
+            _player.Play("collected");
             AddChild(_timer = new Timer());
             _timer.Start(.1f);
             _timer.Connect("timeout", this, nameof(Timeout));
@@ -70,7 +73,6 @@ namespace Parry2.game.world.objects.card
 
         public void Timeout()
         {
-            GD.Print("lol");
             Connections
                 .ToList()
                 .ForEach(path => GetNode<ICardUser>(path).OnCardCollected());

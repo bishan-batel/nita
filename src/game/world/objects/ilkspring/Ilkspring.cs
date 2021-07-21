@@ -1,3 +1,5 @@
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using Parry2.game.mechanic.hittable;
 
@@ -6,28 +8,27 @@ namespace Parry2.game.world.objects.ilkspring
     public class Ilkspring : Node2D
     {
         Timer _timer;
+        [Node("AnimationPlayer")] readonly AnimationPlayer _player = null;
+
+        [Node("HittableArea/CollisionShape2D")]
+        readonly CollisionShape2D _hittableCollision = null;
+
         [Export] public float DownTime = 3;
+
+        public override void _Ready() => this.Wire();
 
         public void Timeout()
         {
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("unsquish");
-
-            GetNode<HittableArea>(nameof(HittableArea))
-                .GetNode<CollisionShape2D>(nameof(CollisionShape2D))
-                .Disabled = false;
+            _player.Play("unsquish");
+            _hittableCollision.Disabled = false;
             _timer?.QueueFree();
         }
 
         // ReSharper disable once UnusedParameter.Global
         public void _on_HittableArea_OnHit(HitInformation info)
         {
-            GetNode<AnimationPlayer>("AnimationPlayer")
-                .Play("squish");
-
-            GetNode<HittableArea>(nameof(HittableArea))
-                .GetNode<CollisionShape2D>(nameof(CollisionShape2D))
-                .Disabled = true;
+            _player.Play("squish");
+            _hittableCollision.Disabled = true;
 
             _timer = new Timer();
             AddChild(_timer);

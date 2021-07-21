@@ -61,8 +61,8 @@ GodotRx="*res://addons/godotrx/Internal/Singleton.cs"
 
 [display]
 
-window/size/width=286
-window/size/height=168
+window/size/width=304
+window/size/height=171
 window/size/test_width=1430
 window/size/test_height=840
 window/dpi/allow_hidpi=true
