@@ -36,10 +36,7 @@ namespace Parry2.game.world.actors.player
 
         void _noClipMovement()
         {
-            Velocity = new Vector2(
-                Input.GetActionStrength("right") - Input.GetActionStrength("left"),
-                Input.GetActionStrength("down") - Input.GetActionStrength("up")
-            ) * NoClipSpeed;
+            Velocity = _controller.WalkInput * NoClipSpeed;
         }
 
         void _processJump(float delta)
@@ -57,20 +54,20 @@ namespace Parry2.game.world.actors.player
             // Jump impulse and hold detection
             if (IsOnFloor())
             {
-                if (!Input.IsActionJustPressed("jump") || !ControlActive) return;
+                if (!_controller.JumpJustPressed || !ControlActive) return;
                 _velocity.y = -JumpStrength;
                 IsJumpHold = true;
                 _animPlayback.Travel("jump");
             }
             else if (IsJumpHold && ControlActive)
             {
-                IsJumpHold = Input.IsActionPressed("jump");
+                IsJumpHold = _controller.JumpPressed;
             }
         }
 
         void _processMovement(float delta)
         {
-            float input = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+            float input = _controller.WalkInput.x;
 
             if (input == 0 && ControlActive)
             {

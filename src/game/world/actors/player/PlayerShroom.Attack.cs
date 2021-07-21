@@ -73,10 +73,9 @@ namespace Parry2.game.world.actors.player
         {
             _damageProcess();
             var area2D = GetNode<Area2D>("AttackArea");
-            var attackAnim = GetNode<AnimationPlayer>("AttackArea/AnimationPlayer");
 
 
-            if (attackAnim.IsPlaying())
+            if (_attackPlayer.IsPlaying())
             {
                 Array overlappingAreas = area2D.GetOverlappingAreas();
                 if (overlappingAreas.Count == 0) return;
@@ -88,26 +87,11 @@ namespace Parry2.game.world.actors.player
             area2D.Rotation = GetAttackRotation();
 
             _inKnockback = false;
-            if (!Input.IsActionJustPressed("attack")) return;
-            attackAnim.Play("attack");
+            if (!_controller.AttackJustPressed) return;
+            _attackPlayer.Play("attack");
         }
 
-        float GetAttackRotation()
-        {
-            // Retrieves axis for analog stick
-            float
-                xPos = Input.GetActionStrength("attack_right"),
-                xNeg = Input.GetActionStrength("attack_left"),
-                yPos = Input.GetActionStrength("attack_down"),
-                yNeg = Input.GetActionStrength("attack_up");
-
-            // Snaps rotation to multiple of AttackRotSnap
-            float SnapRot(float rot) => Mathf.Stepify(rot, AttackRotSnap);
-
-            return Input.GetConnectedJoypads().Count == 0
-                ? SnapRot(GlobalPosition.AngleToPoint(GetGlobalMousePosition()) + Mathf.Pi - Rotation)
-                : SnapRot(new Vector2(xPos - xNeg, yPos - yNeg).Angle() - Rotation);
-        }
+        float GetAttackRotation() => Mathf.Stepify(_controller.AttackRotation, AttackRotSnap);
 
         void _processHit(IHittable hittable)
         {

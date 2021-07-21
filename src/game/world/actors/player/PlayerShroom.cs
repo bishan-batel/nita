@@ -1,9 +1,11 @@
+using System;
 using System.Runtime.Serialization;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
 using GodotOnReady.Attributes;
 using Parry2.game.mechanic;
+using Parry2.managers;
 
 namespace Parry2.game.world.actors.player
 {
@@ -18,6 +20,9 @@ namespace Parry2.game.world.actors.player
 
         [OnReadyGet("AnimationTree", Property = "parameters/playback")]
         AnimationNodeStateMachinePlayback _animPlayback;
+
+        readonly Func<InputController, InputController> _applyController = InputManager.Apply;
+        InputController _controller;
 
 
         public Vector2 Velocity
@@ -40,6 +45,7 @@ namespace Parry2.game.world.actors.player
             this.Wire();
             _velocity = Vector2.Zero;
             _animationTree.Active = true;
+            _controller = new InputController(this);
             _addDebugCommands();
         }
 
@@ -56,6 +62,8 @@ namespace Parry2.game.world.actors.player
 
         public override void _Process(float delta)
         {
+            _controller = _applyController.Invoke(_controller);
+
             _attackProcess();
             _sprite.GlobalScale = Vector2.One;
         }
