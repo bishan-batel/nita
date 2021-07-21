@@ -5,7 +5,22 @@ namespace Parry2.managers
 {
     public static class InputManager
     {
-        public static InputController Apply(InputController controller)
+        public static InputController Apply(InputController controller) =>
+            new()
+            {
+                JumpPressed = Input.IsActionPressed("jump"),
+                JumpJustPressed = Input.IsActionJustPressed("jump"),
+
+                AttackRotation = GetAttackRot(controller.Owner),
+                AttackJustPressed = Input.IsActionJustPressed("attack"),
+
+                WalkInput = new Vector2(
+                    Input.GetActionStrength("right") - Input.GetActionStrength("left"),
+                    Input.GetActionStrength("down") - Input.GetActionStrength("up")
+                )
+            };
+
+        static float GetAttackRot(Node2D controller)
         {
             float attackRot = Input.GetConnectedJoypads().Count > 0
                 // Controller aiming
@@ -14,24 +29,9 @@ namespace Parry2.managers
                     Input.GetJoyAxis(0, (int) JoystickList.Axis3)
                 ).Angle()
                 // Mouse aiming
-                : controller.Owner
-                    ?.GetAngleTo(controller.Owner.GetGlobalMousePosition()) ?? 0f;
-
-            controller.Set(new InputController
-            {
-                JumpPressed = Input.IsActionPressed("jump"),
-                JumpJustPressed = Input.IsActionJustPressed("jump"),
-
-                AttackRotation = attackRot,
-                AttackJustPressed = Input.IsActionJustPressed("attack"),
-
-                WalkInput = new Vector2(
-                    Input.GetActionStrength("right") - Input.GetActionStrength("left"),
-                    Input.GetActionStrength("down") - Input.GetActionStrength("up")
-                )
-            });
-
-            return controller;
+                : controller
+                    ?.GetAngleTo(controller.GetGlobalMousePosition()) ?? 0f;
+            return attackRot;
         }
     }
 }
