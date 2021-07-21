@@ -1,6 +1,5 @@
 using Godot;
 using Parry2.game.world.actors.player;
-using Parry2.utils;
 
 namespace Parry2.managers
 {
