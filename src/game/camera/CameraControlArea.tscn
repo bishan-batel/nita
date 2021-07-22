@@ -6,3 +6,4 @@
 collision_layer = 524288
 collision_mask = 0
 script = ExtResource( 1 )
+CameraZoom = Vector2( 1, 1 )

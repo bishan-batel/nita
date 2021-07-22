@@ -46,7 +46,8 @@ _global_script_class_icons={
 
 config/name="Parry2"
 run/main_scene="res://src/menu/Menu.tscn"
-boot_splash/image="res://assets/textures/detail/backgrounds/mushroom_plains 0.png"
+boot_splash/image="res://assets/loading.png"
+boot_splash/use_filter=false
 config/icon="res://assets/textures/objects/saw/saw.png"
 
 [autoload]
@@ -61,11 +62,10 @@ GodotRx="*res://addons/godotrx/Internal/Singleton.cs"
 
 [display]
 
-window/size/width=304
-window/size/height=171
-window/size/test_width=1430
-window/size/test_height=840
+window/size/width=300
+window/size/height=168
 window/dpi/allow_hidpi=true
+mouse_cursor/custom_image="res://icon.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 

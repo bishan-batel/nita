@@ -222,6 +222,7 @@ height = 14.0
 ]]
 collision_layer = 4
 script = ExtResource( 2 )
+AttackRotSnap = 0.785
 Health = 1
 TurnAngle = 0.0
 TurnSpeed = 0.1
@@ -241,7 +242,6 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -3 )
 hframes = 6
 vframes = 4
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 1 )
@@ -267,7 +267,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AttackArea"]
-playback_speed = 2.0
+playback_speed = 2.3
 anims/attack = SubResource( 20 )
 
 [node name="fungus_attack" type="Sprite" parent="AttackArea"]

@@ -1,59 +1,71 @@
 using Godot;
-using Godot.Collections;
 using GodotRx;
 using Parry2.utils;
+using System;
+using System.Reactive.Linq;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
+using Array = Godot.Collections.Array;
 
 namespace Parry2.game.camera
 {
     public class FollowCamera : Area2D
     {
+        [Node("Camera")] readonly Camera2D _camera = null;
+        [Node("CollisionShape2D")] readonly CollisionShape2D _collisionShape = null;
         CMargin4 _dragMargin, _targetMargin;
 
-        Vector2 _targetPos, _targetZoom;
-        bool _respawnDone;
+        Vector2 _targetPos, _pos;
+        bool _isRespawning;
 
-        [Export] public float SmoothingSpeed = .1f, MaxSmoothVel, ZoomRoundAmt;
-
-        [Export] public Vector2 Zoom = new(.9f, .9f);
+        [Export] public float SmoothingSpeed = .1f, MaxSmoothVel;
 
         [Export] public NodePath TargetPath { set; get; }
+        public Node2D Target => GetNodeOrNull<Node2D>(TargetPath);
 
         public override void _Ready()
         {
+            this.Wire();
+
+            _pos = GlobalPosition;
+
             this.Dispatch(() =>
             {
-                _dragMargin = new CMargin4(GetNode<Camera2D>("Camera"));
-                _respawnDone = true;
+                _dragMargin = new CMargin4(_camera);
+                _isRespawning = false;
             }, .1f);
+
+            this.OnProcess()
+                .Where(_ => _isRespawning)
+                .Subscribe(_ => GlobalPosition = _targetPos)
+                .DisposeWith(this);
+
+            this
+                .OnProcess()
+                .Where(_ => !_isRespawning)
+                .Subscribe(_process)
+                .DisposeWith(this);
+            // _camera.Zoom = Vector2.One;
         }
 
-        public override void _Process(float delta)
+        void _process(float delta)
         {
-            if (!_respawnDone)
-            {
-                GlobalPosition = _targetPos;
-                _targetZoom = Zoom;
-                return;
-            }
+            // _camera.Zoom = Vector2.One;
 
-            GetNode<CollisionShape2D>("CollisionShape2D")
-                .GlobalPosition = GetNode<Node2D>(TargetPath).GlobalPosition;
-            var camera = GetNode<Camera2D>("Camera");
+            _collisionShape.GlobalPosition = Target.GlobalPosition;
+
             float smoothSpeedDelta = 1 - Mathf.Pow(SmoothingSpeed, delta);
 
             // Smooths position to target
-            GlobalPosition = GlobalPosition.LinearInterpolate(_targetPos, smoothSpeedDelta).Round();
+            _pos = _pos.LinearInterpolate(_targetPos, smoothSpeedDelta);
+            GlobalPosition = _pos.Round();
+
 
             // Smooths camera to target
-            camera.Zoom = camera.Zoom.LinearInterpolate(_targetZoom, smoothSpeedDelta);
-            camera.Zoom = (camera.Zoom / ZoomRoundAmt).Round() * ZoomRoundAmt;
-            if (camera.Zoom == Vector2.Zero)
-                camera.Zoom = new Vector2(ZoomRoundAmt, ZoomRoundAmt);
-
             // Smooths margin to target
-            new CMargin4(camera)
+            new CMargin4(_camera)
                 .Lerp(_targetMargin, smoothSpeedDelta)
-                .AssignToDragMargin(camera);
+                .AssignToDragMargin(_camera);
         }
 
         public override void _PhysicsProcess(float delta)
@@ -70,20 +82,16 @@ namespace Parry2.game.camera
 
             _targetMargin = _dragMargin;
 
-            _targetPos = GetNode<Node2D>(TargetPath).GlobalPosition;
-            _targetZoom = Zoom;
-            // GlobalRotation = GetNode<Node2D>(TargetPath).GlobalRotation;
+            _targetPos = Target.GlobalPosition;
         }
 
         void _controlByArea(CameraControlArea area)
         {
             // GlobalRotation = Mathf.LerpAngle(GlobalRotation, 0, .1f);
             _targetPos = area.GetNodeOrNull<Node2D>(area.Point)?.GlobalPosition ??
-                         GetNode<Node2D>(TargetPath).GlobalPosition;
+                         Target.GlobalPosition;
 
             _targetMargin = new CMargin4(0f, 0f, 0f, 0f);
-            if (area.CameraZoom != Vector2.Zero)
-                _targetZoom = area.CameraZoom;
         }
     }
 }

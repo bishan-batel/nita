@@ -12,12 +12,10 @@ collision_mask = 524288
 script = ExtResource( 1 )
 SmoothingSpeed = 0.066
 MaxSmoothVel = 2.0
-ZoomRoundAmt = 1.0
 
 [node name="Camera" type="Camera2D" parent="."]
 rotating = true
 current = true
-zoom = Vector2( 0.9, 0.9 )
 drag_margin_top = 0.3
 drag_margin_bottom = 0.1
 editor_draw_drag_margin = true

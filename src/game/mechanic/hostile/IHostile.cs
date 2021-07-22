@@ -7,8 +7,5 @@ namespace Parry2.game.mechanic.hostile
         [Export] public bool Disabled { set; get; }
         [Export] public bool TeleportToSafeSpot { set; get; }
         [Export] public int Damage { set; get; }
-
-
-        // public void OnHitConnected(HitConnect)
     }
 }

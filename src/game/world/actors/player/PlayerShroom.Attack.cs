@@ -36,16 +36,18 @@ namespace Parry2.game.world.actors.player
 
 
             // Get all overlapping bodies and areas of IHostile
-            var overlapping = damageArea.GetOverlappingAreas().Cast<object>()
+            var overlapping = damageArea
+                .GetOverlappingAreas()
+                .Cast<object>()
                 // .Where(IsHostile)
-                .Cast<IHostile>()
                 .Concat(
                     damageArea
                         .GetOverlappingBodies()
                         .Cast<object>()
-                        // .Where(IsHostile)
-                        .Cast<IHostile>()
-                ).ToList();
+                    // .Where(IsHostile)
+                )
+                .Cast<IHostile>()
+                .ToList();
 
             if (overlapping.Count is 0) return;
 

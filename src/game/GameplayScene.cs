@@ -1,4 +1,6 @@
 using System.Linq;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using Parry2.game.room;
 using Parry2.managers.game;
@@ -8,11 +10,15 @@ namespace Parry2.game
 {
     public class GameplayScene : GameState
     {
+        public static PackedScene PackedScene =>
+            ResourceLoader.Load<PackedScene>("res://src/game/GameplayScene.tscn");
+
         public static GameplayScene Singleton;
         public static string EnteredGate;
         [Export] public string DefaultChapterName = "test_room";
 
-        public Node ChapterContainer;
+        [Node("ChapterViewContainer/ChapterContainer")]
+        public readonly Node ChapterContainer = null;
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
@@ -27,27 +33,31 @@ namespace Parry2.game
             Singleton = this;
         }
 
-        public static PackedScene PackedScene =>
-            ResourceLoader.Load<PackedScene>("res://src/game/GameplayScene.tscn");
 
         public static Room CurrentRoom { set; get; }
 
         public override void _Ready()
         {
             base._Ready();
+            this.Wire();
 
             CurrentRoom ??= SaveManager
                 .CurrentSaveFile
                 ?.CurrentRoom
+#if DEBUG
+                ?.Instance(PackedScene.GenEditState.Instance) as Room;
+#else
                 ?.Instance() as Room;
-
-            Node chapterContainer = GetNode("ChapterContainer");
+#endif
 
             // Clears Container
-            foreach (Node child in chapterContainer.GetChildren())
-                child.Free();
+            ChapterContainer
+                .GetChildren()
+                .Cast<Node>()
+                .ToList()
+                .ForEach(child => child.Free());
 
-            chapterContainer.AddChild(CurrentRoom);
+            ChapterContainer.AddChild(CurrentRoom);
         }
 
 
