@@ -17,7 +17,6 @@ namespace Parry2.game.world.objects.checkpoint
         static NodePath _claimed;
 
 
-        // TODO give checkpoint functionality to the room instead of a static class
         [Obsolete("", true)]
         public static NodePath Claimed
         {

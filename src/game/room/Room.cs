@@ -26,7 +26,7 @@ namespace Parry2.game.room
         {
             if (GetTree().CurrentScene == this)
             {
-                GameplayScene.LoadRoom(this);
+                GameplayScene.LoadRoomFromCurrentScene(this);
                 return;
             }
 
@@ -92,6 +92,7 @@ namespace Parry2.game.room
 
             if (roomSave is null) return;
             this.DebugPrint($"Loading {RoomName} from save file");
+
 
             roomSave
                 .Keys

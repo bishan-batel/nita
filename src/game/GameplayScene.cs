@@ -2,9 +2,12 @@ using System.Linq;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
+using GodotRx;
 using Parry2.game.room;
 using Parry2.managers.game;
 using Parry2.managers.save;
+using Parry2.utils;
+using System;
 
 namespace Parry2.game
 {
@@ -64,28 +67,30 @@ namespace Parry2.game
         public static void LoadRoom(string roomName, string gateway = null)
         {
             // Singleton.DebugPrint($"Loading into {roomName} through gateway {gateway ?? "[default]"}");
-            EnteredGate = gateway;
 
-            // Singleton
-            //     .ChapterContainer
-            //     .GetChildren()
-            //     .Cast<Node>()
-            //     .ToList()
-            //     .ForEach(node => node.Free());
-            //
-            // Singleton.ChapterContainer.AddChild(
-            //     CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>()
-            // );
+            CurrentRoom
+                .OnTreeExiting()
+                .Subscribe(_ =>
+                {
+                    EnteredGate = gateway;
+
+                    CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>();
+                    Singleton.ChapterContainer.AddChild(CurrentRoom);
+                }).DisposeWith(Singleton);
+
+            CurrentRoom.QueueFree();
 
 
-            Global
-                .Singleton
-                .GetTree()
-                .ChangeSceneTo(RoomList.GetChapterScene(roomName));
+            // Global
+            //     .Singleton
+            //     .GetTree()
+            //     .ChangeSceneTo(RoomList.GetChapterScene(roomName));
         }
 
-        public static void LoadRoom(Room room)
+        public static void LoadRoomFromCurrentScene(Room room)
         {
+            room.DebugPrint($"Changing scene from {nameof(Room)} to {nameof(GameplayScene)}");
+
             room
                 .GetTree()
                 .ChangeSceneTo(PackedScene);

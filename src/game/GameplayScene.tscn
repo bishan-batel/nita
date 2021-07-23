@@ -4,11 +4,13 @@
 [ext_resource path="res://src/game/world/objects/checkpoint/CheckpointManagerNode.cs" type="Script" id=2]
 
 [node name="GameplayScene" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ChapterViewContainer" type="ViewportContainer" parent="."]
+pause_mode = 1
 margin_right = 300.0
 margin_bottom = 168.0
 stretch = true

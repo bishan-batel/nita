@@ -16,7 +16,6 @@ namespace Parry2.game.world.actors.player
         [Export] public int InvulnerabilityFrames { get; set; }
         [Export] public int Health { get; set; }
 
-        // TODO simplify damage system away from combat / clean up obsolete code
         void _damageProcess()
         {
             if (_invulnerable || NoClip)
