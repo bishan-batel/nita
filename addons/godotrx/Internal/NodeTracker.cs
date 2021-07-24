@@ -1,19 +1,19 @@
-using Godot;
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using Godot;
 
 namespace GodotRx.Internal
 {
   internal class NodeTracker : Node
   {
     public static readonly string DefaultName = "__NodeTracker__";
+    Subject<InputEvent>? _onInput;
+    Subject<float>? _onPhysicsProcess;
 
-    private Subject<float>? _onProcess;
-    private Subject<float>? _onPhysicsProcess;
-    private Subject<InputEvent>? _onInput;
-    private Subject<InputEvent>? _onUnhandledInput;
-    private Subject<InputEventKey>? _onUnhandledKeyInput;
+    Subject<float>? _onProcess;
+    Subject<InputEvent>? _onUnhandledInput;
+    Subject<InputEventKey>? _onUnhandledKeyInput;
 
     public IObservable<float> OnProcess
     {

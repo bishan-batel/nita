@@ -12,79 +12,77 @@ using File = System.IO.File;
 // lol
 namespace Parry2.editor
 {
-    [Obsolete("Incomplete class", true)]
-    public class LevelData : ISerializable
+  [Obsolete("Incomplete class", true)]
+  public class LevelData : ISerializable
+  {
+    public const string
+        FileExtension = ".lmao",
+        TilemapFileExtension = ".tmx";
+
+    // Meta filesystem
+    public readonly string Name, ParentDirectory;
+
+    /// <param name="path">Should be an absolute path with LevelData file extension</param>
+    public LevelData(string path)
     {
-        public const string
-            FileExtension = ".lmao",
-            TilemapFileExtension = ".tmx";
+      string[] directories = path.Split("/");
+      string name = directories.Last();
 
-        // Meta filesystem
-        public readonly string Name, ParentDirectory;
-
-        /// <param name="path">Should be an absolute path with LevelData file extension</param>
-        public LevelData(string path)
-        {
-            string[] directories = path.Split("/");
-            string name = directories.Last();
-
-            string fileName = path.Remove(0, path.Length - name.Length);
-            ParentDirectory = path.Remove(path.Length - name.Length);
-            Name = fileName.Remove(fileName.Length - FileExtension.Length);
-        }
-
-        public LevelData(string directory, string name)
-        {
-            ParentDirectory = directory;
-            Name = name;
-        }
-
-        public LevelData(SerializationInfo info, StreamingContext context = default)
-        {
-            ParentDirectory = info.GetString(nameof(ParentDirectory));
-            Name = info.GetString(nameof(Name));
-        }
-
-        public string FileName => Name + FileExtension;
-        public string Path => ParentDirectory.PlusFile(FileName);
-        public string TiledPath => ParentDirectory.PlusFile(Name) + TilemapFileExtension;
-
-        public TiledMap Map => new(TiledPath);
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue(nameof(ParentDirectory), ParentDirectory);
-            info.AddValue(nameof(Name), Name);
-        }
-
-        public void ApplyTo(Node root)
-        {
-            TiledMap map = Map;
-
-            map.Layers.ToList().ForEach(l => { });
-            TiledLayer layer = map.Layers[0];
-        }
-
-        // save filesystem garbo
-
-        /// <summary>
-        ///     Saves the file to system
-        /// </summary>
-        void Flush()
-        {
-            FileStream fs = File.Open(Path, FileMode.Create);
-            var bf = new BinaryFormatter();
-            bf.Serialize(fs, this);
-            fs.Close();
-        }
-
-        public override string ToString()
-        {
-            return $"[FullPath: '{Path}', " +
-                   $"Name: '{Name}', " +
-                   $"Parent Directory '{ParentDirectory}'" +
-                   $"TiledPath: '{TiledPath}'" +
-                   "]";
-        }
+      string fileName = path.Remove(0, path.Length - name.Length);
+      ParentDirectory = path.Remove(path.Length - name.Length);
+      Name = fileName.Remove(fileName.Length - FileExtension.Length);
     }
+
+    public LevelData(string directory, string name)
+    {
+      ParentDirectory = directory;
+      Name = name;
+    }
+
+    public LevelData(SerializationInfo info, StreamingContext context = default)
+    {
+      ParentDirectory = info.GetString(nameof(ParentDirectory));
+      Name = info.GetString(nameof(Name));
+    }
+
+    public string FileName => Name + FileExtension;
+    public string Path => ParentDirectory.PlusFile(FileName);
+    public string TiledPath => ParentDirectory.PlusFile(Name) + TilemapFileExtension;
+
+    public TiledMap Map => new(TiledPath);
+
+    public void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+      info.AddValue(nameof(ParentDirectory), ParentDirectory);
+      info.AddValue(nameof(Name), Name);
+    }
+
+    public void ApplyTo(Node root)
+    {
+      TiledMap map = Map;
+
+      map.Layers.ToList().ForEach(l => { });
+      TiledLayer layer = map.Layers[0];
+    }
+
+    // save filesystem garbo
+
+    /// <summary>
+    ///   Saves the file to system
+    /// </summary>
+    void Flush()
+    {
+      FileStream fs = File.Open(Path, FileMode.Create);
+      var bf = new BinaryFormatter();
+      bf.Serialize(fs, this);
+      fs.Close();
+    }
+
+    public override string ToString() =>
+        $"[FullPath: '{Path}', " +
+        $"Name: '{Name}', " +
+        $"Parent Directory '{ParentDirectory}'" +
+        $"TiledPath: '{TiledPath}'" +
+        "]";
+  }
 }

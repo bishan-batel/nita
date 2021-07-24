@@ -1,5 +1,3 @@
-using Godot;
-using GodotRx.Internal;
 using System;
 using System.Collections.Generic;
 using System.Reactive;
@@ -7,7 +5,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-
+using GodotRx.Internal;
 using Object = Godot.Object;
 
 namespace GodotRx
@@ -35,13 +33,13 @@ namespace GodotRx
     public static IObservable<(T1, T2, T3, T4, T5, T6)> ObserveSignal<T1, T2, T3, T4, T5, T6>(this Object obj, string signalName)
       => ObserveSignal(obj, signalName, new EventTracker<T1, T2, T3, T4, T5, T6>());
 
-    private static IObservable<T> ObserveSignal<T>(Object obj, string signalName, BaseEventTracker<T> tracker)
+    static IObservable<T> ObserveSignal<T>(Object obj, string signalName, BaseEventTracker<T> tracker)
     {
       obj.Connect(signalName, tracker, tracker.TargetMethod);
 
       var subscriptionList = new List<IDisposable>();
       var onSignal = tracker.OnSignal;
-      var instId = obj.GetInstanceId();
+      ulong instId = obj.GetInstanceId();
 
       InstanceTracker.Of(obj).Freed += () =>
       {
@@ -52,7 +50,7 @@ namespace GodotRx
 
       return Observable.Create<T>(observer =>
       {
-        var subscription = onSignal.Subscribe(observer.OnNext);
+        IDisposable subscription = onSignal.Subscribe(observer.OnNext);
         subscriptionList.Add(subscription);
 
         return Disposable.Create(() =>

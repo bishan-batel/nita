@@ -42,8 +42,8 @@ namespace Parry2.debug
     class Command : Object
     {
       readonly List<(string name, Variant.Type type)> _arguments;
-      readonly string _name, _description, _funcName;
       readonly Object _instance;
+      readonly string _name, _description, _funcName;
 
       public Command() : this(null, null, null, null)
       {

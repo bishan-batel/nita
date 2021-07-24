@@ -1,19 +1,17 @@
-using Godot;
-using GodotRx.Internal;
 using System;
 using System.Collections.Generic;
-
+using GodotRx.Internal;
 using Object = Godot.Object;
 
 namespace GodotRx
 {
   public static class IDisposableExtensions
   {
-    private static readonly Dictionary<ulong, HashSet<IDisposable>> objectDisposables = new Dictionary<ulong, HashSet<IDisposable>>();
+    static readonly Dictionary<ulong, HashSet<IDisposable>> objectDisposables = new();
 
     public static void DisposeWith(this IDisposable disposable, Object obj)
     {
-      var instId = obj.GetInstanceId();
+      ulong instId = obj.GetInstanceId();
 
       if (!objectDisposables.ContainsKey(instId))
       {
@@ -21,11 +19,9 @@ namespace GodotRx
 
         InstanceTracker.Of(obj).Freed += () =>
         {
-          foreach (var disposable in objectDisposables[instId])
-          {
-            // GD.Print($"disposed with {instId}");
+          foreach (IDisposable disposable in objectDisposables[instId])
+              // GD.Print($"disposed with {instId}");
             disposable.Dispose();
-          }
 
           objectDisposables.Remove(instId);
         };

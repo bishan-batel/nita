@@ -13,12 +13,12 @@ namespace GodotRx
     }
 
     public static IObservable<U> OfType<T, U>(this IObservable<T> observable)
-      where T : class
-      where U : T
+        where T : class
+        where U : T
     {
       return observable
-        .Where(e => e is U)
-        .Select(e => (U) e);
+          .Where(e => e is U)
+          .Select(e => (U) e);
     }
   }
 }

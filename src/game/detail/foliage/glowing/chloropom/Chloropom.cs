@@ -2,51 +2,51 @@ using Godot;
 
 namespace Parry2.game.detail.foliage.glowing.chloropom
 {
-    [Tool]
-    public class Chloropom : Sprite
+  [Tool]
+  public class Chloropom : Sprite
+  {
+    float _energy = .87f;
+
+    [Export]
+    public new int Frame
     {
-        float _energy = .87f;
+      set => base.Frame = value;
+      get => base.Frame;
+    }
 
-        [Export]
-        public new int Frame
-        {
-            set => base.Frame = value;
-            get => base.Frame;
-        }
+    [Export]
+    public float Energy
+    {
+      set
+      {
+        _energy = value;
+        if (IsInsideTree()) GetNode<Light2D>(nameof(Light2D)).Energy = value;
+      }
+      get => _energy;
+    }
 
-        [Export]
-        public float Energy
-        {
-            set
-            {
-                _energy = value;
-                if (IsInsideTree()) GetNode<Light2D>(nameof(Light2D)).Energy = value;
-            }
-            get => _energy;
-        }
-
-        [Export]
-        public bool DisplayInEditor
-        {
-            set
-            {
-                if (IsInsideTree()) GetNode<Light2D>(nameof(Light2D)).Visible = value;
-            }
-            get => IsInsideTree() && GetNode<Light2D>(nameof(Light2D)).Visible;
-        }
+    [Export]
+    public bool DisplayInEditor
+    {
+      set
+      {
+        if (IsInsideTree()) GetNode<Light2D>(nameof(Light2D)).Visible = value;
+      }
+      get => IsInsideTree() && GetNode<Light2D>(nameof(Light2D)).Visible;
+    }
 
 
-        public override void _Ready()
-        {
-            Frame = Frame;
-            Energy = Energy;
+    public override void _Ready()
+    {
+      Frame = Frame;
+      Energy = Energy;
 #if DEBUG
-            DisplayInEditor = !Engine.EditorHint;
+      DisplayInEditor = !Engine.EditorHint;
 #else
             DisplayInEditor = true;
 #endif
-            if (Energy == 0)
-                Energy = .87f;
-        }
+      if (Energy == 0)
+        Energy = .87f;
     }
+  }
 }
