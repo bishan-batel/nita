@@ -15,7 +15,7 @@ namespace Parry2.game.world.actors.player
 
         public float AttackRotation { set; get; }
 
-        public Node2D Owner { get; }
+        public Node2D Owner { set; get; }
 
         public InputController(Node2D playerShroom)
         {

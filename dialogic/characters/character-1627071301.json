@@ -1,0 +1,20 @@
+{
+	"color": "#ffff6c6c",
+	"description": "Main Player",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1627071301.json",
+	"mirror_portraits": false,
+	"name": "Nita",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": ""
+		}
+	],
+	"scale": 100
+}

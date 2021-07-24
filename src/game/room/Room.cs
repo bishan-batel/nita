@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Godot;
+using GodotRx;
 using Parry2.editor;
 using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
@@ -24,6 +25,8 @@ namespace Parry2.game.room
 
         public override void _Ready()
         {
+            // TODO fix checkpoints
+
             if (GetTree().CurrentScene == this)
             {
                 GameplayScene.LoadRoomFromCurrentScene(this);
@@ -33,10 +36,12 @@ namespace Parry2.game.room
             if (!RoomList.IsValidRoomName(RoomName))
                 throw new Exception("Unauthorized name");
 
+            GD.Print(IsInsideTree() + " IS IN TREE");
             LoadFromSave(SaveManager.CurrentSaveFile);
 
             var player = GetNode<PlayerShroom>(Player);
 
+            // Attempts to find entered gateway in scene
             RoomGateway gateway = GetTree()
                 .GetNodesInGroup(RoomGateway.GatewayGroup)
                 .Cast<RoomGateway>()
@@ -51,8 +56,8 @@ namespace Parry2.game.room
             else if (CheckpointManager.ClaimedPath is not null)
             {
                 Vector2 location = CheckpointManager.GetSpawnLocation();
-                this.DebugPrint($"Using checkpoint @ {location}");
-                GetNode<PlayerShroom>(Player).GlobalPosition = location;
+                this.DebugPrint($"Using checkpoint @ position ({location})");
+                player.GlobalPosition = location;
             }
             else
             {
@@ -73,14 +78,13 @@ namespace Parry2.game.room
             GameplayScene.LoadRoom(RoomName);
         }
 
+#if DEBUG
         public override void _Process(float delta)
         {
-#if DEBUG
             if (Input.IsActionJustPressed("debug_load_from_save"))
                 GetTree().ReloadCurrentScene();
-#endif
-            //  LoadFromSave(SaveManager.CurrentSaveFile);
         }
+#endif
 
         public void LoadFromSave(SaveFile saveFile = null)
         {
@@ -89,10 +93,9 @@ namespace Parry2.game.room
 
             // Room-bound Persistent Node Loading
             var roomSave = saveFile.RoomData[RoomName];
-
             if (roomSave is null) return;
-            this.DebugPrint($"Loading {RoomName} from save file");
 
+            this.DebugPrint($"Loading {RoomName} from save file");
 
             roomSave
                 .Keys

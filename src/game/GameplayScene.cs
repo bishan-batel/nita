@@ -8,6 +8,7 @@ using Parry2.managers.game;
 using Parry2.managers.save;
 using Parry2.utils;
 using System;
+using Parry2.debug;
 
 namespace Parry2.game
 {
@@ -22,6 +23,8 @@ namespace Parry2.game
 
         [Node("ChapterViewContainer/ChapterContainer")]
         public readonly Node ChapterContainer = null;
+
+        [Node("UI/DialogueManager")] public readonly GameDialogueManager DialogueManager = null;
 
         //  I would use default parameters to have just one constructor, but godot
         // seems to just crash when trying to instance it
@@ -61,6 +64,7 @@ namespace Parry2.game
                 .ForEach(child => child.Free());
 
             ChapterContainer.AddChild(CurrentRoom);
+            AddCommands();
         }
 
 
@@ -107,6 +111,27 @@ namespace Parry2.game
         {
             tree.ChangeSceneTo(PackedScene);
             CurrentRoom = (Room) file.CurrentRoom.Instance();
+        }
+
+        public void AddCommands()
+        {
+            this.AddCommand(
+                "room",
+                "Changes room to specified ID",
+                nameof(CmdRoom),
+                ("room_name", Variant.Type.String)
+            );
+        }
+
+        void CmdRoom(string roomName)
+        {
+            if (!RoomList.IsValidRoomName(roomName))
+            {
+                GConsole.WriteLine($"[color=red]{roomName} is invalid");
+                return;
+            }
+
+            LoadRoom(roomName);
         }
     }
 }

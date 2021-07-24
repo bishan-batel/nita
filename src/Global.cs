@@ -1,7 +1,9 @@
 #define DEBUG
 
 using System;
+using System.Reactive.Linq;
 using Godot;
+using GodotRx;
 using Parry2.debug;
 
 namespace Parry2
@@ -21,7 +23,13 @@ namespace Parry2
 
         public override void _Ready()
         {
+            PauseMode = PauseModeEnum.Process;
             this.AddCommand("exit", "Exits out of console", nameof(Exit));
+
+            GConsole
+                .OnToggled()
+                .Subscribe(shown => GetTree().Paused = shown)
+                .DisposeWith(this);
         }
 
         public void Exit()

@@ -29,16 +29,13 @@ namespace Parry2.game.world.objects.checkpoint
                 _claimedPath = value;
                 ClaimedNode?.Claim();
 
-
                 SaveManager.SaveDeferred();
             }
             get => _claimedPath;
         }
 
         Checkpoint ClaimedNode =>
-            _claimedPath is null
-                ? null
-                : GameplayScene.CurrentRoom.GetNode<Checkpoint>(_claimedPath);
+            _claimedPath is null ? null : GameplayScene.CurrentRoom.GetNodeOrNull<Checkpoint>(_claimedPath);
 
         public ISerializable Save()
         {
@@ -51,14 +48,15 @@ namespace Parry2.game.world.objects.checkpoint
 
         public void LoadFrom(ISerializable obj)
         {
-            this.DebugPrint($"{obj} alfsjdkfla;jsdlfkjldfkajdslkj");
             if (obj is not CheckpointManagerSave save) return;
             ClaimedPath = save.Path;
         }
 
         public Vector2 GetSpawnLocation()
         {
-            return ClaimedNode?.GlobalPosition ?? Vector2.Zero;
+            return ClaimedNode?.IsInsideTree() ?? false
+                ? ClaimedNode.GlobalPosition
+                : Vector2.Zero;
         }
 
         public void OnLeftRoom()
