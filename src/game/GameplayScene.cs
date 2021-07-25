@@ -68,17 +68,19 @@ namespace Parry2.game
     }
 
 
-    public static void LoadRoom(string roomName, string gateway = null)
+    public static void LoadRoom(string roomName, bool save = true, string gateway = null)
     {
       // Singleton.DebugPrint($"Loading into {roomName} through gateway {gateway ?? "[default]"}");
+
+      if (save)
+        SaveManager.Save();
 
       CurrentRoom
           .OnTreeExiting()
           .Subscribe(_ =>
           {
             EnteredGate = gateway;
-
-            CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>();
+            CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>(PackedScene.GenEditState.Instance);
             Singleton.ChapterContainer.AddChild(CurrentRoom);
           }).DisposeWith(Singleton);
 

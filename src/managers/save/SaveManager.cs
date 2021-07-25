@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -64,23 +65,20 @@ namespace Parry2.managers.save
     public override void _Input(InputEvent @event)
     {
       if (Input.IsActionJustPressed("debug_save"))
-        SaveDeferred();
+        Save();
     }
 #endif
 
-    public static void SaveDeferred()
-    {
-      Singleton.CallDeferred(nameof(_save));
-    }
+    public static void SaveDeferred(SaveFile file = null) =>
+        Singleton.CallDeferred(nameof(_save), file);
 
-    public static void Save()
-    {
-      Singleton._save();
-    }
+    public static void Save(SaveFile file = null) => Singleton._save(file);
 
-    void _save()
+    void _save(SaveFile file)
     {
-      this.DebugPrint($"Saving to file [{CurrentSaveFile.Name}]");
+      file ??= CurrentSaveFile;
+
+      this.DebugPrint($"Saving to file [{file.Name}]");
 
       // TODO figure out wtf this TODO is saying
 
@@ -88,23 +86,26 @@ namespace Parry2.managers.save
       // if it isn't then find way to copy instance of the current room before passing
       // into flush thread
 
+      // Asserts that game is in gameplay mode
       if (GameStateManager.CurrentState is not GameplayScene)
-      {
-        this.DebugPrintErr($"\tUnable to save state, wrong gamestate {GameStateManager.CurrentState}");
-        return;
-      }
+        throw new Exception($"Unable to save state, wrong gamestate [{GameStateManager.CurrentState}]");
 
-      GameplayScene
-          .CurrentRoom
-          .SaveData(CurrentSaveFile);
+      if (GameplayScene.CurrentRoom is null)
+        throw new Exception("|\t> Unable to save state, no room loaded");
 
-      this.DebugPrint($"\tFlushing save file ['{CurrentSaveFile.Name}'] to filesystem");
+      // Saves
+      GameplayScene.CurrentRoom.SaveData(file);
 
-      if (CurrentSaveFile.Flush()) this.DebugPrint("\tFlushed save successfully");
-      else Singleton.DebugPrintErr($"\tFailed to flush save '{CurrentSaveFile.Name}'");
+      if (CurrentSaveFile.Flush()) this.DebugPrint("|\t> Flushed save successfully");
+      else throw new Exception($"Failed to flush save '{file.Name}'");
     }
 
 
+    /// <summary>
+    /// Returns a Godot.Directory opened into the game's save directory.
+    /// This will create the save directory if it does not exist.
+    /// </summary>
+    /// <returns>Godot.Directory opened to game's save directory</returns>
     public static Directory OpenSaveDirectory()
     {
       var saveDir = new Directory();
@@ -114,57 +115,54 @@ namespace Parry2.managers.save
       return saveDir;
     }
 
+    /// <summary>
+    /// Opens save in specified filepath 
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public static bool OpenSave(string path)
     {
-      Singleton.DebugPrint($"Loading {path} save --");
+      Singleton.DebugPrint($"Loading {path}");
 
-      var dir = new Directory();
-      if (!dir.DirExists(SavesDirAbsPath))
-        dir.MakeDir(SavesDirAbsPath);
+      // Assert that save directory exists
+      OpenSaveDirectory();
 
-      SaveFile file = SaveFile.Open(path);
-      if (file is null)
-      {
-        Singleton.DebugPrintErr($"\tFailed to open file {path}");
-        return false;
-      }
-
-      CurrentSaveFile = file;
-      Singleton.DebugPrint($"\tLoaded {path} save successfully");
-      return true;
+      return SaveFile.Open(path) is not null;
     }
 
 
+    /// <summary>
+    /// Creates a new empty save file of specified name
+    /// </summary>
+    /// <param name="name">Name of new save file</param>
+    /// <returns>Returns true if save was created succesfully</returns>
     public static bool CreateNewSave(string name = null)
     {
       Singleton.DebugPrint($"Creating new save file {name}...");
       SaveFile file;
 
       // Name checking
-      if (name == null)
-      {
+      if (name is null)
         file = new SaveFile();
-      }
+
       else if (IsValidFileName(name))
-      {
         file = new SaveFile(name);
-      }
+
       else
       {
-        Singleton.DebugPrintErr($"\tInvalid filename {name}");
+        Singleton.DebugPrintErr($"|\t>Invalid filename {name}");
         return false;
       }
 
       // Flushes to filesystem and checks result
-      bool result = file.Flush();
-      if (result)
-        Singleton.DebugPrint($"\tCreated new save file {name}");
-      else
-        Singleton.DebugPrintErr($"\tFailed to create file {name}");
-
-      return result;
+      return file.Flush();
     }
 
+    /// <summary>
+    /// Used to get the full file path to a save file of specified name
+    /// </summary>
+    /// <param name="name">File name</param>
+    /// <returns></returns>
     public static string FormatAbsPath(string name) =>
         SavesDirAbsPath.PlusFile(name + SaveFileType);
 

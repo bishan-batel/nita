@@ -14,7 +14,7 @@ namespace Parry2.debug
 
     // Signals
     public static IObservable<bool> OnToggled() => Singleton.ObserveSignal<bool>("toggled");
-    public static IObservable<(string, Reference, string)> OnCommandAdded() => Singleton.ObserveSignal<(string, Reference, string)>("command_added");
+    public static IObservable<(string name, Reference reference, string targetName)> OnCommandAdded() => Singleton.ObserveSignal<string, Reference, string>("command_added");
     public static IObservable<string> OnCommandRemoved() => Singleton.ObserveSignal<string>("command_removed");
     public static IObservable<string> OnCommandNotFound() => Singleton.ObserveSignal<string>("command_not_found");
     public static IObservable<Object> OnCommandExecuted() => Singleton.ObserveSignal<Object>("command_executed");

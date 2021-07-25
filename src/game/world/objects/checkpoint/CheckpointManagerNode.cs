@@ -1,11 +1,18 @@
 using System;
+using System.Data;
+using System.Linq;
 using System.Runtime.Serialization;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
+using GodotRx;
+using Parry2.game.world.actors.player;
 using Parry2.managers.save;
 using Parry2.utils;
 
 namespace Parry2.game.world.objects.checkpoint
 {
+  [Group(SaveManager.PersistGroup)]
   public class CheckpointManagerNode : Node, IPersistant
   {
     NodePath _claimedPath;
@@ -34,47 +41,41 @@ namespace Parry2.game.world.objects.checkpoint
       get => _claimedPath;
     }
 
-    Checkpoint ClaimedNode =>
-        _claimedPath is null ? null : GameplayScene.CurrentRoom.GetNodeOrNull<Checkpoint>(_claimedPath);
+    Checkpoint ClaimedNode => ClaimedPath is null
+        ? null
+        : GameplayScene.CurrentRoom.GetNodeOrNull<Checkpoint>(_claimedPath);
+
+    public override void _Ready() => this.Wire();
+
+    /// <summary>
+    /// Retrieves spawn location from the current claimed checkpoint
+    /// </summary>
+    public Vector2 GetSpawnLocation() => ClaimedNode.GlobalPosition;
+
+    /// <summary>
+    /// Called to clear checkpoint / to reset checkpoint once you leave a room
+    /// </summary>
+    public void OnLeftRoom() => ClaimedPath = null;
+
+    public void Claim(Checkpoint checkpoint) => ClaimedPath = checkpoint.GetPathFromRoom();
 
     public ISerializable Save()
     {
       if (ClaimedPath is null) return null;
 
       this.DebugPrint("Saving checkpoint data");
-      var save = new CheckpointManagerSave {Path = ClaimedPath};
+      var save = new CheckpointManagerSave
+      {
+        Path = ClaimedPath
+      };
       return save;
     }
 
     public void LoadFrom(ISerializable obj)
     {
+      GD.Print("Rofl ROFL ROFL ROFL");
       if (obj is not CheckpointManagerSave save) return;
       ClaimedPath = save.Path;
-    }
-
-    public Vector2 GetSpawnLocation() =>
-        ClaimedNode?.IsInsideTree() ?? false
-            ? ClaimedNode.GlobalPosition
-            : Vector2.Zero;
-
-    public void OnLeftRoom()
-    {
-      ClaimedPath = null;
-    }
-
-    public void Claim(Checkpoint checkpoint)
-    {
-      Claim(checkpoint.GetPath());
-    }
-
-    public void Claim(NodePath checkpoint)
-    {
-      ClaimedPath = checkpoint;
-    }
-
-    public override void _Ready()
-    {
-      AddToGroup(SaveManager.PersistGroup);
     }
 
     [Serializable]
@@ -85,10 +86,8 @@ namespace Parry2.game.world.objects.checkpoint
       public CheckpointManagerSave(SerializationInfo info, StreamingContext context) =>
           Path = info.GetString(nameof(Path));
 
-      public void GetObjectData(SerializationInfo info, StreamingContext context)
-      {
-        info.AddValue(nameof(Path), Path);
-      }
+      public void GetObjectData(SerializationInfo info, StreamingContext context) =>
+          info.AddValue(nameof(Path), Path);
     }
   }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using Godot;
 using GodotRx;
 
@@ -14,19 +15,23 @@ namespace Parry2.game
           .Where(@event => @event is InputEventKey)
           .Cast<InputEventKey>()
           .Where(key => key.IsActionPressed("debug_dialogue"))
-          .Subscribe(async _ =>
-          {
-            Node node = DialogicSharp.Start("test_timeline");
-            AddChild(node);
-
-            await this.WaitNextIdleFrame();
-            var control = node.GetNode<Control>("DialogNode");
-
-            await this.WaitNextIdleFrame();
-            control.RectSize = new Vector2(1600, 900);
-            control.RectScale = Vector2.One * .188f;
-          })
+          .Subscribe(async _ => await Start("test_timeline"))
           .DisposeWith(this);
+    }
+
+    public async Task<Node> Start(string timeline)
+    {
+      Node node = DialogicSharp.Start(timeline);
+      AddChild(node);
+
+      await this.WaitNextIdleFrame();
+      var control = node.GetNode<Control>("DialogNode");
+
+      await this.WaitNextIdleFrame();
+      control.RectSize = new Vector2(Global.UpscaledWindowSize.width, Global.UpscaledWindowSize.height);
+      control.RectScale = Vector2.One * Global.WinUpscaleFactor;
+
+      return node;
     }
   }
 }

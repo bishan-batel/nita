@@ -8,6 +8,7 @@ using Parry2.managers;
 
 namespace Parry2.game.world.actors.player
 {
+  // #girlboss
   public partial class PlayerShroom : KinematicBody2D, IKillable
   {
     [Node("AnimationTree")] readonly AnimationTree _animationTree = null;
@@ -66,6 +67,7 @@ namespace Parry2.game.world.actors.player
 
       _attackProcess();
       _sprite.GlobalScale = Vector2.One;
+      _sprite.GlobalPosition = GlobalPosition.Round();
     }
   }
 }

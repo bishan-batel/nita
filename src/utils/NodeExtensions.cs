@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Parry2.game;
 
 namespace Parry2.utils
 {
@@ -16,9 +17,7 @@ namespace Parry2.utils
     }
 #nullable enable
 
-    [Obsolete]
-    public static T? GetNodeOrNull<T>(this Node node, NodePath? path) where T : Node =>
-        path is null ? null : node.GetNodeOrNull<T>(path);
+    public static NodePath GetPathFromRoom(this Node node) => GameplayScene.CurrentRoom.GetPathTo(node);
 
     public static AnimationNodeStateMachinePlayback GetPlaybackFrom(
       this Node parent, string path = "AnimationTree")

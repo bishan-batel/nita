@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Godot;
+using GodotRx;
 using Parry2.editor;
 using Parry2.game.world.actors.player;
 using Parry2.game.world.objects.checkpoint;
@@ -18,25 +19,34 @@ namespace Parry2.game.room
     [Export] public string RoomName = string.Empty;
 
 
-    public static CheckpointManagerNode CheckpointManager => GameplayScene
-        .Singleton
-        .GetNode<CheckpointManagerNode>("CheckpointManager");
+    public CheckpointManagerNode CheckpointManager { private set; get; }
 
-    public override void _Ready()
+    public override async void _Ready()
     {
       // TODO fix checkpoints
 
+      // Used when debugging to bypass having to go through menu each time
       if (GetTree().CurrentScene == this)
       {
         GameplayScene.LoadRoomFromCurrentScene(this);
         return;
       }
 
+      // Checks if room is valid
       if (!RoomList.IsValidRoomName(RoomName))
         throw new Exception("Unauthorized name");
 
-      GD.Print(IsInsideTree() + " IS IN TREE");
+      // Adds checkpoint manager
+      CheckpointManager = new CheckpointManagerNode();
+      AddChild(CheckpointManager, true);
+
+      // Awaits frame to let checkpoint manager process
+      await this.WaitNextIdleFrame();
+
+
       LoadFromSave(SaveManager.CurrentSaveFile);
+
+      await this.WaitNextIdleFrame();
 
       var player = GetNode<PlayerShroom>(Player);
 
@@ -55,25 +65,21 @@ namespace Parry2.game.room
       else if (CheckpointManager.ClaimedPath is not null)
       {
         Vector2 location = CheckpointManager.GetSpawnLocation();
-        this.DebugPrint($"Using checkpoint @ position ({location})");
         player.GlobalPosition = location;
       }
+      // If checkpoint or entered gateway doesn't exist, go through the default
       else
       {
         var @default = GetNodeOrNull<RoomGateway>(DefaultGateway);
         @default?.EnteredCutscene(player);
         this.DebugPrint($"Entering room through default gateway [{@default?.Name ?? "null"}]");
       }
-
-
-      // if (Checkpoint.ClaimedPath == null)
-
-
-      SaveData();
     }
 
     public void OnDeath()
     {
+      // GetTree().ReloadCurrentScene();
+      SaveManager.Save();
       GameplayScene.LoadRoom(RoomName);
     }
 

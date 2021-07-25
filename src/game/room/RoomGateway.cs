@@ -94,21 +94,23 @@ namespace Parry2.game.room
       _player = player;
 
       // Notify checkpoint manager that we left the room
-      Room.CheckpointManager.OnLeftRoom();
+      GameplayScene
+          .CurrentRoom
+          .CheckpointManager
+          .OnLeftRoom();
 
-      SaveManager.Save();
-      GameplayScene.LoadRoom(TargetRoomName, TargetGate);
+      GameplayScene.LoadRoom(TargetRoomName, true, TargetGate);
     }
 
     static Vector2 GateDirectionToVector2(GateDirection direction)
     {
       return direction switch
       {
-          GateDirection.Right => Vector2.Right,
-          GateDirection.Left => Vector2.Left,
-          GateDirection.Down => Vector2.Down,
-          GateDirection.Up => Vector2.Up,
-          _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, string.Empty)
+        GateDirection.Right => Vector2.Right,
+        GateDirection.Left => Vector2.Left,
+        GateDirection.Down => Vector2.Down,
+        GateDirection.Up => Vector2.Up,
+        _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, string.Empty)
       };
     }
   }

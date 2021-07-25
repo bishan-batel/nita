@@ -24,9 +24,9 @@ namespace Parry2.managers.save
       GlobalData = new Dictionary<string, ISerializable>();
       RoomData = new Dictionary<string, RoomSaveData>
       {
-          {
-              "rofl_test", new RoomSaveData()
-          }
+        {
+          "rofl_test", new RoomSaveData()
+        }
       };
 
       Version = LatestSaveVersion;
@@ -74,16 +74,23 @@ namespace Parry2.managers.save
     // Serialize to file
     public bool Flush()
     {
-      string path = SaveManager.FormatAbsPath(Name);
+      try
+      {
+        string path = SaveManager.FormatAbsPath(Name);
 
-      var dir = new Directory();
-      if (!dir.DirExists(SaveManager.SavesDirAbsPath))
-        dir.MakeDir(SaveManager.SavesDirAbsPath);
-      FileStream fs = File.Create(path);
-      var bf = new BinaryFormatter();
-      bf.Serialize(fs, this);
-      fs.Close();
-      return true;
+        var dir = new Directory();
+        if (!dir.DirExists(SaveManager.SavesDirAbsPath))
+          dir.MakeDir(SaveManager.SavesDirAbsPath);
+        FileStream fs = File.Create(path);
+        var bf = new BinaryFormatter();
+        bf.Serialize(fs, this);
+        fs.Close();
+        return true;
+      }
+      catch
+      {
+        return false;
+      }
     }
 
     // Deserialize specified file

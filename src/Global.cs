@@ -9,11 +9,18 @@ namespace Parry2
 {
   public class Global : Node
   {
-    public Global() =>
-        Singleton = Singleton == null
-            ? this
-            : throw
-                new Exception("Duplicate " + nameof(Global) + "found");
+    // Window constants
+    public const float AspectRatio = 16f / 9f;
+    public static readonly (int width, int height) WindowSize = (300, 268);
+
+    // Upscale window constants used for rendering UI / text
+    public static readonly (int width, int height) UpscaledWindowSize = (1600, 900);
+    public static readonly float WinUpscaleFactor = WindowSize.width / (float) UpscaledWindowSize.width;
+
+    public Global() => Singleton = Singleton is null
+        ? this
+        : throw
+            new Exception("Duplicate " + nameof(Global) + "found");
 
     public static Global Singleton { private set; get; }
 
@@ -21,12 +28,20 @@ namespace Parry2
     public override void _Ready()
     {
       PauseMode = PauseModeEnum.Process;
-      this.AddCommand("exit", "Exits out of console", nameof(Exit));
 
+      // Commands
+      AddDefaultCommands();
+
+      // Pauses game when console toggled
       GConsole
           .OnToggled()
           .Subscribe(shown => GetTree().Paused = shown)
           .DisposeWith(this);
+    }
+
+    void AddDefaultCommands()
+    {
+      this.AddCommand("exit", "Exits out of console", nameof(Exit));
     }
 
     public void Exit()

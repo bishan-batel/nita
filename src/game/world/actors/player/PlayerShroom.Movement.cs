@@ -31,6 +31,7 @@ namespace Parry2.game.world.actors.player
 
       _processMovement(delta);
       _processJump(delta);
+      _sprite.GlobalPosition = _sprite.GlobalPosition.Round();
     }
 
     void _noClipMovement()
