@@ -1,0 +1,55 @@
+{
+	"events": [
+		{
+			"action": "join",
+			"character": "character-1627071301.json",
+			"event_id": "dialogic_002",
+			"mirror": false,
+			"portrait": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			}
+		},
+		{
+			"character": "character-1627071301.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer"
+		},
+		{
+			"character": "character-1627071301.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "cock or balls"
+		},
+		{
+			"choice": " cock",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "balls",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2.4",
+		"file": "timeline-1627183498.json",
+		"name": "test_timeline"
+	}
+}
