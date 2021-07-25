@@ -9,11 +9,13 @@ using Parry2.game.world.actors.player;
 using Parry2.game.world.objects.checkpoint;
 using Parry2.managers.save;
 using Parry2.utils;
+using Environment = Godot.Environment;
 
 namespace Parry2.game.room
 {
   public class Room : Node
   {
+    [Export] public Environment WorldEnviorment;
     [Export] public NodePath DefaultGateway;
     [Export] public NodePath Player;
     [Export] public string RoomName = string.Empty;
@@ -74,6 +76,12 @@ namespace Parry2.game.room
         @default?.EnteredCutscene(player);
         this.DebugPrint($"Entering room through default gateway [{@default?.Name ?? "null"}]");
       }
+
+      // Applies world enviorment
+      GameplayScene
+          .Singleton
+          .GetNode<WorldEnvironment>("Env")
+          .Environment = WorldEnviorment ?? new Environment();
     }
 
     public void OnDeath()

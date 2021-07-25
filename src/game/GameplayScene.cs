@@ -18,7 +18,7 @@ namespace Parry2.game
     public static string EnteredGate;
 
     [Node("ChapterViewContainer/ChapterContainer")]
-    public readonly Node ChapterContainer = null;
+    public readonly Viewport ChapterContainer = null;
 
     [Node("UI/DialogueManager")] public readonly GameDialogueManager DialogueManager = null;
     [Export] public string DefaultChapterName = "test_room";

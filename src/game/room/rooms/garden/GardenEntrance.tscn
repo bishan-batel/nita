@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/game/room/Room.cs" type="Script" id=1]
 [ext_resource path="res://src/game/world/tilemaps/GroundMap.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/game/detail/effects/parallax/FungalPlainsParallax.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/game/room/RoomGateway.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/game/room/rooms/garden/env/GardenLighting.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/game/room/rooms/garden/env/GardenEnv.tres" type="Environment" id=10]
 [ext_resource path="res://src/game/world/objects/checkpoint/Checkpoint.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -16,6 +17,7 @@ extents = Vector2( 7, 18 )
 
 [node name="GardenEntrance" type="Node2D"]
 script = ExtResource( 1 )
+WorldEnviorment = ExtResource( 10 )
 DefaultGateway = NodePath("Entrance Area/TestGateway")
 Player = NodePath("PlayerShroom")
 RoomName = "garden_entrance"
@@ -94,8 +96,8 @@ shape = SubResource( 1 )
 
 [node name="GateLeft" parent="Entrance Area" instance=ExtResource( 8 )]
 position = Vector2( 263, 265 )
-TargetRoomName = "garden_entrance"
-TargetGate = "TestGateway"
+TargetRoomName = "test_room"
+TargetGate = "Entrance"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance Area/GateLeft"]
 position = Vector2( 0, -5 )

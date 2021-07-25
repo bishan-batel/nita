@@ -24,7 +24,7 @@ namespace Parry2.game.world.actors.player
     {
       _velocity = MoveAndSlide(_velocity, Vector2.Up);
       if (!_onGroundLastFrame && IsOnFloor())
-        Input.StartJoyVibration(0, .4f, .4f, .21f);
+        Input.StartJoyVibration(0, 1.0f, 1.0f, .1f);
       _onGroundLastFrame = IsOnFloor();
 
       _turnAnim();
