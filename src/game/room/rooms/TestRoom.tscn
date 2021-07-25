@@ -1337,16 +1337,16 @@ shape = SubResource( 7 )
 position = Vector2( 108, -25 )
 
 [node name="Up Section" parent="CameraAreas" instance=ExtResource( 4 )]
-visible = false
 position = Vector2( 1590, 35 )
 Point = NodePath("Position2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraAreas/Up Section"]
-position = Vector2( 18, -32 )
+position = Vector2( 17, -32 )
 shape = SubResource( 8 )
 
 [node name="Position2D" type="Position2D" parent="CameraAreas/Up Section"]
-position = Vector2( 19, 19 )
+visible = false
+position = Vector2( 20, 33 )
 
 [node name="Up Section - Below" parent="CameraAreas" instance=ExtResource( 4 )]
 visible = false

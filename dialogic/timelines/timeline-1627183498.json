@@ -21,30 +21,10 @@
 			"text": "gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer gamer"
 		},
 		{
-			"character": "character-1627071301.json",
-			"event_id": "dialogic_010",
-			"options": [
-
-			],
+			"character": "",
+			"event_id": "dialogic_001",
 			"portrait": "",
-			"question": "cock or balls"
-		},
-		{
-			"choice": " cock",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"choice": "balls",
-			"condition": "",
-			"definition": "",
-			"event_id": "dialogic_011",
-			"value": ""
-		},
-		{
-			"event_id": "dialogic_013"
+			"text": "juan sucks lol"
 		}
 	],
 	"metadata": {

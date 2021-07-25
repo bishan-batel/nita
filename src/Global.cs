@@ -1,6 +1,7 @@
 #define DEBUG
 
 using System;
+using System.Runtime.InteropServices;
 using Godot;
 using GodotRx;
 using Parry2.debug;
@@ -41,10 +42,23 @@ namespace Parry2
 
     void AddDefaultCommands()
     {
-      this.AddCommand("exit", "Exits out of console", nameof(Exit));
+      this.AddCommand("exit", "Exits out of console", nameof(CmdExit));
+      this.AddCommand(
+        "timescale",
+        "Speeds up or slows down game by a factor",
+        nameof(CmdTimescale),
+        ("factor", Variant.Type.Real)
+      );
     }
 
-    public void Exit()
+    public void CmdTimescale(float factor)
+    {
+      GConsole.ToggleConsole();
+      GConsole.Write($"Changed time scale to {factor}");
+      Engine.TimeScale = factor;
+    }
+
+    public void CmdExit()
     {
       GConsole.Clear();
       GConsole.ToggleConsole();
