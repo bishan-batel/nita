@@ -129,7 +129,7 @@ namespace Parry2.game.world.actors.player
       IsJumpHold = true;
       hittable._onHit(new HitInformation(this, dir));
 
-      Input.StartJoyVibration(0, .8f, .8f, .2f);
+      Input.StartJoyVibration(0, 1f, 1f, .3f);
     }
   }
 }

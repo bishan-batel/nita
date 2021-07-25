@@ -18,9 +18,15 @@ namespace Parry2.game.world.actors.player
         JumpStrength,
         MaxFall;
 
+    bool _onGroundLastFrame;
+
     public override void _PhysicsProcess(float delta)
     {
       _velocity = MoveAndSlide(_velocity, Vector2.Up);
+      if (!_onGroundLastFrame && IsOnFloor())
+        Input.StartJoyVibration(0, .4f, .4f, .21f);
+      _onGroundLastFrame = IsOnFloor();
+
       _turnAnim();
 
       if (NoClip)
