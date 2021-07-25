@@ -29,13 +29,14 @@ namespace Parry2.game.world.actors.player
         return;
       }
 
-      var damageArea = GetNode<Area2D>("DamageArea");
 
       // Get all overlapping areas and bodies
 
 
       // Get all overlapping bodies and areas of IHostile
-      var overlapping = damageArea
+      var damageArea = GetNode<Area2D>("DamageArea");
+
+      IHostile hostile = damageArea
           .GetOverlappingAreas()
           .Cast<object>()
           // .Where(IsHostile)
@@ -46,12 +47,10 @@ namespace Parry2.game.world.actors.player
             // .Where(IsHostile)
           )
           .Cast<IHostile>()
-          .ToList();
+          .ToList()
+          .FirstOrDefault();
 
-      if (overlapping.Count is 0) return;
-
-      IHostile hostile = overlapping.First();
-      if (_invulnerable) return;
+      if (hostile is null) return;
 
       Input.StartJoyVibration(0, 1f, 1f, .5f);
       if (hostile.TeleportToSafeSpot)
