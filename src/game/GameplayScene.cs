@@ -109,11 +109,7 @@ namespace Parry2.game
       room.QueueFree();
     }
 
-    public static void LoadFromSave(SceneTree tree, SaveFile file)
-    {
-      tree.ChangeSceneTo(PackedScene);
-      CurrentRoom = (Room) file.CurrentRoom.Instance();
-    }
+    public static void LoadFromSave(SaveFile file) => LoadRoom(file.CurrentRoomName);
 
     public void AddCommands()
     {

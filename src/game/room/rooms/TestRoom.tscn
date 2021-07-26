@@ -1256,8 +1256,8 @@ z_index = 13
 z_as_relative = false
 DegreeSnap = 5.625
 Speed = 1.0
-TransformRot = 270.0
 NormalRot = 90.0
+TransformRot = 270.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
 position = Vector2( -32, 0 )

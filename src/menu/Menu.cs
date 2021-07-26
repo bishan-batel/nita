@@ -1,5 +1,7 @@
+using System;
 using Godot;
 using Parry2.game;
+using Parry2.game.room;
 using Parry2.managers.game;
 using Parry2.managers.save;
 
@@ -63,15 +65,16 @@ namespace Parry2.menu
       // Removes the space added before
       string saveName = _savesList.GetItemText(index).Substring(1);
 
-      bool success = SaveManager.OpenSave(SaveManager.FormatAbsPath(saveName));
 
-      if (!success)
+      if (SaveManager.OpenSave(SaveManager.FormatAbsPath(saveName)))
       {
-        _ui.GetNode<Popup>("CorruptedFilePopup").Popup_();
+        // TODO FIX
+        GetTree().ChangeSceneTo(RoomList.GetChapterScene("test_room"));
+        // GameplayScene.LoadFromSave(SaveManager.CurrentSaveFile ?? throw new Exception("Save file is null"));
         return;
       }
 
-      GameplayScene.LoadFromSave(GetTree(), SaveManager.CurrentSaveFile);
+      _ui.GetNode<Popup>("CorruptedFilePopup").Popup_();
     }
 
     public void _on_CreateButton_pressed()

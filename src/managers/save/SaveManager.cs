@@ -88,7 +88,10 @@ namespace Parry2.managers.save
 
       // Asserts that game is in gameplay mode
       if (GameStateManager.CurrentState is not GameplayScene)
-        throw new Exception($"Unable to save state, wrong gamestate [{GameStateManager.CurrentState}]");
+      {
+        this.DebugPrintErr($"Unable to save state, wrong gamestate [{GameStateManager.CurrentState}]");
+        return;
+      }
 
       if (GameplayScene.CurrentRoom is null)
         throw new Exception("|\t> Unable to save state, no room loaded");
@@ -126,8 +129,8 @@ namespace Parry2.managers.save
 
       // Assert that save directory exists
       OpenSaveDirectory();
-
-      return SaveFile.Open(path) is not null;
+      CurrentSaveFile = SaveFile.Open(path);
+      return CurrentSaveFile is not null;
     }
 
 

@@ -22,12 +22,7 @@ namespace Parry2.managers.save
       Name = name;
       CurrentRoomName = RoomList.GetName("test_room");
       GlobalData = new Dictionary<string, ISerializable>();
-      RoomData = new Dictionary<string, RoomSaveData>
-      {
-        {
-          "rofl_test", new RoomSaveData()
-        }
-      };
+      RoomData = new Dictionary<string, RoomSaveData>();
 
       Version = LatestSaveVersion;
     }
