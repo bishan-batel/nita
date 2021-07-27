@@ -6,7 +6,7 @@
 [node name="BackgroundMap" type="TileMap" groups=[
 "Layered",
 ]]
-modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
+modulate = Color( 0.396078, 0.360784, 0.396078, 1 )
 z_index = -1
 z_as_relative = false
 tile_set = ExtResource( 2 )
@@ -14,4 +14,5 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 0
 collision_mask = 0
 format = 1
+tile_data = PoolIntArray( 18, 1, 0 )
 script = ExtResource( 1 )

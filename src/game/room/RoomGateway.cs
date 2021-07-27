@@ -64,9 +64,11 @@ namespace Parry2.game.room
           Horizontal();
           break;
 
+        // TODO make actual animation
         case GateDirection.Up:
         case GateDirection.Down:
-          throw new NotImplementedException();
+          player.GlobalPosition = GlobalPosition;
+          break;
         default:
           throw new ArgumentOutOfRangeException();
       }

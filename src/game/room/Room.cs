@@ -31,7 +31,8 @@ namespace Parry2.game.room
       // Used when debugging to bypass having to go through menu each time
       if (GetTree().CurrentScene == this)
       {
-        GameplayScene.LoadRoom(RoomName);
+        GetTree().ChangeSceneTo(GameplayScene.PackedScene);
+        GameplayScene.CurrentRoom = (Room) Duplicate();
         return;
       }
 #endif
