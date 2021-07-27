@@ -49,7 +49,7 @@ namespace Parry2.game.room
       _player.Velocity = new Vector2((_player.MaxSpeed * -_cutsceneDir).x, _player.Velocity.y);
     }
 
-    public void EnteredCutscene(PlayerShroom player)
+    public virtual void EnteredCutscene(PlayerShroom player)
     {
       _player = player;
       _cutsceneDir = GateDirectionToVector2(Direction);
@@ -72,7 +72,7 @@ namespace Parry2.game.room
       }
     }
 
-    async void Horizontal()
+    protected virtual void Horizontal()
     {
       SetProcess(true);
       _player.ControlActive = false;
@@ -82,9 +82,6 @@ namespace Parry2.game.room
         SetProcess(false);
         _player.ControlActive = true;
       }, CutsceneWalkTime);
-      // await this.WaitForSeconds(CutsceneWalkTime, false);
-      // SetProcess(false);
-      // _player.ControlActive = true;
     }
 
     public void OnEntered(Node body)

@@ -1,7 +1,7 @@
 #define DEBUG
 
 using System;
-using System.Runtime.InteropServices;
+using System.Reactive.Linq;
 using Godot;
 using GodotRx;
 using Parry2.debug;
@@ -29,6 +29,8 @@ namespace Parry2
     public override void _Ready()
     {
       PauseMode = PauseModeEnum.Process;
+
+      AddKeybindings();
 
       // Commands
       AddDefaultCommands();
@@ -64,17 +66,43 @@ namespace Parry2
       GConsole.ToggleConsole();
     }
 
-    public override void _Input(InputEvent @event)
+    public void AddKeybindings()
     {
-      if (@event is not InputEventKey eventKey) return;
+      var actionEventObservable = this
+          .OnInput()
+          .Where(@event => @event is InputEventAction)
+          .Cast<InputEventAction>();
 
+      // Fullscreen toggle
+      actionEventObservable
+          .Where(@event => @event.IsActionPressed("fullscreen_toggle"))
+          .Subscribe(_ => OS.WindowFullscreen = !OS.WindowFullscreen);
+      
 #if DEBUG
-      if (eventKey.IsActionPressed("debug_restart"))
-        GetTree().ReloadCurrentScene();
+      // Debug restart
+      actionEventObservable
+          .Where(@event => @event.IsActionPressed("debug_restart"))
+          .Subscribe(_ => GetTree().ReloadCurrentScene());
 #endif
+    }
+  }
 
-      if (eventKey.IsActionPressed("fullscreen_toggle"))
-        OS.WindowFullscreen = !OS.WindowFullscreen;
+  public class GroupInterfaceException : Exception
+  {
+    public readonly Node Node;
+    public readonly Type Expected;
+
+    public override string Message => $"Group [{Expected.Name}] expected in node [{Node.Name}]";
+
+    /// <summary>
+    /// Exception used when you are trying to sync all instances of a godot group to classes with an interface 
+    /// </summary>
+    /// <param name="node"></param>
+    /// <param name="expectedGroup"></param>
+    public GroupInterfaceException(Node node, Type expectedGroup)
+    {
+      Node = node;
+      Expected = expectedGroup;
     }
   }
 }

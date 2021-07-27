@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using GDMechanic.Wiring;
+using GDMechanic.Wiring.Attributes;
 using Godot;
 using Parry2.game;
 using Parry2.game.room;
@@ -9,9 +12,12 @@ namespace Parry2.menu
 {
   public class Menu : GameState
   {
-    Panel _savePanel;
-    ItemList _savesList;
-    Control _ui;
+    [Node("CanvasLayer/UI/SavePanel")] readonly Panel _savePanel = null;
+
+    [Node("CanvasLayer/UI/SavePanel/SavesList")]
+    readonly ItemList _savesList = null;
+
+    [Node("CanvasLayer/UI")] readonly Control _ui = null;
 
     public Menu() : base(nameof(Menu))
     {
@@ -20,15 +26,9 @@ namespace Parry2.menu
     public override void _Ready()
     {
       base._Ready();
+      this.Wire();
       GetNode<AnimationPlayer>("AnimationPlayer").Play("spin");
 
-      _ui = GetNode<Control>("CanvasLayer/UI");
-      _savePanel = _ui.GetNode<Panel>("SavePanel");
-      _savesList = _savePanel.GetNode<ItemList>("SavesList");
-
-#if DEBUG
-      GD.Print("Updating save file list");
-#endif
       UpdateSaveFileList();
       SaveManager.CurrentSaveFile = null;
     }
@@ -41,13 +41,13 @@ namespace Parry2.menu
 
       foreach (string path in saveFilePaths)
       {
-        string name = SaveManager.GetSaveFileName(path);
+        string name = path.GetFile().Replace(SaveManager.SaveFileType, "");
         // GD.Print($"Loaded {name} to menu");
         // Adds a space for formatting
         _savesList.AddItem(" " + name);
       }
 
-      if (_savesList.GetItemCount() == 0) return;
+      if (_savesList.GetItemCount() is 0) return;
       _savePanel.GetNode<Button>("PlayButton").Disabled = true;
       _savePanel.GetNode<Button>("DeleteButton").Disabled = true;
     }
@@ -68,9 +68,7 @@ namespace Parry2.menu
 
       if (SaveManager.OpenSave(SaveManager.FormatAbsPath(saveName)))
       {
-        // TODO FIX
-        GetTree().ChangeSceneTo(RoomList.GetChapterScene("test_room"));
-        // GameplayScene.LoadFromSave(SaveManager.CurrentSaveFile ?? throw new Exception("Save file is null"));
+        GameplayScene.LoadFromSave();
         return;
       }
 
@@ -88,9 +86,10 @@ namespace Parry2.menu
 
     public void _on_DeleteButton_pressed()
     {
-      int index = _savesList.GetSelectedItems()[0];
+      int index = _savesList.GetSelectedItems().First();
       string saveName = _savesList.GetItemText(index).Substring(1);
-      string path = SaveManager.SaveDirPath + saveName + SaveManager.SaveFileType;
+      string path = SaveManager.FormatAbsPath(saveName);
+
       var dir = new Directory();
       dir.Remove(path);
       UpdateSaveFileList();

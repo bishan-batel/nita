@@ -14,11 +14,26 @@ namespace Parry2.managers.save
   [Serializable]
   public class SaveFile : ISerializable
   {
-    internal const SaveVersion LatestSaveVersion = SaveVersion.V0W0B;
+    internal const SaveVersion LatestSaveVersion = SaveVersion.V0A;
     internal SaveVersion Version;
 
+    public string CurrentRoomName { get; }
+    public Dictionary<string, RoomSaveData> RoomData { get; }
+    public Dictionary<string, ISerializable> GlobalData { get; }
+
+    public PackedScene CurrentRoom =>
+        RoomList.GetChapterScene(CurrentRoomName);
+
+    public string Name { get; }
+
+    /// <summary>
+    /// Creates a new save file, will not save to file unless explicitly told so
+    /// </summary>
+    /// <param name="name">Filename for </param>
     public SaveFile(string name = "debug_save")
     {
+      if (!SaveManager.IsValidFileName(name)) throw new IOException($"Invalid name {name}");
+
       Name = name;
       CurrentRoomName = RoomList.GetName("test_room");
       GlobalData = new Dictionary<string, ISerializable>();
@@ -27,11 +42,18 @@ namespace Parry2.managers.save
       Version = LatestSaveVersion;
     }
 
+    /// <summary>
+    /// Used for serialization, do not use explicitly
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="context"></param>
+    /// <exception cref="Exception"></exception>
     public SaveFile(SerializationInfo info, StreamingContext context)
     {
+      // Gets version 
       string versionString = info.GetString(nameof(Version));
       bool success = Enum.TryParse(versionString, out Version);
-      if (!success) throw new Exception($"Invalid version {versionString}");
+      if (!success) throw new IOException($"Invalid save version {versionString}");
 
       CurrentRoomName = info.GetString(nameof(CurrentRoomName));
       Name = info.GetString(nameof(Name));
@@ -44,15 +66,6 @@ namespace Parry2.managers.save
           info.GetValue(nameof(GlobalData), globalDataType) as Dictionary<string, ISerializable>;
     }
 
-    public string CurrentRoomName { get; }
-    public Dictionary<string, RoomSaveData> RoomData { get; }
-    public Dictionary<string, ISerializable> GlobalData { get; }
-
-
-    public PackedScene CurrentRoom =>
-        RoomList.GetChapterScene(CurrentRoomName);
-
-    public string Name { get; }
 
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
@@ -62,33 +75,32 @@ namespace Parry2.managers.save
       info.AddValue(nameof(GlobalData), GlobalData);
 
       // Meta
-      info.AddValue(nameof(Version), Version.ToString());
+      info.AddValue(nameof(Version), (int) Version);
       info.AddValue(nameof(Name), Name);
     }
 
-    // Serialize to file
+    /// <summary>
+    /// Serializes content and saves it to filesystem
+    /// </summary>
+    /// <returns>Success</returns>
     public bool Flush()
     {
-      try
-      {
-        string path = SaveManager.FormatAbsPath(Name);
+      // try
+      // {
+      string path = SaveManager.FormatAbsPath(Name);
 
-        var dir = new Directory();
-        if (!dir.DirExists(SaveManager.SavesDirAbsPath))
-          dir.MakeDir(SaveManager.SavesDirAbsPath);
-        FileStream fs = File.Create(path);
-        var bf = new BinaryFormatter();
-        bf.Serialize(fs, this);
-        fs.Close();
-        return true;
-      }
-      catch
-      {
-        return false;
-      }
+      SaveManager.OpenSaveDirectory();
+      FileStream fs = File.Create(path);
+      var bf = new BinaryFormatter();
+      bf.Serialize(fs, this);
+      fs.Close();
+      return true;
     }
 
-    // Deserialize specified file
+    /// <summary>
+    /// Opens & deserializes specified file 
+    /// </summary>
+    /// <param name="path">Full path to file</param>
     public static SaveFile Open(string path)
     {
       FileStream fs = File.OpenRead(path);
@@ -101,7 +113,8 @@ namespace Parry2.managers.save
     [Serializable]
     internal enum SaveVersion
     {
-      V0W0B
+      Invalid,
+      V0A
     }
   }
 }

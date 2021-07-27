@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Godot;
 using Godot.Collections;
 using Parry2.game;
 using Parry2.managers.game;
 using Parry2.utils;
+using Path = System.IO.Path;
 
 namespace Parry2.managers.save
 {
@@ -13,25 +16,39 @@ namespace Parry2.managers.save
     public const string SaveDirPath = "user://saves/";
     public const string SaveFileType = ".dat";
 
-    // Persist group is used for nodes bound to a room
+    /// <summary>
+    /// Persist group used for nodes with state to be saved to it's designated room
+    /// </summary>
     public const string PersistGroup = "Persist";
 
-    // Global persist is for nodes that move between rooms such as Players 
+    /// <summary>
+    /// Global persist used for special cases like players whose state is not bound to a single room
+    /// </summary>
     public const string GlobalPersistGroup = "GlobalPersist";
 
     public SaveManager() =>
         Singleton = this;
 
     public static SaveManager Singleton { private set; get; }
+
+    /// <summary>
+    /// Retrieves absolute path for the save directory
+    /// </summary>
     public static string SavesDirAbsPath => OS.GetUserDataDir() + "/saves";
 
+    /// <summary>
+    /// Current loaded save file (use this over any other save file that is not loaded unless absolutely required)
+    /// </summary>
     public static SaveFile CurrentSaveFile { set; get; }
 
-    public static Array<string> SaveSlots
+    /// <summary>
+    /// Returns list of saves in save directory
+    /// </summary>
+    public static IEnumerable<string> SaveSlots
     {
       get
       {
-        Directory saveDir = OpenSaveDirectory();
+        Godot.Directory saveDir = OpenSaveDirectory();
         var slots = new Array<string>();
 
 
@@ -39,7 +56,8 @@ namespace Parry2.managers.save
         string nextPath;
 
         saveDir.ListDirBegin(true, true);
-        while ((nextPath = saveDir.GetNext()) != "")
+
+        while ((nextPath = saveDir.GetNext()) != string.Empty)
         {
           if (!saveDir.FileExists(nextPath)) continue;
           if (!nextPath.EndsWith(SaveFileType)) continue;
@@ -56,11 +74,11 @@ namespace Parry2.managers.save
     {
       CurrentSaveFile ??= new SaveFile();
       CurrentSaveFile.Flush();
-
       if (OS.GetUserDataDir() == "user://")
         this.DebugPrintErr("Unable to find user:// directory");
     }
 
+    // TODO remove for final production
 #if DEBUG
     public override void _Input(InputEvent @event)
     {
@@ -69,9 +87,17 @@ namespace Parry2.managers.save
     }
 #endif
 
+    /// <summary>
+    /// Saves game on idle frames
+    /// </summary>
+    /// <param name="file">Save file to save the game to (will default to the currently loaded save file in SaveManager)</param>
     public static void SaveDeferred(SaveFile file = null) =>
         Singleton.CallDeferred(nameof(_save), file);
 
+    /// <summary>
+    /// Saves game (Warning: will not wait for idles frames meaning depending on how many objects there are to save it may cause a lag spike)
+    /// </summary>
+    /// <param name="file">Save file to save the game to (will default to the currently loaded save file in SaveManager)</param>
     public static void Save(SaveFile file = null) => Singleton._save(file);
 
     void _save(SaveFile file)
@@ -88,32 +114,27 @@ namespace Parry2.managers.save
 
       // Asserts that game is in gameplay mode
       if (GameStateManager.CurrentState is not GameplayScene)
-      {
-        this.DebugPrintErr($"Unable to save state, wrong gamestate [{GameStateManager.CurrentState}]");
-        return;
-      }
+        throw new WrongGamestateException(typeof(GameplayScene));
 
       if (GameplayScene.CurrentRoom is null)
-        throw new Exception("|\t> Unable to save state, no room loaded");
+        throw new NullReferenceException("Unable to save state, no room loaded");
 
       // Saves
       GameplayScene.CurrentRoom.SaveData(file);
 
       if (CurrentSaveFile.Flush()) this.DebugPrint("|\t> Flushed save successfully");
-      else throw new Exception($"Failed to flush save '{file.Name}'");
+      else throw new IOException($"Failed to flush save '{file.Name}'");
     }
-
 
     /// <summary>
     /// Returns a Godot.Directory opened into the game's save directory.
     /// This will create the save directory if it does not exist.
     /// </summary>
     /// <returns>Godot.Directory opened to game's save directory</returns>
-    public static Directory OpenSaveDirectory()
+    public static Godot.Directory OpenSaveDirectory()
     {
-      var saveDir = new Directory();
+      var saveDir = new Godot.Directory();
       saveDir.MakeDir(SaveDirPath);
-
       saveDir.Open(SaveDirPath);
       return saveDir;
     }
@@ -132,7 +153,6 @@ namespace Parry2.managers.save
       CurrentSaveFile = SaveFile.Open(path);
       return CurrentSaveFile is not null;
     }
-
 
     /// <summary>
     /// Creates a new empty save file of specified name
@@ -166,17 +186,34 @@ namespace Parry2.managers.save
     /// </summary>
     /// <param name="name">File name</param>
     /// <returns></returns>
-    public static string FormatAbsPath(string name) =>
-        SavesDirAbsPath.PlusFile(name + SaveFileType);
+    public static string FormatAbsPath(string name) => SavesDirAbsPath.PlusFile(name + SaveFileType);
 
-    public static string GetSaveFileName(string path)
+    /// <summary>
+    /// Checks if save file name is valid to save
+    /// </summary>
+    /// <param name="name">Save file name (omit parent directory)</param>
+    /// <returns>Validity of filename</returns>
+    public static bool IsValidFileName(string name)
     {
-      string name = path.Split("/").Last();
-      return name.Remove(name.Length() - SaveFileType.Length());
+      return
+          !string.IsNullOrEmpty(name) &&
+          name.IndexOfAny(Path.GetInvalidFileNameChars()) < 0 &&
+          !IsInvalidWinName(name);
     }
 
-    public static bool IsValidFileName(string name) =>
-        // TODO write this lol or else game crashes
-        true;
+    public static readonly string[] InvalidWindowFilenames =
+    {
+      "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+    };
+
+    /// <summary>
+    /// Used to check if a files name (without extensions) matches the window's list of
+    /// unusable filenames
+    /// </summary>
+    /// <param name="name">Filename to check (omit any extensions)</param>
+    /// <returns>Invalidity of file name</returns>
+    public static bool IsInvalidWinName(string name) => InvalidWindowFilenames
+        .ToList()
+        .Any(invalid => string.Equals(name, invalid, StringComparison.CurrentCultureIgnoreCase));
   }
 }

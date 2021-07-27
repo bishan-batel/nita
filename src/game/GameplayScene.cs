@@ -8,7 +8,6 @@ using Parry2.debug;
 using Parry2.game.room;
 using Parry2.managers.game;
 using Parry2.managers.save;
-using Parry2.utils;
 
 namespace Parry2.game
 {
@@ -17,8 +16,11 @@ namespace Parry2.game
     public static GameplayScene Singleton;
     public static string EnteredGate;
 
-    [Node("ChapterViewContainer/ChapterContainer")]
-    public readonly Viewport ChapterContainer = null;
+    /// <summary>
+    /// Container for rooms to be switched in and out of
+    /// </summary>
+    [Node("RoomViewContainer/RoomContainer")]
+    public readonly Viewport RoomContainer = null;
 
     [Node("UI/DialogueManager")] public readonly GameDialogueManager DialogueManager = null;
     [Export] public string DefaultChapterName = "test_room";
@@ -51,29 +53,37 @@ namespace Parry2.game
           .CurrentSaveFile
           ?.CurrentRoom
 #if DEBUG
-          ?.Instance(PackedScene.GenEditState.Instance) as Room;
+          ?.Instance<Room>(PackedScene.GenEditState.Instance);
 #else
-                ?.Instance() as Room;
+                ?.Instance<Room>();
 #endif
 
       // Clears Container
-      ChapterContainer
+      RoomContainer
           .GetChildren()
           .Cast<Node>()
           .ToList()
           .ForEach(child => child.Free());
 
-      ChapterContainer.AddChild(CurrentRoom);
+      RoomContainer.AddChild(CurrentRoom);
       AddCommands();
     }
 
 
+    /// <summary>
+    /// Loads specified room from specified ID, will only work if game is already in a room / in gameplay state
+    /// </summary>
+    /// <param name="roomName">Room string ID</param>
+    /// <param name="save">Should save the old room before loading</param>
+    /// <param name="gateway">Name of gateway to enter</param>
     public static void LoadRoom(string roomName, bool save = true, string gateway = null)
     {
+      if (GameStateManager.CurrentState is not GameplayScene)
+        throw new WrongGamestateException(typeof(GameplayScene));
+
       // Singleton.DebugPrint($"Loading into {roomName} through gateway {gateway ?? "[default]"}");
 
-      if (save)
-        SaveManager.Save();
+      if (save) SaveManager.Save();
 
       CurrentRoom
           .OnTreeExiting()
@@ -81,35 +91,20 @@ namespace Parry2.game
           {
             EnteredGate = gateway;
             CurrentRoom = RoomList.GetChapterScene(roomName).Instance<Room>(PackedScene.GenEditState.Instance);
-            Singleton.ChapterContainer.AddChild(CurrentRoom);
-          }).DisposeWith(Singleton);
+            Singleton.RoomContainer.AddChild(CurrentRoom);
+          })
+          .DisposeWith(Singleton);
 
       CurrentRoom.QueueFree();
-
-
-      // Global
-      //     .Singleton
-      //     .GetTree()
-      //     .ChangeSceneTo(RoomList.GetChapterScene(roomName));
     }
 
-    public static void LoadRoomFromCurrentScene(Room room)
-    {
-      room.DebugPrint($"Changing scene from {nameof(Room)} to {nameof(GameplayScene)}");
-
-      room
-          .GetTree()
-          .ChangeSceneTo(PackedScene);
-
-      // stores in static variable as a mock constructor argument
-      CurrentRoom = (Room) room.Duplicate();
-
-      // I'm like 50% sure this queue free is not required because you are changing the scene
-      // but I don't want to risk a memory leak so I'm gonna leave it in here
-      room.QueueFree();
-    }
-
-    public static void LoadFromSave(SaveFile file) => LoadRoom(file.CurrentRoomName);
+    /// <summary>
+    /// Used to load a room using the current save file, intended use is transition from other game states into gameplay
+    /// </summary>
+    public static void LoadFromSave() => Global
+        .Singleton
+        .GetTree()
+        .ChangeSceneTo(PackedScene);
 
     public void AddCommands()
     {

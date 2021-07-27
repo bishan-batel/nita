@@ -20,7 +20,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChapterViewContainer" type="ViewportContainer" parent="."]
+[node name="RoomViewContainer" type="ViewportContainer" parent="."]
 pause_mode = 1
 margin_right = 300.0
 margin_bottom = 168.0
@@ -29,7 +29,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChapterContainer" type="Viewport" parent="ChapterViewContainer"]
+[node name="RoomContainer" type="Viewport" parent="RoomViewContainer"]
 size = Vector2( 300, 168 )
 handle_input_locally = false
 disable_3d = true

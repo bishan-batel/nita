@@ -27,12 +27,14 @@ namespace Parry2.game.room
     {
       // TODO fix checkpoints
 
+#if DEBUG
       // Used when debugging to bypass having to go through menu each time
       if (GetTree().CurrentScene == this)
       {
-        GameplayScene.LoadRoomFromCurrentScene(this);
+        GameplayScene.LoadRoom(RoomName);
         return;
       }
+#endif
 
       // Checks if room is valid
       if (!RoomList.IsValidRoomName(RoomName))
@@ -127,6 +129,11 @@ namespace Parry2.game.room
       ObjectOrder.OrganizeLayersInTree(GetTree());
     }
 
+    /// <summary>
+    /// Saves data to save file in memory, will not save to filesystem
+    /// </summary>
+    /// <param name="saveFile">Save file to write into, defaults to the currently loaded save file</param>
+    /// <exception cref="Exception"></exception>
     public void SaveData(SaveFile saveFile = null)
     {
       this.DebugPrint("Getting Room Data...");
@@ -142,7 +149,7 @@ namespace Parry2.game.room
           .ForEach(node =>
           {
             if (!(node is IPersistant persistant))
-              throw new Exception($"Node not persistant {node.Name}, {node.GetType()}");
+              throw new GroupInterfaceException(node, typeof(IPersistant));
             ISerializable nodeSave = persistant.Save();
             if (nodeSave is null) return;
             // this.DebugPrint($"\tSaved data from {node.Name}");
@@ -160,7 +167,7 @@ namespace Parry2.game.room
           .ForEach(node =>
           {
             if (node is not IGlobalPersistant globalPersistant)
-              throw new Exception($"Node is not global persistant {node.Name}");
+              throw new GroupInterfaceException(node, typeof(IGlobalPersistant));
 
             ISerializable nodeSave = globalPersistant.GlobalSave();
             if (nodeSave is null) return;
