@@ -202,7 +202,7 @@ shader_param/seed = 5.368
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 10, 22 )
 
-[sub_resource type="Shader" id=20]
+[sub_resource type="Shader" id=19]
 code = "shader_type canvas_item;
 
 // Gonkee's fire shader for Godot 3 - full tutorial https://youtu.be/CI3JZ-3cabg
@@ -305,8 +305,8 @@ void fragment() {
 	//COLOR = vec4(vec3(everything_combined), 1.0);
 }"
 
-[sub_resource type="ShaderMaterial" id=19]
-shader = SubResource( 20 )
+[sub_resource type="ShaderMaterial" id=20]
+shader = SubResource( 19 )
 shader_param/timeScale = 1.935
 shader_param/transparent = Color( 0, 0, 0, 0 )
 shader_param/inner = Color( 0.827451, 0.709804, 0.447059, 1 )
@@ -1369,9 +1369,9 @@ position = Vector2( 1847, 472 )
 rotation = 1.5708
 z_index = 13
 z_as_relative = false
-TransformRot = 270.0
 DegreeSnap = 5.625
 NormalRot = 90.0
+TransformRot = 270.0
 Speed = 1.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
@@ -1559,7 +1559,7 @@ position = Vector2( -15, 0 )
 shape = SubResource( 18 )
 
 [node name="meat boris2" type="Sprite" parent="."]
-material = SubResource( 19 )
+material = SubResource( 20 )
 position = Vector2( -9, 207.875 )
 scale = Vector2( 0.0680473, 0.075 )
 z_index = 10

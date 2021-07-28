@@ -64,6 +64,8 @@ DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
 
 window/size/width=300
 window/size/height=168
+window/size/test_width=1600
+window/size/test_height=900
 window/dpi/allow_hidpi=true
 mouse_cursor/custom_image="res://icon.png"
 window/stretch/mode="2d"

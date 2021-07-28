@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Parry2.game.world.actors.player
@@ -63,7 +64,7 @@ namespace Parry2.game.world.actors.player
         if (!_controller.JumpJustPressed || !ControlActive) return;
         _velocity.y = -JumpStrength;
         IsJumpHold = true;
-        _animPlayback.Travel("jump");
+        // _animPlayback.Travel("jump");
       }
       else if (IsJumpHold && ControlActive)
       {
@@ -75,10 +76,13 @@ namespace Parry2.game.world.actors.player
     {
       float input = _controller.WalkInput.x;
 
-      if (input == 0 && ControlActive)
+      if (input is 0 && ControlActive)
       {
         _decelerate(delta);
-        if (IsOnFloor()) _animPlayback.Travel("idle");
+
+        string node = _animPlayback.GetCurrentNode();
+        if (node is not "sleeping" && !string.IsNullOrEmpty(node))
+          _animPlayback.Travel("idle");
       }
       else
       {

@@ -5,6 +5,7 @@ using Godot;
 using GodotOnReady.Attributes;
 using Parry2.game.mechanic;
 using Parry2.managers;
+using Parry2.utils;
 
 namespace Parry2.game.world.actors.player
 {
@@ -45,9 +46,11 @@ namespace Parry2.game.world.actors.player
     {
       this.Wire();
       _velocity = Vector2.Zero;
-      _animationTree.Active = true;
       _controller = new InputController(this);
       _addDebugCommands();
+
+      _animationTree.Active = true;
+      _animPlayback.Start("sleeping");
     }
 
 
@@ -66,8 +69,8 @@ namespace Parry2.game.world.actors.player
       _controller = _applyController.Invoke(_controller);
 
       _attackProcess();
-      _sprite.GlobalScale = Vector2.One;
       _sprite.GlobalPosition = GlobalPosition.Round();
+      _sprite.Scale = Vector2.One;
     }
   }
 }

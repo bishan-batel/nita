@@ -34,27 +34,31 @@ tracks/1/keys = {
 "values": [ 7, 8, 9, 10, 11, 12 ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=2]
 size = 256
+outline_size = 5
+outline_color = Color( 0.203922, 0.360784, 0.329412, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 use_mipmaps = true
 use_filter = true
 extra_spacing_top = 20
 font_data = ExtResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.964706, 0.380392, 0.380392, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.705882, 0.215686, 0.215686, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.466667, 0.141176, 0.141176, 1 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.933333, 0.313726, 0.313726, 1 )
 
 [node name="MainMenu" type="Node2D"]
@@ -75,7 +79,7 @@ position = Vector2( 143, 84 )
 [node name="mushroom" type="Sprite" parent="CanvasLayer/PlayerWrapper"]
 texture = ExtResource( 1 )
 hframes = 6
-vframes = 4
+vframes = 5
 frame = 7
 
 [node name="UI" type="Control" parent="CanvasLayer"]
@@ -93,7 +97,7 @@ margin_top = 188.0
 margin_right = 524.0
 margin_bottom = 516.0
 theme = ExtResource( 3 )
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 2 )
 text = "Nita"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -161,7 +165,7 @@ margin_top = 15.0
 margin_right = 509.0
 margin_bottom = 509.0
 theme = ExtResource( 3 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 items = [ "Save File", null, false ]
 allow_rmb_select = true
 __meta__ = {
@@ -178,10 +182,10 @@ margin_top = 524.0
 margin_right = 157.0
 margin_bottom = 589.0
 focus_mode = 0
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
 disabled = true
 text = "Delete"
 
