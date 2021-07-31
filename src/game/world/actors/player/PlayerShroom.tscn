@@ -196,10 +196,13 @@ switch_mode = 1
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 2
@@ -218,13 +221,13 @@ disabled = true
 states/idle/node = SubResource( 6 )
 states/idle/position = Vector2( 288.5, 279 )
 states/jump/node = SubResource( 7 )
-states/jump/position = Vector2( -229, 78.5 )
+states/jump/position = Vector2( 42.4286, 40.2712 )
 states/land/node = SubResource( 8 )
-states/land/position = Vector2( -131.232, 26.5 )
+states/land/position = Vector2( 289.144, 45.3513 )
 states/run/node = SubResource( 9 )
 states/run/position = Vector2( -130.116, 285.5 )
 states/sleeping/node = SubResource( 10 )
-states/sleeping/position = Vector2( 479.125, 278.265 )
+states/sleeping/position = Vector2( 470.554, 278.195 )
 transitions = [ "idle", "run", SubResource( 11 ), "run", "idle", SubResource( 12 ), "run", "jump", SubResource( 13 ), "idle", "jump", SubResource( 14 ), "jump", "land", SubResource( 15 ), "land", "run", SubResource( 16 ), "land", "idle", SubResource( 17 ), "land", "jump", SubResource( 18 ), "sleeping", "idle", SubResource( 19 ) ]
 start_node = "sleeping"
 graph_offset = Vector2( -258.732, 0 )
@@ -275,7 +278,7 @@ collision_layer = 4
 script = ExtResource( 2 )
 AttackRotSnap = 0.785
 Health = 1
-TurnAngle = 0.0
+TurnAngle = -15.0
 TurnSpeed = 0.1
 Accel = 300.0
 DeAccel = 200.0

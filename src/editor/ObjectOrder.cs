@@ -24,20 +24,20 @@ namespace Parry2.editor
 
     public static readonly List<Type> Order = new[]
     {
-        typeof(BackgroundMap),
-        typeof(KeyCard),
-        typeof(ShroomvineWheel),
-        typeof(BluehatNpc),
-        typeof(PlayerShroom),
-        typeof(Bullshroom),
-        typeof(Ilkspring),
-        typeof(Sporevine),
-        typeof(Saw),
-        typeof(Chloropom),
-        typeof(Checkpoint),
-        typeof(GroundMap),
-        typeof(MechanicalDoor),
-        typeof(MechanicalRotate)
+      typeof(BackgroundMap),
+      typeof(KeyCard),
+      typeof(ShroomvineWheel),
+      typeof(BluehatNpc),
+      typeof(PlayerShroom),
+      typeof(Bullshroom),
+      typeof(Ilkspring),
+      typeof(Sporevine),
+      typeof(Saw),
+      typeof(Chloropom),
+      typeof(Checkpoint),
+      typeof(GroundMap),
+      typeof(MechanicalDoor),
+      typeof(MechanicalRotate)
     }.ToList();
 
     public static void OrganizeLayersInTree(SceneTree tree)
@@ -58,8 +58,7 @@ namespace Parry2.editor
       // If the search failed, double check with script
       if (node.ZIndex != -1) return;
 
-      Reference scriptRef = node.GetScript();
-      if (scriptRef is not CSharpScript script) return;
+      if (node.GetScript() is not CSharpScript script) return;
 
       string name = script
           .ResourcePath

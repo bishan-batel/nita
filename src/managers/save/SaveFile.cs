@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
 using Parry2.game.room;
-using Directory = Godot.Directory;
 using File = System.IO.File;
 using RoomSaveData = System.Collections.Generic.Dictionary<string, System.Runtime.Serialization.ISerializable>;
 
@@ -85,15 +84,14 @@ namespace Parry2.managers.save
     /// <returns>Success</returns>
     public bool Flush()
     {
-      // try
-      // {
       string path = SaveManager.FormatAbsPath(Name);
 
       SaveManager.OpenSaveDirectory();
-      FileStream fs = File.Create(path);
+
+      using FileStream fs = File.Create(path);
+
       var bf = new BinaryFormatter();
       bf.Serialize(fs, this);
-      fs.Close();
       return true;
     }
 
@@ -103,10 +101,9 @@ namespace Parry2.managers.save
     /// <param name="path">Full path to file</param>
     public static SaveFile Open(string path)
     {
-      FileStream fs = File.OpenRead(path);
+      using FileStream fs = File.OpenRead(path);
       var bf = new BinaryFormatter();
       object data = bf.Deserialize(fs);
-      fs.Close();
       return data as SaveFile;
     }
 

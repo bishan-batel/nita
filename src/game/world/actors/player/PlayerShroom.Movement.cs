@@ -64,7 +64,7 @@ namespace Parry2.game.world.actors.player
         if (!_controller.JumpJustPressed || !ControlActive) return;
         _velocity.y = -JumpStrength;
         IsJumpHold = true;
-        // _animPlayback.Travel("jump");
+        _animPlayback.Start("jump");
       }
       else if (IsJumpHold && ControlActive)
       {
@@ -81,7 +81,7 @@ namespace Parry2.game.world.actors.player
         _decelerate(delta);
 
         string node = _animPlayback.GetCurrentNode();
-        if (node is not "sleeping" && !string.IsNullOrEmpty(node))
+        if (node is not "sleeping" && IsOnFloor())
           _animPlayback.Travel("idle");
       }
       else

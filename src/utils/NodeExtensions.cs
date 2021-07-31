@@ -45,5 +45,9 @@ namespace Parry2.utils
 
     public static Node GetSibling(this Node node, NodePath path) =>
         node.GetParent().GetNode(path);
+
+    // Math
+    public static float DistanceTo(this Node2D node1, Node2D node2) =>
+        node1.GlobalPosition.DistanceTo(node2.GlobalPosition);
   }
 }

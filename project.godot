@@ -44,7 +44,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Parry2"
+config/name="Nita"
 run/main_scene="res://src/menu/Menu.tscn"
 boot_splash/image="res://assets/loading.png"
 boot_splash/use_filter=false
@@ -82,6 +82,7 @@ enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/godot
 [gui]
 
 theme/use_hidpi=true
+theme/custom="res://assets/default.tres"
 
 [importer_defaults]
 
