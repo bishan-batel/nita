@@ -3,11 +3,10 @@ using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
 using GodotOnReady.Attributes;
-using Parry2.game.mechanic;
-using Parry2.managers;
-using Parry2.utils;
+using Nita.game.mechanic;
+using Nita.managers;
 
-namespace Parry2.game.world.actors.player
+namespace Nita.game.world.actors.player
 {
   // #girlboss
   public partial class PlayerShroom : KinematicBody2D, IKillable

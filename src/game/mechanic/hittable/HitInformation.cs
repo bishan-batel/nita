@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.mechanic.hittable
+namespace Nita.game.mechanic.hittable
 {
   // would use a struct but godot has as stroke when using them in signals
   public class HitInformation : Resource

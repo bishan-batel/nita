@@ -2,7 +2,7 @@ using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public static class ReactiveExtensions
   {

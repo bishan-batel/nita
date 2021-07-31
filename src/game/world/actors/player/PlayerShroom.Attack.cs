@@ -1,10 +1,10 @@
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Parry2.game.mechanic.hittable;
-using Parry2.game.mechanic.hostile;
+using Nita.game.mechanic.hittable;
+using Nita.game.mechanic.hostile;
 
-namespace Parry2.game.world.actors.player
+namespace Nita.game.world.actors.player
 {
   public partial class PlayerShroom
   {

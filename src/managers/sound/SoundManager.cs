@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-namespace Parry2.managers.sound
+namespace Nita.managers.sound
 {
   public class SoundManager : Node
   {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GodotRx.Internal
+namespace Nita.addons.godotrx.Internal
 {
   internal static class ListExtensions
   {

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Parry2.managers.save
+namespace Nita.managers.save
 {
   public interface IPersistant
   {

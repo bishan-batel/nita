@@ -1,14 +1,12 @@
-using System;
 using System.Linq;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using Parry2.game;
-using Parry2.game.room;
-using Parry2.managers.game;
-using Parry2.managers.save;
+using Nita.game;
+using Nita.managers.game;
+using Nita.managers.save;
 
-namespace Parry2.menu
+namespace Nita.menu
 {
   public class Menu : GameState
   {

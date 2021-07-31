@@ -3,11 +3,11 @@ using System.Reactive.Linq;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using GodotRx;
-using Parry2.utils;
+using Nita.addons.godotrx;
+using Nita.utils;
 using Array = Godot.Collections.Array;
 
-namespace Parry2.game.camera
+namespace Nita.game.camera
 {
   public class FollowCamera : Area2D
   {
@@ -43,12 +43,12 @@ namespace Parry2.game.camera
       this
           .OnProcess()
           .Where(_ => !_isRespawning)
-          .Subscribe(_process)
+          .Subscribe(Travel)
           .DisposeWith(this);
       // _camera.Zoom = Vector2.One;
     }
 
-    void _process(float delta)
+    void Travel(float delta)
     {
       // _camera.Zoom = Vector2.One;
 

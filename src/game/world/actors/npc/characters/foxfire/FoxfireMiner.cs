@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.actors.npc.characters.foxfire
+namespace Nita.game.world.actors.npc.characters.foxfire
 {
   public class FoxfireMiner : Node2D
   {

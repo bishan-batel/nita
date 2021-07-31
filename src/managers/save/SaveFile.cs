@@ -4,11 +4,11 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
-using Parry2.game.room;
+using Nita.game.room;
 using File = System.IO.File;
 using RoomSaveData = System.Collections.Generic.Dictionary<string, System.Runtime.Serialization.ISerializable>;
 
-namespace Parry2.managers.save
+namespace Nita.managers.save
 {
   [Serializable]
   public class SaveFile : ISerializable

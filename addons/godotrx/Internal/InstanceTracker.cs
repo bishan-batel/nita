@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Object = Godot.Object;
 
-namespace GodotRx.Internal
+namespace Nita.addons.godotrx.Internal
 {
   internal sealed class InstanceTracker : Object
   {

@@ -3,7 +3,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Godot;
 
-namespace GodotRx.Internal
+namespace Nita.addons.godotrx.Internal
 {
   internal class NodeTracker : Node
   {

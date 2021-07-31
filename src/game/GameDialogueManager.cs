@@ -2,9 +2,10 @@ using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Godot;
-using GodotRx;
+using Nita.addons.dialogic.Other;
+using Nita.addons.godotrx;
 
-namespace Parry2.game
+namespace Nita.game
 {
   public class GameDialogueManager : Control
   {

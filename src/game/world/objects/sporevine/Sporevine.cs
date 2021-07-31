@@ -2,7 +2,7 @@ using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
 
-namespace Parry2.game.world.objects.sporevine
+namespace Nita.game.world.objects.sporevine
 {
   [Tool]
   public class Sporevine : Line2D

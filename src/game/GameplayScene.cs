@@ -3,13 +3,13 @@ using System.Linq;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using GodotRx;
-using Parry2.debug;
-using Parry2.game.room;
-using Parry2.managers.game;
-using Parry2.managers.save;
+using Nita.addons.godotrx;
+using Nita.debug;
+using Nita.game.room;
+using Nita.managers.game;
+using Nita.managers.save;
 
-namespace Parry2.game
+namespace Nita.game
 {
   public class GameplayScene : GameState
   {

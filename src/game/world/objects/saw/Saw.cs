@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.world.objects.saw
+namespace Nita.game.world.objects.saw
 {
   [Tool]
   public class Saw : Node2D

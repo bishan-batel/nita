@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.camera
+namespace Nita.game.camera
 {
   public class CameraControlArea : Area2D
   {

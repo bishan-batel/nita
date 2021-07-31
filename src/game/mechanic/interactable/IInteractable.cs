@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.mechanic.interactable
+namespace Nita.game.mechanic.interactable
 {
   public interface IInteractable
   {

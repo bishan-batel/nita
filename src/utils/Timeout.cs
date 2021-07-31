@@ -2,9 +2,9 @@ using System;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using GodotRx;
+using Nita.addons.godotrx;
 
-namespace Parry2.utils
+namespace Nita.utils
 {
   public static class Timeout
   {

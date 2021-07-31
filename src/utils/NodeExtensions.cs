@@ -1,8 +1,8 @@
 using System;
 using Godot;
-using Parry2.game;
+using Nita.game;
 
-namespace Parry2.utils
+namespace Nita.utils
 {
   public static class NodeExtensions
   {

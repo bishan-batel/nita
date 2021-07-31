@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using GodotRx.Internal;
+using Nita.addons.godotrx.Internal;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public interface IReadOnlyReactiveProperty<out T> : IObservable<T>, IDisposable
   {

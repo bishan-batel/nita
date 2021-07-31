@@ -1,16 +1,12 @@
 using System;
-using System.Data;
-using System.Linq;
 using System.Runtime.Serialization;
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using GodotRx;
-using Parry2.game.world.actors.player;
-using Parry2.managers.save;
-using Parry2.utils;
+using Nita.managers.save;
+using Nita.utils;
 
-namespace Parry2.game.world.objects.checkpoint
+namespace Nita.game.world.objects.checkpoint
 {
   [Group(SaveManager.PersistGroup)]
   public class CheckpointManagerNode : Node, IPersistant

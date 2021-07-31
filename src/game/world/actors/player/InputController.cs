@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.world.actors.player
+namespace Nita.game.world.actors.player
 {
   public struct InputController
   {

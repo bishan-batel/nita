@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using GodotRx;
-using Parry2.utils;
+using Nita.addons.godotrx;
+using Nita.utils;
 using Object = Godot.Object;
 
-namespace Parry2.debug
+namespace Nita.debug
 {
   public static class GConsole
   {

@@ -2,7 +2,7 @@ using System;
 using System.Runtime.Serialization;
 using Godot;
 
-namespace Parry2.utils
+namespace Nita.utils
 {
   [Serializable]
   public struct Vector2Serial : ISerializable

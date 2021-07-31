@@ -1,7 +1,7 @@
 using Godot;
-using Parry2.editor;
+using Nita.editor;
 
-namespace Parry2.game
+namespace Nita.game
 {
   [Tool]
   public class LayerHelper : Node

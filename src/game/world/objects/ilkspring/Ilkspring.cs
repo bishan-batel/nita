@@ -1,9 +1,9 @@
 using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
-using Parry2.game.mechanic.hittable;
+using Nita.game.mechanic.hittable;
 
-namespace Parry2.game.world.objects.ilkspring
+namespace Nita.game.world.objects.ilkspring
 {
   public class Ilkspring : Node2D
   {

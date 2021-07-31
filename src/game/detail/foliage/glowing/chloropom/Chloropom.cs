@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.detail.foliage.glowing.chloropom
+namespace Nita.game.detail.foliage.glowing.chloropom
 {
   [Tool]
   public class Chloropom : Sprite

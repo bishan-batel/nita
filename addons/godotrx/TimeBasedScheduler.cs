@@ -2,9 +2,9 @@ using System;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using Godot;
-using GodotRx.Internal;
+using Nita.addons.godotrx.Internal;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public sealed class TimeBasedScheduler : IScheduler
   {

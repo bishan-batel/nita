@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.actors.npc
+namespace Nita.game.world.actors.npc
 {
   public abstract class CharacterController : KinematicBody2D
   {

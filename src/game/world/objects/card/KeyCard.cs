@@ -4,10 +4,10 @@ using GDMechanic.Wiring;
 using GDMechanic.Wiring.Attributes;
 using Godot;
 using Godot.Collections;
-using Parry2.editor;
-using Parry2.game.world.tilemaps;
+using Nita.editor;
+using Nita.game.world.tilemaps;
 
-namespace Parry2.game.world.objects.card
+namespace Nita.game.world.objects.card
 {
   // TODO fix this class / add electricity arc effect
   [Tool]

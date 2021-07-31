@@ -1,7 +1,7 @@
 using Godot;
-using Parry2.debug;
+using Nita.debug;
 
-namespace Parry2.game.world.actors.player
+namespace Nita.game.world.actors.player
 {
   public partial class PlayerShroom
   {

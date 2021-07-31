@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.utils
+namespace Nita.utils
 {
   public struct CMargin4
   {

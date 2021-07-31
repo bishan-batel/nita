@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.mechanic.hostile
+namespace Nita.game.mechanic.hostile
 {
   public interface IHostile
   {

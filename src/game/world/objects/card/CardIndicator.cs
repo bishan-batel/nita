@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.world.objects.card
+namespace Nita.game.world.objects.card
 {
   [Tool]
   public class CardIndicator : Sprite, ICardUser

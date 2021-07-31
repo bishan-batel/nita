@@ -10,7 +10,7 @@ using File = System.IO.File;
 // TODO credit https://github.com/TheBoneJarmer/TiledCS
 // TODO uh actually fucking work on the level editor you lazy piece of shit
 // lol
-namespace Parry2.editor
+namespace Nita.editor
 {
   [Obsolete("Incomplete class", true)]
   public class LevelData : ISerializable

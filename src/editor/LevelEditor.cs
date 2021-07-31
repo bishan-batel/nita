@@ -1,6 +1,6 @@
-using Parry2.managers.game;
+using Nita.managers.game;
 
-namespace Parry2.editor
+namespace Nita.editor
 {
   public class LevelEditor : GameState
   {

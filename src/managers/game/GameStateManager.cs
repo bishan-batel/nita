@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.managers.game
+namespace Nita.managers.game
 {
   public class GameStateManager : Node
   {

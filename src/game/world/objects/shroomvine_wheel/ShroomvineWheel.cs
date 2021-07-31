@@ -1,7 +1,7 @@
 using Godot;
-using Parry2.game.mechanic.hittable;
+using Nita.game.mechanic.hittable;
 
-namespace Parry2.game.world.objects.shroomvine_wheel
+namespace Nita.game.world.objects.shroomvine_wheel
 {
   public class ShroomvineWheel : Node2D
   {

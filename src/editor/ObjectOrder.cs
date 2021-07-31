@@ -2,20 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Parry2.game.actors.npc.bluehat;
-using Parry2.game.actors.npc.bullshroom;
-using Parry2.game.detail.foliage.glowing.chloropom;
-using Parry2.game.world.actors.player;
-using Parry2.game.world.objects.card;
-using Parry2.game.world.objects.card.cardusers;
-using Parry2.game.world.objects.checkpoint;
-using Parry2.game.world.objects.ilkspring;
-using Parry2.game.world.objects.saw;
-using Parry2.game.world.objects.shroomvine_wheel;
-using Parry2.game.world.objects.sporevine;
-using Parry2.game.world.tilemaps;
+using Nita.game.detail.foliage.glowing.chloropom;
+using Nita.game.world.actors.npc.bluehat;
+using Nita.game.world.actors.npc.bullshroom;
+using Nita.game.world.actors.player;
+using Nita.game.world.objects.card;
+using Nita.game.world.objects.card.cardusers;
+using Nita.game.world.objects.checkpoint;
+using Nita.game.world.objects.ilkspring;
+using Nita.game.world.objects.saw;
+using Nita.game.world.objects.shroomvine_wheel;
+using Nita.game.world.objects.sporevine;
+using Nita.game.world.tilemaps;
 
-namespace Parry2.editor
+namespace Nita.editor
 {
   [Tool]
   public static class ObjectOrder

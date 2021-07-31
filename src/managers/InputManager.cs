@@ -1,7 +1,7 @@
 using Godot;
-using Parry2.game.world.actors.player;
+using Nita.game.world.actors.player;
 
-namespace Parry2.managers
+namespace Nita.managers
 {
   public static class InputManager
   {

@@ -1,4 +1,4 @@
-namespace Parry2.game.mechanic
+namespace Nita.game.mechanic
 {
   public interface IKillable
   {

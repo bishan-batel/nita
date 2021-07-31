@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Godot;
-using GodotRx;
-using Parry2.editor;
-using Parry2.game.world.actors.player;
-using Parry2.game.world.objects.checkpoint;
-using Parry2.managers.save;
-using Parry2.utils;
+using Nita.addons.godotrx;
+using Nita.editor;
+using Nita.game.world.actors.player;
+using Nita.game.world.objects.checkpoint;
+using Nita.managers.save;
+using Nita.utils;
 using Environment = Godot.Environment;
 
-namespace Parry2.game.room
+namespace Nita.game.room
 {
   public class Room : Node
   {

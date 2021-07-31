@@ -4,12 +4,12 @@ using System.IO;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Parry2.game;
-using Parry2.managers.game;
-using Parry2.utils;
+using Nita.game;
+using Nita.managers.game;
+using Nita.utils;
 using Path = System.IO.Path;
 
-namespace Parry2.managers.save
+namespace Nita.managers.save
 {
   public class SaveManager : Node
   {

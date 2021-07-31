@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using GodotRx.Internal;
+using Nita.addons.godotrx.Internal;
 using Object = Godot.Object;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public static class IDisposableExtensions
   {

@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-namespace Parry2.game.room
+namespace Nita.game.room
 {
   public static class RoomList
   {

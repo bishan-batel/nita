@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parry2", "Parry2.csproj", "{F3B590BF-7BD7-4B1E-9D3F-2371801CDA1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nita", "Nita.csproj", "{F3B590BF-7BD7-4B1E-9D3F-2371801CDA1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

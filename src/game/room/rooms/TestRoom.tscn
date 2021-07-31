@@ -848,10 +848,10 @@ __meta__ = {
 }
 
 [node name="RichTextLabel8" type="RichTextLabel" parent="Overlay text"]
-margin_left = 371.0
-margin_top = -41.0
-margin_right = 567.0
-margin_bottom = 40.0
+margin_left = 387.0
+margin_top = -13.0
+margin_right = 583.0
+margin_bottom = 68.0
 custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 0.870588, 0.870588, 1, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
@@ -1370,8 +1370,8 @@ z_index = 13
 z_as_relative = false
 DegreeSnap = 5.625
 Speed = 1.0
-NormalRot = 90.0
 TransformRot = 270.0
+NormalRot = 90.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
 position = Vector2( -32, 0 )

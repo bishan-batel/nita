@@ -4,7 +4,7 @@ using Godot;
 using Array = Godot.Collections.Array;
 using Object = Godot.Object;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public static class SignalExtensions
   {

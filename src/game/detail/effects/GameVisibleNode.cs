@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.detail.effects
+namespace Nita.game.detail.effects
 {
   [Tool]
   public class GameVisibleNode : Node2D

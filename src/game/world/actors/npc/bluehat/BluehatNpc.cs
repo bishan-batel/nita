@@ -1,9 +1,9 @@
 using Godot;
-using Parry2.game.mechanic.hittable;
-using Parry2.game.world.actors.player;
-using Parry2.utils;
+using Nita.game.mechanic.hittable;
+using Nita.game.world.actors.player;
+using Nita.utils;
 
-namespace Parry2.game.actors.npc.bluehat
+namespace Nita.game.world.actors.npc.bluehat
 {
   public class BluehatNpc : Node2D
   {

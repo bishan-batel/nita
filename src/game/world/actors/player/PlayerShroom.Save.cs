@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.Serialization;
-using Parry2.managers.save;
-using Parry2.utils;
+using Nita.managers.save;
+using Nita.utils;
 
-namespace Parry2.game.world.actors.player
+namespace Nita.game.world.actors.player
 {
   public partial class PlayerShroom : IPersistant, IGlobalPersistant
   {

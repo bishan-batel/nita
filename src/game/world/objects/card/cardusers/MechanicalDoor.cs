@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.world.objects.card.cardusers
+namespace Nita.game.world.objects.card.cardusers
 {
   [Tool]
   public class MechanicalDoor : Node2D, ICardUser

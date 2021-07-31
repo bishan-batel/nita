@@ -4,9 +4,9 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using Godot;
-using GodotRx.Internal;
+using Nita.addons.godotrx.Internal;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public static class NodeExtensions
   {

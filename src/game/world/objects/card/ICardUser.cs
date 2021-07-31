@@ -1,4 +1,4 @@
-namespace Parry2.game.world.objects.card
+namespace Nita.game.world.objects.card
 {
   public interface ICardUser
   {

@@ -3,10 +3,10 @@
 using System;
 using System.Reactive.Linq;
 using Godot;
-using GodotRx;
-using Parry2.debug;
+using Nita.addons.godotrx;
+using Nita.debug;
 
-namespace Parry2
+namespace Nita
 {
   public class Global : Node
   {
@@ -77,7 +77,7 @@ namespace Parry2
       actionEventObservable
           .Where(@event => @event.IsActionPressed("fullscreen_toggle"))
           .Subscribe(_ => OS.WindowFullscreen = !OS.WindowFullscreen);
-      
+
 #if DEBUG
       // Debug restart
       actionEventObservable

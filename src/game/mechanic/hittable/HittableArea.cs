@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Parry2.game.mechanic.hittable
+namespace Nita.game.mechanic.hittable
 {
   public class HittableArea : Area2D, IHittable
   {

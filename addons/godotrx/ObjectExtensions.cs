@@ -5,10 +5,10 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
-using GodotRx.Internal;
+using Nita.addons.godotrx.Internal;
 using Object = Godot.Object;
 
-namespace GodotRx
+namespace Nita.addons.godotrx
 {
   public static class ObjectExtensions
   {

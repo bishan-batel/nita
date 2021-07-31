@@ -1,11 +1,10 @@
 using System;
 using Godot;
-using GodotRx;
-using Parry2.game.world.actors.player;
-using Parry2.managers.save;
-using Parry2.utils;
+using Nita.addons.godotrx;
+using Nita.game.world.actors.player;
+using Nita.utils;
 
-namespace Parry2.game.room
+namespace Nita.game.room
 {
   public class RoomGateway : Area2D
   {

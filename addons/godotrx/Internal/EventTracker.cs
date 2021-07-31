@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Object = Godot.Object;
 
-namespace GodotRx.Internal
+namespace Nita.addons.godotrx.Internal
 {
   internal abstract class BaseEventTracker<T> : Object
   {
