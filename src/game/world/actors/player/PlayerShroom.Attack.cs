@@ -87,7 +87,7 @@ namespace Nita.game.world.actors.player
       area2D.Rotation = GetAttackRotation();
 
       _inKnockback = false;
-      if (!_controller.AttackJustPressed) return;
+      if (_animPlayback.GetCurrentNode() is "sleeping" || !_controller.AttackJustPressed) return;
       _attackPlayer.Play("attack");
     }
 
