@@ -30,7 +30,7 @@ __meta__ = {
 }
 
 [node name="RoomContainer" type="Viewport" parent="RoomViewContainer"]
-size = Vector2( 300, 168 )
+size = Vector2( 256, 144 )
 handle_input_locally = false
 disable_3d = true
 usage = 0
