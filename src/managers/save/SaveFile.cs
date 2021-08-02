@@ -34,7 +34,7 @@ namespace Nita.managers.save
       if (!SaveManager.IsValidFileName(name)) throw new IOException($"Invalid name {name}");
 
       Name = name;
-      CurrentRoomName = RoomList.GetName("test_room");
+      CurrentRoomName = RoomList.GetName("garden_entrance");
       GlobalData = new Dictionary<string, ISerializable>();
       RoomData = new Dictionary<string, RoomSaveData>();
 
