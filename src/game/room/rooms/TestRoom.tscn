@@ -857,8 +857,8 @@ custom_colors/default_color = Color( 0.870588, 0.870588, 1, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0.117647, 0.117647, 0.12549, 1 )
 bbcode_enabled = true
-bbcode_text = " [wave amp=30 freq=5]penis ha get it its like the funny word lol"
-text = " penis ha get it its like the funny word lol"
+bbcode_text = " [wave amp=30 freq=5]gamer gamr gamer gamers gaming gamer"
+text = " gamer gamr gamer gamers gaming gamer"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1369,9 +1369,9 @@ rotation = 1.5708
 z_index = 13
 z_as_relative = false
 DegreeSnap = 5.625
-Speed = 1.0
-TransformRot = 270.0
 NormalRot = 90.0
+TransformRot = 270.0
+Speed = 1.0
 
 [node name="Saw" parent="Doors/MechanicalRotate" instance=ExtResource( 16 )]
 position = Vector2( -32, 0 )
