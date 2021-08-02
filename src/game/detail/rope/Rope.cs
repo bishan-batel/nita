@@ -54,7 +54,7 @@ namespace Nita.game.detail.rope
 
     public void Simulate()
     {
-      if (_segments == null) GeneratePoints();
+      if (_segments is null) GeneratePoints();
 
       for (var i = 0; i < _segments.Length; i++)
       {
@@ -90,17 +90,19 @@ namespace Nita.game.detail.rope
         // Calc correction between points for that spicy rope behaviour
         float distance = segment.Pos.DistanceTo(neighbor.Pos);
         float error = Mathf.Abs(distance - idealDist);
-        Vector2 direction = Vector2.Zero;
+        Vector2 diff = Vector2.Zero;
 
         if (distance > idealDist)
-          direction = (segment.Pos - neighbor.Pos).Normalized();
-        else if (distance > idealDist)
-          direction = (neighbor.Pos - segment.Pos).Normalized();
+          diff = segment.Pos - neighbor.Pos;
+        else if (distance < idealDist)
+          diff = neighbor.Pos - segment.Pos;
 
         // Apply correction to both points
-        Vector2 correction = direction * error;
-        segment.Pos -= correction * Tension;
-        neighbor.Pos += correction * Tension;
+        Vector2 correction = diff.Normalized() * error * Tension;
+        correction = correction.Clamped(diff.Length());
+
+        segment.Pos -= correction;
+        neighbor.Pos += correction;
 
         _segments[i] = segment;
         _segments[i + 1] = neighbor;
