@@ -10,6 +10,7 @@ using RoomSaveData = System.Collections.Generic.Dictionary<string, System.Runtim
 
 namespace Nita.managers.save
 {
+  // TODO make save file more abstract to allow game to save data in other locations then file system (ie. Cloud or SteamDB)
   [Serializable]
   public class SaveFile : ISerializable
   {

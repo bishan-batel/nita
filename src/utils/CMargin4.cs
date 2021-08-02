@@ -1,7 +1,9 @@
+using System;
 using Godot;
 
 namespace Nita.utils
 {
+  [Obsolete]
   public struct CMargin4
   {
     public float Top, Bottom, Left, Right;
@@ -33,10 +35,10 @@ namespace Nita.utils
 
     public CMargin4 Lerp(CMargin4 to, float weight) =>
         new(
-          Mathf.Lerp(Top, to.Top, weight),
-          Mathf.Lerp(Bottom, to.Bottom, weight),
-          Mathf.Lerp(Left, to.Left, weight),
-          Mathf.Lerp(Right, to.Right, weight)
-        );
+            Mathf.Lerp(Top, to.Top, weight),
+            Mathf.Lerp(Bottom, to.Bottom, weight),
+            Mathf.Lerp(Left, to.Left, weight),
+            Mathf.Lerp(Right, to.Right, weight)
+            );
   }
 }
