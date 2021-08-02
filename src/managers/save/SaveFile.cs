@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Godot;
 using Nita.game.room;
+using Nita.game.world.actors.player;
 using File = System.IO.File;
 using RoomSaveData = System.Collections.Generic.Dictionary<string, System.Runtime.Serialization.ISerializable>;
 
@@ -17,7 +18,7 @@ namespace Nita.managers.save
     internal const SaveVersion LatestSaveVersion = SaveVersion.V0A;
     internal SaveVersion Version;
 
-    public string CurrentRoomName { get; }
+    public string CurrentRoomName { set; get; }
     public Dictionary<string, RoomSaveData> RoomData { get; }
     public Dictionary<string, ISerializable> GlobalData { get; }
 

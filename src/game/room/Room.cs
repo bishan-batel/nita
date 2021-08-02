@@ -141,6 +141,8 @@ namespace Nita.game.room
 
       saveFile ??= SaveManager.CurrentSaveFile;
 
+      saveFile.CurrentRoomName = RoomName;
+      
       // Room-bound Persistent Node Saving
       var roomSaves = new Dictionary<string, ISerializable>();
       GetTree()

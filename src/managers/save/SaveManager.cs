@@ -57,7 +57,7 @@ namespace Nita.managers.save
 
         saveDir.ListDirBegin(true, true);
 
-        while ((nextPath = saveDir.GetNext()) != string.Empty)
+        while ((nextPath = saveDir.GetNext()) is not "")
         {
           if (!saveDir.FileExists(nextPath)) continue;
           if (!nextPath.EndsWith(SaveFileType)) continue;
@@ -72,9 +72,8 @@ namespace Nita.managers.save
 
     public override void _Ready()
     {
-      CurrentSaveFile ??= new SaveFile();
-      CurrentSaveFile.Flush();
-      if (OS.GetUserDataDir() == "user://")
+      CurrentSaveFile = new SaveFile();
+      if (OS.GetUserDataDir() is "user://")
         this.DebugPrintErr("Unable to find user:// directory");
     }
 
@@ -158,7 +157,7 @@ namespace Nita.managers.save
     /// Creates a new empty save file of specified name
     /// </summary>
     /// <param name="name">Name of new save file</param>
-    /// <returns>Returns true if save was created succesfully</returns>
+    /// <returns>Returns true if save was created successfully</returns>
     public static bool CreateNewSave(string name = null)
     {
       Singleton.DebugPrint($"Creating new save file {name}...");

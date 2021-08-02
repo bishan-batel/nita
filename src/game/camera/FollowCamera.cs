@@ -11,12 +11,12 @@ namespace Nita.game.camera
 {
   public class FollowCamera : Area2D
   {
-    [Node("Camera")] readonly Camera2D _camera = null;
+    [Node("CameraContainer/Camera")] readonly Camera2D _camera = null;
+    [Node("CameraContainer")] readonly Node2D _cameraContainer = null;
     [Node("CollisionShape2D")] readonly CollisionShape2D _collisionShape = null;
-    CMargin4 _dragMargin, _targetMargin;
     bool _isRespawning;
 
-    Vector2 _targetPos, _pos;
+    Vector2 _targetPos;
 
     [Export] public float SmoothingSpeed = .1f, MaxSmoothVel;
 
@@ -27,13 +27,7 @@ namespace Nita.game.camera
     {
       this.Wire();
 
-      _pos = GlobalPosition;
-
-      this.Dispatch(() =>
-      {
-        _dragMargin = new CMargin4(_camera);
-        _isRespawning = false;
-      }, .1f);
+      this.Dispatch(() => { _isRespawning = false; }, .1f);
 
       this.OnProcess()
           .Where(_ => _isRespawning)
@@ -57,15 +51,8 @@ namespace Nita.game.camera
       float smoothSpeedDelta = 1 - Mathf.Pow(SmoothingSpeed, delta);
 
       // Smooths position to target
-      _pos = _pos.LinearInterpolate(_targetPos, smoothSpeedDelta);
-      GlobalPosition = _pos.Round();
-
-
-      // Smooths camera to target
-      // Smooths margin to target
-      new CMargin4(_camera)
-          .Lerp(_targetMargin, smoothSpeedDelta)
-          .AssignToDragMargin(_camera);
+      GlobalPosition = GlobalPosition.LinearInterpolate(_targetPos, smoothSpeedDelta);
+      _cameraContainer.GlobalPosition = GlobalPosition.Round();
     }
 
     public override void _PhysicsProcess(float delta)
@@ -80,7 +67,7 @@ namespace Nita.game.camera
         return;
       }
 
-      _targetMargin = _dragMargin;
+      _camera.DragMarginHEnabled = _camera.DragMarginVEnabled = true;
 
       _targetPos = Target.GlobalPosition;
     }
@@ -91,7 +78,7 @@ namespace Nita.game.camera
       _targetPos = area.GetNodeOrNull<Node2D>(area.Point)?.GlobalPosition ??
                    Target.GlobalPosition;
 
-      _targetMargin = new CMargin4(0f, 0f, 0f, 0f);
+      _camera.DragMarginHEnabled = _camera.DragMarginVEnabled = false;
     }
   }
 }
