@@ -25,6 +25,7 @@ namespace Nita.game.world.actors.player
     Vector2 _velocity;
     [Export] public float TurnAngle = 10f, TurnSpeed = .5f;
 
+    float _speedRot;
 
     public Vector2 Velocity
     {
@@ -38,7 +39,6 @@ namespace Nita.game.world.actors.player
     public void Kill()
     {
     }
-
 
     [OnReady]
     public void OnReady()
@@ -60,7 +60,8 @@ namespace Nita.game.world.actors.player
       if (!IsOnFloor())
         target = _velocity.x / MaxSpeed * -TurnAngle;
 
-      _sprite.RotationDegrees += (target - _sprite.RotationDegrees) * TurnSpeed;
+      _speedRot += (target - _speedRot) * TurnSpeed;
+      _sprite.RotationDegrees = Mathf.Round(_speedRot);
     }
 
     public override void _Process(float delta)

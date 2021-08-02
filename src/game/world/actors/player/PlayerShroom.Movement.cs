@@ -22,7 +22,7 @@ namespace Nita.game.world.actors.player
 
     public override void _PhysicsProcess(float delta)
     {
-      _velocity = MoveAndSlide(_velocity, Vector2.Up);
+      _velocity = MoveAndSlide(_velocity, Vector2.Up, true);
       if (!_onGroundLastFrame && IsOnFloor())
         Input.StartJoyVibration(0, 1.0f, 1.0f, .1f);
       _onGroundLastFrame = IsOnFloor();
