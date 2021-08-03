@@ -91,7 +91,7 @@ namespace Nita.game.world.actors.player
       _attackPlayer.Play("attack");
     }
 
-    float GetAttackRotation() => Mathf.Stepify(_controller.AttackRotation, AttackRotSnap);
+    float GetAttackRotation() => Mathf.Round((_controller.AttackRotation+Mathf.Tau) / AttackRotSnap) * AttackRotSnap;
 
     void _processHit(IHittable hittable)
     {

@@ -234,7 +234,7 @@ graph_offset = Vector2( -258.732, 0 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 5, 7 )
 
 [sub_resource type="Animation" id=23]
@@ -269,7 +269,7 @@ tracks/1/keys = {
 radius = 6.0
 height = 14.0
 
-[sub_resource type="RectangleShape2D" id=22]
+[sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 6, 7 )
 
 [node name="PlayerShroom" type="KinematicBody2D" groups=[
@@ -315,7 +315,7 @@ parameters/playback = SubResource( 21 )
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
-shape = SubResource( 25 )
+shape = SubResource( 22 )
 
 [node name="AttackArea" type="Area2D" parent="."]
 position = Vector2( 0, -4 )
@@ -328,11 +328,10 @@ playback_speed = 2.3
 anims/attack = SubResource( 23 )
 
 [node name="fungus_attack" type="Sprite" parent="AttackArea"]
-visible = false
 position = Vector2( 14, -1 )
 texture = ExtResource( 3 )
 hframes = 10
-frame = 9
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 visible = false
@@ -347,4 +346,4 @@ collision_mask = 8
 [node name="CollisionBody2D" type="CollisionShape2D" parent="DamageArea"]
 visible = false
 position = Vector2( 0, -2 )
-shape = SubResource( 22 )
+shape = SubResource( 25 )
