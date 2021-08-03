@@ -17,14 +17,30 @@ namespace Nita.game.room
   {
     [Export] public Environment WorldEnviorment;
     [Export] public NodePath DefaultGateway;
-    [Export] public NodePath Player;
+
+    [Export]
+    public NodePath PlayerPath
+    {
+      set
+      {
+        _playerPath = value;
+        if (!IsInsideTree()) return;
+        if (value is null) return;
+        Player = GetNode<PlayerShroom>(_playerPath);
+      }
+      get => _playerPath;
+    }
+
     [Export] public string RoomName = string.Empty;
+    public PlayerShroom Player { private set; get; }
+    NodePath _playerPath;
 
 
     public CheckpointManagerNode CheckpointManager { private set; get; }
 
     public override async void _Ready()
     {
+      PlayerPath = PlayerPath;
       // TODO fix checkpoints
 
 #if DEBUG
@@ -53,7 +69,7 @@ namespace Nita.game.room
 
       await this.WaitNextIdleFrame();
 
-      var player = GetNode<PlayerShroom>(Player);
+      var player = GetNode<PlayerShroom>(PlayerPath);
 
       // Attempts to find entered gateway in scene
       RoomGateway gateway = GetTree()
@@ -142,7 +158,7 @@ namespace Nita.game.room
       saveFile ??= SaveManager.CurrentSaveFile;
 
       saveFile.CurrentRoomName = RoomName;
-      
+
       // Room-bound Persistent Node Saving
       var roomSaves = new Dictionary<string, ISerializable>();
       GetTree()

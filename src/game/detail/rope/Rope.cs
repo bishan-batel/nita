@@ -25,7 +25,7 @@ namespace Nita.game.detail.rope
     [Export] public bool ConstrainEndPoint { get; set; } = true;
 
     int _nodeCount;
-    private Segment[] _segments;
+    Segment[] _segments;
 
     public override void _Ready()
     {

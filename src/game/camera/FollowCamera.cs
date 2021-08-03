@@ -26,8 +26,9 @@ namespace Nita.game.camera
     public override void _Ready()
     {
       this.Wire();
+      _isRespawning = true;
 
-      this.Dispatch(() => { _isRespawning = false; }, .1f);
+      this.Dispatch(() => { _isRespawning = false; }, .2f);
 
       this.OnProcess()
           .Where(_ => _isRespawning)
@@ -77,6 +78,7 @@ namespace Nita.game.camera
       // GlobalRotation = Mathf.LerpAngle(GlobalRotation, 0, .1f);
       _targetPos = area.GetNodeOrNull<Node2D>(area.Point)?.GlobalPosition ??
                    Target.GlobalPosition;
+      _targetPos -= _cameraContainer.ToLocal(_camera.GlobalPosition);
 
       _camera.DragMarginHEnabled = _camera.DragMarginVEnabled = false;
     }

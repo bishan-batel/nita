@@ -14,7 +14,7 @@ namespace Nita.game.world.actors.npc.bluehat
     {
       var player = GameplayScene
           .CurrentRoom?
-          .GetNodeOrNull<PlayerShroom>(GameplayScene.CurrentRoom?.Player);
+          .GetNodeOrNull<PlayerShroom>(GameplayScene.CurrentRoom?.PlayerPath);
 
       if (player is not null && player.IsInsideTree())
       {

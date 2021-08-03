@@ -20,6 +20,7 @@ static func get_character_list() -> Array:
 		if '.json' in file:
 			var data: Dictionary     = DialogicResources.get_character_json(file)
 			var color: Color         = Color("#ffffff")
+
 			var c_name: String       = data['id']
 			var portraits: Array     = []
 			var display_name: String = ''

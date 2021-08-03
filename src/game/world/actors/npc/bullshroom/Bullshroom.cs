@@ -15,7 +15,7 @@ namespace Nita.game.world.actors.npc.bullshroom
 
     protected override Vector2 GetInputDir()
     {
-      NodePath playerPath = GameplayScene.CurrentRoom?.Player;
+      NodePath playerPath = GameplayScene.CurrentRoom?.PlayerPath;
       if (playerPath == null) return Vector2.Zero;
       var player = GameplayScene.CurrentRoom.GetNode<PlayerShroom>(playerPath);
 
