@@ -132,13 +132,10 @@ namespace Nita.game.room
       roomSave
           .Keys
           .ToList()
-          .ConvertAll(nodePath => (GetNodeOrNull<IPersistant>(nodePath), nodePath))
-          .FindAll(node => node.Item1 is not null)
-          .ForEach(node =>
+          .ForEach(key =>
           {
-            (IPersistant persistant, string nodePath) = node;
-            // this.DebugPrint($"\tLoading {nodePath}");
-            persistant.LoadFrom(roomSave[nodePath]);
+            var persistant = GetNodeOrNull(key) as IPersistant;
+            persistant?.LoadFrom(roomSave[key]);
           });
 
       // TODO Implement global loading
@@ -167,12 +164,11 @@ namespace Nita.game.room
           .ToList()
           .ForEach(node =>
           {
-            if (!(node is IPersistant persistant))
+            if (node is not IPersistant persistant)
               throw new GroupInterfaceException(node, typeof(IPersistant));
-            ISerializable nodeSave = persistant.Save();
-            if (nodeSave is null) return;
+
             // this.DebugPrint($"\tSaved data from {node.Name}");
-            roomSaves[GetPathTo(node)] = nodeSave;
+            roomSaves[GetPathTo(node)] = persistant.Save();
           });
 
       // Saves room data
@@ -189,7 +185,6 @@ namespace Nita.game.room
               throw new GroupInterfaceException(node, typeof(IGlobalPersistant));
 
             ISerializable nodeSave = globalPersistant.GlobalSave();
-            if (nodeSave is null) return;
             saveFile.GlobalData[globalPersistant.UniqueName] = nodeSave;
           });
     }

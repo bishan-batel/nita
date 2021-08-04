@@ -13,7 +13,9 @@ namespace Nita.game.room
       Right,
       Left,
       Up,
-      Down
+      Down,
+      Forward,
+      Spawn
     }
 
     public const string GatewayGroup = "RoomGateway";
@@ -66,6 +68,9 @@ namespace Nita.game.room
         // TODO make actual animation
         case GateDirection.Up:
         case GateDirection.Down:
+        case GateDirection.Forward:
+          throw new NotImplementedException();
+        case GateDirection.Spawn:
           player.GlobalPosition = GlobalPosition;
           break;
         default:
@@ -108,7 +113,7 @@ namespace Nita.game.room
         GateDirection.Left => Vector2.Left,
         GateDirection.Down => Vector2.Down,
         GateDirection.Up => Vector2.Up,
-        _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, string.Empty)
+        _ => Vector2.Zero
       };
     }
   }

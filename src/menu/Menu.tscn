@@ -35,7 +35,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="DynamicFont" id=2]
-size = 256
+size = 120
 outline_size = 5
 outline_color = Color( 0.203922, 0.360784, 0.329412, 1 )
 use_mipmaps = true
@@ -92,13 +92,13 @@ __meta__ = {
 }
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer/UI"]
-margin_left = 52.0
-margin_top = 188.0
-margin_right = 524.0
-margin_bottom = 516.0
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 532.0
+margin_bottom = 636.0
 theme = ExtResource( 3 )
 custom_fonts/normal_font = SubResource( 2 )
-text = "Nita"
+text = "funni mushroom game go brr"
 __meta__ = {
 "_edit_use_anchors_": false
 }

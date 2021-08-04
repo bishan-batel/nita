@@ -11,20 +11,31 @@ namespace Nita.game.world.actors.player
   // #girlboss
   public partial class PlayerShroom : KinematicBody2D, IKillable
   {
+    public enum State
+    {
+      IdleWalk,
+      Sleeping,
+      Sitting,
+      InAir,
+      InCutscene
+    }
+
+    [Export] public float TurnAngle = 10f, TurnSpeed = .5f;
     [Node("AnimationTree")] readonly AnimationTree _animationTree = null;
 
-    readonly Func<InputController, InputController> _applyController = InputManager.Apply;
     [Node("AttackArea/AnimationPlayer")] readonly AnimationPlayer _attackPlayer = null;
 
     [Node("Sprite")] readonly Sprite _sprite = null;
+
+    public State CurrentState;
 
     [OnReadyGet("AnimationTree", Property = "parameters/playback")]
     AnimationNodeStateMachinePlayback _animPlayback;
 
     InputController _controller;
-    Vector2 _velocity;
-    [Export] public float TurnAngle = 10f, TurnSpeed = .5f;
+    readonly Func<InputController, InputController> _applyController = InputManager.Apply;
 
+    Vector2 _velocity;
     float _speedRot;
 
     public Vector2 Velocity

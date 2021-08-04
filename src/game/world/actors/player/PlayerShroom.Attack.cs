@@ -12,7 +12,7 @@ namespace Nita.game.world.actors.player
     float _timeInvulnerable;
 
     // Snaps to every 5 degrees
-    [Export] public float AttackRotSnap { get; set; } = Mathf.Deg2Rad(45);
+    [Export] public float AttackRotSnap { get; set; } = Mathf.Deg2Rad(45 * .25f);
     [Export] public int InvulnerabilityFrames { get; set; }
     [Export] public int Health { get; set; }
 
@@ -91,7 +91,7 @@ namespace Nita.game.world.actors.player
       _attackPlayer.Play("attack");
     }
 
-    float GetAttackRotation() => Mathf.Round((_controller.AttackRotation+Mathf.Tau) / AttackRotSnap) * AttackRotSnap;
+    float GetAttackRotation() => Mathf.Round((_controller.AttackRotation + Mathf.Tau) / AttackRotSnap) * AttackRotSnap;
 
     void _processHit(IHittable hittable)
     {

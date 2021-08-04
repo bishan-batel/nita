@@ -44,6 +44,8 @@ motion_scale = Vector2( 0.35, 0.007 )
 motion_mirroring = Vector2( 742, 0 )
 
 [node name="mushroom_plains 0" type="Sprite" parent="ParallaxLayer5"]
+visible = false
+modulate = Color( 0.374969, 0.384738, 0.462891, 1 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -30 )
 
@@ -54,5 +56,7 @@ motion_offset = Vector2( 400, 0 )
 motion_mirroring = Vector2( 742, 0 )
 
 [node name="mushroom_plains 0" type="Sprite" parent="ParallaxLayer6"]
+visible = false
+modulate = Color( 0.374969, 0.384738, 0.462891, 1 )
 texture = ExtResource( 4 )
 offset = Vector2( 0, -30 )

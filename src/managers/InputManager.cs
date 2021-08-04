@@ -5,21 +5,26 @@ namespace Nita.managers
 {
   public static class InputManager
   {
-    public static InputController Apply(InputController controller) =>
-        new()
-        {
-            JumpPressed = Input.IsActionPressed("jump"),
-            JumpJustPressed = Input.IsActionJustPressed("jump"),
+    public static InputController Apply(InputController controller)
+    {
+      var walkInput = new Vector2(
+        Input.GetActionStrength("right") - Input.GetActionStrength("left"),
+        Input.GetActionStrength("down") - Input.GetActionStrength("up")
+      );
 
-            AttackRotation = GetAttackRot(controller.Owner),
-            AttackJustPressed = Input.IsActionJustPressed("attack"),
+      return new InputController
+      {
+        JumpPressed = Input.IsActionPressed("jump"),
+        JumpJustPressed = Input.IsActionJustPressed("jump"),
 
-            WalkInput = new Vector2(
-              Input.GetActionStrength("right") - Input.GetActionStrength("left"),
-              Input.GetActionStrength("down") - Input.GetActionStrength("up")
-            ),
-            Owner = controller.Owner
-        };
+        AttackRotation = GetAttackRot(controller.Owner),
+        // AttackRotation = walkInput.Angle() + Mathf.Pi,
+        AttackJustPressed = Input.IsActionJustPressed("attack"),
+        WalkInput = walkInput,
+
+        Owner = controller.Owner
+      };
+    }
 
     static float GetAttackRot(Node2D controller) =>
         Input.GetConnectedJoypads().Count is 0

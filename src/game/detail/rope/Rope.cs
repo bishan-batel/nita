@@ -89,7 +89,7 @@ namespace Nita.game.detail.rope
 
         // Calc correction between points for that spicy rope behaviour
         float distance = segment.Pos.DistanceTo(neighbor.Pos);
-        float error = Mathf.Abs(distance - idealDist);
+        float error = Mathf.Max(Mathf.Abs(distance - idealDist), 0);
         Vector2 diff = Vector2.Zero;
 
         if (distance > idealDist)
@@ -123,18 +123,19 @@ namespace Nita.game.detail.rope
 
     public override void _PhysicsProcess(float delta)
     {
-      // Refuse to simulate unless an endpoint is set
-      if (GetNodeOrNull<Node2D>(AnchorPath) is null) return;
-
 #if DEBUG
-      if (!Engine.EditorHint)
+      if (Engine.EditorHint) return;
 #endif
-        Simulate();
+      // Refuse to simulate unless an endpoint is set
+      if (GetNodeOrNull<Node2D>(AnchorPath) is null)
+        return;
+
+      Simulate();
 
       if (_segments is null) return;
 
       // Renders points
-      Points = (from segment in _segments select segment.Pos).ToArray();
+      Points = (from segment in _segments select segment.Pos.Round()).ToArray();
     }
 
     internal struct Segment
