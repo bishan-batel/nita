@@ -26,6 +26,7 @@ namespace Nita.game.detail.fireflies
       );
       GlobalPosition += offset;
 
+      GD.Randomize();
       GlobalRotation = (float) GD.RandRange(-Mathf.Pi, Mathf.Pi);
     }
 

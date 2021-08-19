@@ -29,9 +29,7 @@ namespace Nita.game.world.actors.player
         return;
       }
 
-
       // Get all overlapping areas and bodies
-
 
       // Get all overlapping bodies and areas of IHostile
       var damageArea = GetNode<Area2D>("DamageArea");

@@ -53,10 +53,11 @@ config/icon="res://assets/textures/objects/saw/saw.png"
 [autoload]
 
 Global="*res://src/Global.cs"
+Console="*res://addons/quentincaffeino/console/src/Console.tscn"
+OptionsManager="*res://src/managers/options/OptionsManager.cs"
 GameStateManager="*res://src/managers/game/GameStateManager.cs"
 SaveManager="*res://src/managers/save/SaveManager.cs"
 SoundManager="*res://src/managers/sound/SoundManager.cs"
-Console="*res://addons/quentincaffeino/console/src/Console.tscn"
 DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
 
 [display]

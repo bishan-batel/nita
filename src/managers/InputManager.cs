@@ -1,5 +1,6 @@
 using Godot;
 using Nita.game.world.actors.player;
+using Nita.managers.options;
 
 namespace Nita.managers
 {
@@ -26,15 +27,32 @@ namespace Nita.managers
       };
     }
 
-    static float GetAttackRot(Node2D controller) =>
-        Input.GetConnectedJoypads().Count is 0
-            // Mouse aiming
-            ? controller?.GetAngleTo(controller.GetGlobalMousePosition()) ?? 0f
+    static float GetAttackRot(Node2D controller)
+    {
+      float GetMouseRotation()
+      {
+        // if (controller is null) return 0f;
+        float angle = controller.GetLocalMousePosition().Angle();
+        GD.Print(angle);
+        return angle;
+      }
 
-            // Controller aiming
-            : new Vector2(
-              Input.GetJoyAxis(0, (int) JoystickList.Axis2),
-              Input.GetJoyAxis(0, (int) JoystickList.Axis3)
-            ).Angle();
+      float GetControllerRotation()
+      {
+        float angle = new Vector2(
+          Input.GetJoyAxis(0, (int)JoystickList.Axis2),
+          Input.GetJoyAxis(0, (int)JoystickList.Axis3)
+        ).Angle();
+        GD.Print(angle);
+        return angle;
+      }
+
+      return OptionsManager.Options.ControllerMode == OptionsData.ControllerModeE.Mouse
+          // Mouse aiming
+          ? GetMouseRotation()
+
+          // Controller aiming
+          : GetControllerRotation();
+    }
   }
 }

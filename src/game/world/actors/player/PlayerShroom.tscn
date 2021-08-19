@@ -232,6 +232,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 22 )
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -1 )
 shape = SubResource( 23 )
 
