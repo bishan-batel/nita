@@ -2,6 +2,7 @@
 
 using System;
 using System.Reactive.Linq;
+using System.Windows;
 using Godot;
 using Nita.addons.godotrx;
 using Nita.debug;
@@ -12,11 +13,11 @@ namespace Nita
   {
     // Window constants
     public const float AspectRatio = 16f / 9f;
-    public static readonly (int width, int height) WindowSize = (300, 268);
+    public static readonly (int width, int height) WindowSize = (256, 144);
 
     // Upscale window constants used for rendering UI / text
-    public static readonly (int width, int height) UpscaledWindowSize = (1600, 900);
-    public static readonly float WinUpscaleFactor = WindowSize.width / (float) UpscaledWindowSize.width;
+    public static Vector2 UpScaledWindowSize => Singleton?.GetViewport()?.Size ?? Vector2.Zero;
+    public static readonly float WinUpscaleFactor = UpScaledWindowSize.x / WindowSize.width;
 
     public Global() => Singleton = Singleton is null
         ? this

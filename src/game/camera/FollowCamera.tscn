@@ -10,8 +10,8 @@ monitorable = false
 collision_layer = 0
 collision_mask = 524288
 script = ExtResource( 1 )
-SmoothingSpeed = 0.066
-MaxSmoothVel = 2.0
+SmoothingSpeed = 0.045
+MaxSmoothVel = 1.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

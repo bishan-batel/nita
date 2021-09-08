@@ -75,12 +75,12 @@ namespace Nita.debug
 
       public void Register()
       {
-        var cmd = (Object) Singleton.Call("add_command", _name, _instance, _funcName);
-        cmd = (Object) cmd.Call("set_description", _description);
+        var cmd = (Object)Singleton.Call("add_command", _name, _instance, _funcName);
+        cmd = (Object)cmd.Call("set_description", _description);
 
         _arguments
             .Aggregate(cmd, (chain, arg) =>
-                (Object) chain.Call("add_argument", arg.name, arg.type))
+                (Object)chain.Call("add_argument", arg.name, arg.type))
             .Call("register");
       }
     }

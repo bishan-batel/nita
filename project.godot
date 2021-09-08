@@ -52,10 +52,10 @@ config/icon="res://assets/textures/objects/saw/saw.png"
 
 [autoload]
 
-Global="*res://src/Global.cs"
 Console="*res://addons/quentincaffeino/console/src/Console.tscn"
-OptionsManager="*res://src/managers/options/OptionsManager.cs"
+Global="*res://src/Global.cs"
 GameStateManager="*res://src/managers/game/GameStateManager.cs"
+Options="*res://src/managers/options/Options.cs"
 SaveManager="*res://src/managers/save/SaveManager.cs"
 SoundManager="*res://src/managers/sound/SoundManager.cs"
 DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
@@ -76,7 +76,7 @@ convert_text_resources_to_binary_on_export=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/quentincaffeino/console/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/quentincaffeino/console/plugin.cfg" )
 
 [gui]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon_mouse.svg-65fdce0bc70431b4c9e7ae2a858f7b29.stex"
+path="res://.import/garden_background.png-e388e15287937c118b22134b270c7eb0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/zoomy/icon_mouse.svg"
-dest_files=[ "res://.import/icon_mouse.svg-65fdce0bc70431b4c9e7ae2a858f7b29.stex" ]
+source_file="res://assets/textures/tilemaps/garden/garden_background.png"
+dest_files=[ "res://.import/garden_background.png-e388e15287937c118b22134b270c7eb0.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -29,7 +29,7 @@ namespace Nita.game
       var control = node.GetNode<Control>("DialogNode");
 
       await this.WaitNextIdleFrame();
-      control.RectSize = new Vector2(Global.UpscaledWindowSize.width, Global.UpscaledWindowSize.height);
+      control.RectSize = Global.UpScaledWindowSize;
       control.RectScale = Vector2.One * Global.WinUpscaleFactor;
 
       return node;

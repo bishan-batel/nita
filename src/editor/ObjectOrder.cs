@@ -13,6 +13,7 @@ using Nita.game.world.objects.ilkspring;
 using Nita.game.world.objects.saw;
 using Nita.game.world.objects.shroomvine_wheel;
 using Nita.game.world.objects.sporevine;
+using Nita.game.world.terrain.Platform;
 using Nita.game.world.tilemaps;
 
 namespace Nita.editor
@@ -35,6 +36,7 @@ namespace Nita.editor
       typeof(Saw),
       typeof(Chloropom),
       typeof(Checkpoint),
+      typeof(Platform),
       typeof(GroundMap),
       typeof(MechanicalDoor),
       typeof(MechanicalRotate)
@@ -53,11 +55,16 @@ namespace Nita.editor
     {
       if (node is null) return;
       node.ZAsRelative = false;
-      node.ZIndex = GetLayer(node.GetType());
+      int z = GetLayer(node.GetType());
 
-      // If the search failed, double check with script
-      if (node.ZIndex != -1) return;
+      if (z != -1)
+      {
+        node.ZIndex = z;
+        return;
+      }
 
+      // If the search failed, double check with script name (crude way I know but it's better than making every
+      // node I want to be ordered have a tool script attached)
       if (node.GetScript() is not CSharpScript script) return;
 
       string name = script
@@ -67,13 +74,10 @@ namespace Nita.editor
           .Last()
           .ToLower()
           .Trim();
-      node.ZIndex = Order.FindIndex(type => type.Name.ToLower() == name);
+      z = Order.FindIndex(type => type.Name.ToLower() == name);
+      if (z != -1) node.ZIndex = z;
     }
 
-    public static int GetLayer(object obj) =>
-        GetLayer(obj.GetType());
-
-    public static int GetLayer(Type type) =>
-        Order.IndexOf(type);
+    public static int GetLayer(Type type) => Order.IndexOf(type);
   }
 }

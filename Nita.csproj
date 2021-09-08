@@ -9,7 +9,6 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="GDMechanic" Version="1.0.0-alpha4" />
-        <PackageReference Include="Godot.NET.Sdk" Version="3.3.0" />
         <PackageReference Include="GodotOnReady" Version="1.1.1" />
         <PackageReference Include="GodotTools.IdeMessaging" Version="1.1.1" />
         <PackageReference Include="TiledCS" Version="2.1.1" />

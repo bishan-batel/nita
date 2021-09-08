@@ -67,10 +67,10 @@ func _input(e):
 			var commands = Console.get_command_service().find(self.text)
 			if commands.length == 1:
 				self.set_text(commands.get_by_index(0).get_name())
-			else:
-				for command in commands.getValueIterator():
-					var name = command.get_name()
-					Console.write_line('[color=#ffff66][url=%s]%s[/url][/color]' % [ name, name ])
+			#else:
+			#	for command in commands.getValueIterator():
+			#		var name = command.get_name()
+			#		Console.write_line('[color=#ffff66][url=%s]%s[/url][/color]' % [ name, name ])
 		else:
 			self._autocomplete_triggered_timer = get_tree().create_timer(1.0, true)
 			var autocompleted_command = Console.get_command_service().autocomplete(self.text)
