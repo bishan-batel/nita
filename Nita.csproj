@@ -5,7 +5,6 @@
     </PropertyGroup>
     <ItemGroup>
         <Folder Include="src\game\world\objects\saw" />
-        <Folder Include="src\ui\menu" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="GDMechanic" Version="1.0.0-alpha4" />
