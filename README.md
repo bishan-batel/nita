@@ -17,7 +17,7 @@ named 'godot' (my example, inside `/home/your_username/godot/`)
 After, rename the executable to just 'godot'
 
 ### Build & Run Script
-To get the build and run script either download 'build_and_run.sh' from the repo above & run it with the termanal
+To get the build and run script either download 'build_and_run.sh' from the repo above
 <br><b>OR</b><br>
 Create a nita.sh file and paste the follow text inside
 
@@ -79,7 +79,8 @@ echo "Build complete, attempting run"
 $HOME/godot/godo* --quiet
 ```
 
-
+After you get your run .sh file, run it with the terminal to launch the project.
+<br>It should open the godot window with it saying "building solutions...", close, then open the actual game.
 
 
 ## Resource Credits
