@@ -47,9 +47,4 @@ else
 fi
 
 chmod +x $HOME/godot/godo*
-
-$HOME/godot/godo* --build-solutions -q --quiet
-
-echo "Build complete, attempting run"
-
-$HOME/godot/godo* --quiet
+$HOME/godot/godo* --build-solutions -e
