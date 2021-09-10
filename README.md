@@ -72,15 +72,11 @@ fi
 
 chmod +x $HOME/godot/godo*
 
-$HOME/godot/godo* --build-solutions -q --quiet
-
-echo "Build complete, attempting run"
-
-$HOME/godot/godo* --quiet
+$HOME/godot/godo* --build-solutions -e
 ```
 
 After you get your run .sh file, run it with the terminal to launch the project.
-<br>It should open the godot window with it saying "building solutions...", close, then open the actual game.
+<br>It should open the godot window with it saying "building solutions...", After it is finished with build solutions (and/or reimporting assets), click the play button in the top right corner of the screen to run the project (5 icons to the left from 'Build').
 
 
 ## Resource Credits
