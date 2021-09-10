@@ -7,7 +7,7 @@ namespace Nita.game.world.objects.sporevine
   [Tool]
   public class Sporevine : Line2D
   {
-    [Node("HostileArea/CollisionShape2D")] CollisionShape2D _collisionShape;
+    [Node("HostileArea/CollisionShape2D")] readonly CollisionShape2D _collisionShape = null;
 
     public override void _Ready()
     {
@@ -17,13 +17,13 @@ namespace Nita.game.world.objects.sporevine
 
     public void UpdatePoints()
     {
-      if (Points is null || Points.Length == 0 || Points.Length > 2)
-        Points = new[] {new Vector2(), new Vector2()};
+      if (Points is null || Points.Length is 0 or > 2)
+        Points = new Vector2[2];
 
       _collisionShape.Shape = new SegmentShape2D
       {
-          A = Points[0],
-          B = Points[1]
+        A = Points[0],
+        B = Points[1]
       };
     }
   }

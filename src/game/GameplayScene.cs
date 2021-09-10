@@ -111,19 +111,35 @@ namespace Nita.game
       this.AddCommand(
         "room",
         "Changes room to specified ID",
-        nameof(CmdRoom),
+        nameof(_cmdRoom),
         ("room_name", Variant.Type.String)
+      );
+
+      this.AddCommand(
+        "rooms",
+        "gets all rooms",
+        nameof(_cmdRooms)
       );
     }
 
-    void CmdRoom(string roomName)
+    void _cmdRooms()
+    {
+      RoomList
+          .Rooms
+          .Keys
+          .ToList()
+          .ForEach(GConsole.WriteLine);
+    }
+
+    void _cmdRoom(string roomName)
     {
       if (!RoomList.IsValidRoomName(roomName))
       {
-        GConsole.WriteLine($"[color=red]{roomName} is invalid");
+        GConsole.WriteLine($"[color=red]{roomName} is not a valid room name (see cmd:rooms)[/color]");
         return;
       }
 
+      GConsole.WriteLine($"Loading into room {roomName}");
       LoadRoom(roomName);
     }
   }

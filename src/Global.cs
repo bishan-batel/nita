@@ -45,6 +45,7 @@ namespace Nita
 
     void AddDefaultCommands()
     {
+
       this.AddCommand("exit", "Exits out of console", nameof(CmdExit));
       this.AddCommand(
         "timescale",

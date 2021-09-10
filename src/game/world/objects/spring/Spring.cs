@@ -19,18 +19,19 @@ namespace Nita.game.world.objects.spring
       this
           .OnBodyEntered()
           .Cast<PlayerShroom>()
-          .Subscribe(ApplyImpulse)
+          .Subscribe(_applyImpulse)
           .DisposeWith(this);
     }
 
-    void ApplyImpulse(PlayerShroom body)
+    void _applyImpulse(PlayerShroom body)
     {
       if (_player.IsPlaying()) return;
 
       Vector2 impulse = GetImpulse() * Impulse;
-      impulse.y -= body.Velocity.y;
-
-      body.ApplyForce(impulse);
+      // impulse.y -= body.Velocity.y;
+      // body.ApplyForce(impulse);
+      body.Velocity = impulse;
+      
       body.IsJumpHold = true;
       _player.Play("activate");
     }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/textures/objects/sporevine/sporevine.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/world/objects/sporevine/sporevine.png" type="Texture" id=1]
 [ext_resource path="res://src/game/world/objects/sporevine/Sporevine.cs" type="Script" id=2]
 [ext_resource path="res://src/game/mechanic/hostile/HostileArea.tscn" type="PackedScene" id=3]
 

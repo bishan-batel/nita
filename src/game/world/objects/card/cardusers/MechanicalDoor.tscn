@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/textures/objects/keycard/cardusers/mechanical_door.png" type="Texture" id=1]
+[ext_resource path="res://assets/textures/world/objects/keycard/cardusers/mechanical_door.png" type="Texture" id=1]
 [ext_resource path="res://src/game/world/objects/card/cardusers/MechanicalDoor.cs" type="Script" id=2]
 [ext_resource path="res://src/game/world/objects/card/CardIndicator.tscn" type="PackedScene" id=3]
 

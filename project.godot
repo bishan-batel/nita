@@ -48,7 +48,7 @@ config/name="Nita"
 run/main_scene="res://src/menu/Menu.tscn"
 boot_splash/image="res://assets/loading.png"
 boot_splash/use_filter=false
-config/icon="res://assets/textures/objects/saw/saw.png"
+config/icon="res://assets/textures/world/objects/saw/saw.png"
 
 [autoload]
 
