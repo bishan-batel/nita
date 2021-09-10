@@ -72,11 +72,11 @@ fi
 
 chmod +x $HOME/godot/godo*
 
-$HOME/godot/godo* --build-solutions --no-window -q --quiet
+$HOME/godot/godo* --build-solutions -q --quiet
 
 echo "Build complete, attempting run"
 
-$HOME/godot/godo* --verbose
+$HOME/godot/godo* --quiet
 ```
 
 
