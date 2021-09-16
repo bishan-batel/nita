@@ -23,7 +23,6 @@ namespace Nita
         ? this
         : throw
             new Exception("Duplicate " + nameof(Global) + "found");
-
     public static Global Singleton { private set; get; }
 
 
@@ -47,9 +46,7 @@ namespace Nita
     {
 
       this.AddCommand("exit", "Exits out of console", nameof(CmdExit));
-      this.AddCommand(
-        "timescale",
-        "Speeds up or slows down game by a factor",
+      this.AddCommand( "timescale", "Speeds up or slows down game by a factor",
         nameof(CmdTimescale),
         ("factor", Variant.Type.Real)
       );
