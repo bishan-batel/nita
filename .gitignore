@@ -3,3 +3,4 @@ mono_crash*
 .mono/
 export_presets.cfg
 .import/
+.vscode/
