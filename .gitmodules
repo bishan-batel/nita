@@ -1,0 +1,3 @@
+[submodule "nita-obsidian"]
+	path = nita-obsidian
+	url = https://github.com/bishan-batel/nita-obsidian
