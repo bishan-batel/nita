@@ -23,9 +23,12 @@ namespace Nita.game.world.actors.player
     public override void _PhysicsProcess(float delta)
     {
       _velocity = MoveAndSlide(_velocity, Vector2.Up, true);
-      
+
       if (!_onGroundLastFrame && IsOnFloor())
+      {
         Input.StartJoyVibration(0, 1.0f, 1.0f, .1f);
+        EmitSignal(nameof(OnLand)); 
+      }
       _onGroundLastFrame = IsOnFloor();
 
       _turnAnim();
@@ -65,6 +68,7 @@ namespace Nita.game.world.actors.player
         _velocity.y = -JumpStrength;
         IsJumpHold = true;
         _animPlayback.Start("jump");
+        EmitSignal(nameof(OnJump));
       }
       else if (IsJumpHold && ControlActive)
       {

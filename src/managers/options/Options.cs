@@ -32,7 +32,7 @@ namespace Nita.managers.options
 
     void _setupDefaultOptions()
     {
-      PutIfEmpty(Option.UseController, true);
+      PutIfEmpty(Option.UseController, false);
     }
 
     void _setupCommands()

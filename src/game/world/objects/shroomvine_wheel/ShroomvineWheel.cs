@@ -1,3 +1,4 @@
+using GDMechanic.Wiring;
 using Godot;
 using Nita.game.mechanic.hittable;
 
@@ -20,6 +21,8 @@ namespace Nita.game.world.objects.shroomvine_wheel
 
 	  // Snaps angle to multiple of SpeedSnap
 	  _angle = Mathf.Round(_angle / SpeedSnap) * SpeedSnap;
+	  
+	  this.Wire();
 	}
 
 	public override void _Process(float delta)
@@ -33,6 +36,10 @@ namespace Nita.game.world.objects.shroomvine_wheel
 	public void _on_HittableArea_OnHit(HitInformation hitInfo)
 	{
 	  _angVel -= HitImpulse;
+	  EmitSignal(nameof(OnHit));
 	}
+
+	[Signal]
+	public delegate void OnHit();
   }
 }

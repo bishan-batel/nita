@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/game/room/Room.cs" type="Script" id=1]
 [ext_resource path="res://src/game/world/terrain/tilemaps/GroundMap.tscn" type="PackedScene" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://src/game/world/terrain/platform/Platform.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/textures/tilemaps/garden/broken/signs.png" type="Texture" id=24]
 [ext_resource path="res://src/game/world/objects/spring/Spring.tscn" type="PackedScene" id=25]
-[ext_resource path="res://src/game/world/static_damage/Stalactite.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -1580,8 +1579,5 @@ position = Vector2( 866, -256 )
 z_index = 7
 z_as_relative = false
 points = PoolVector2Array( 79, 73, 52, 66 )
-
-[node name="Stalactite" parent="Objects/Spikes" instance=ExtResource( 26 )]
-position = Vector2( 1351, 137 )
 
 [editable path="CanvasLayer/FungalPlainsParallax"]

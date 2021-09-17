@@ -83,5 +83,12 @@ namespace Nita.game.world.actors.player
       _sprite.GlobalPosition = GlobalPosition.Round();
       _sprite.Scale = Vector2.One;
     }
+
+    // Sound Signals
+    [Signal] public delegate void OnJump();
+
+    [Signal] public delegate void OnLand();
+
+    [Signal] public delegate void OnHit();
   }
 }

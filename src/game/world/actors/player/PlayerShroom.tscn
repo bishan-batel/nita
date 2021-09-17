@@ -1,8 +1,10 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/textures/mushroom/player/nita.png" type="Texture" id=1]
 [ext_resource path="res://src/game/world/actors/player/PlayerShroom.cs" type="Script" id=2]
 [ext_resource path="res://assets/textures/mushroom/player/fungus_attack.png" type="Texture" id=3]
+[ext_resource path="res://src/managers/sound/sfx/Sfx2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sound/world/objects/player.jump.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -267,3 +269,10 @@ collision_mask = 8
 visible = false
 position = Vector2( 0, -2 )
 shape = SubResource( 26 )
+
+[node name="Sfx2DJump" parent="." instance=ExtResource( 4 )]
+stream = ExtResource( 5 )
+volume_db = -4.0
+bus = "Game"
+
+[connection signal="OnJump" from="." to="Sfx2DJump" method="play"]

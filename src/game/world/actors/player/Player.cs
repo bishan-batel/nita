@@ -1,6 +1,9 @@
 using Godot;
 
-public class Rofl : Node {
-  public override void _Ready() {
+namespace Nita.game.world.actors.player
+{
+  public class Player: Node {
+    public override void _Ready() {
+    }
   }
 }

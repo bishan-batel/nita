@@ -3,6 +3,7 @@ using Godot;
 using Godot.Collections;
 using Nita.game.mechanic.hittable;
 using Nita.game.mechanic.hostile;
+using Nita.game.world.objects.shroomvine_wheel;
 
 namespace Nita.game.world.actors.player
 {
@@ -87,6 +88,7 @@ namespace Nita.game.world.actors.player
       _inKnockback = false;
       if (_animPlayback.GetCurrentNode() is "sleeping" || !_controller.AttackJustPressed) return;
       _attackPlayer.Play("attack");
+      EmitSignal(nameof(OnHit));
     }
 
     float GetAttackRotation() => Mathf.Round((_controller.AttackRotation + Mathf.Tau) / AttackRotSnap) * AttackRotSnap;

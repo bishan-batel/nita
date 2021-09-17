@@ -69,7 +69,6 @@ namespace Nita.game.world.objects.checkpoint
 
     public void LoadFrom(ISerializable obj)
     {
-      GD.Print("Rofl ROFL ROFL ROFL");
       if (obj is not CheckpointManagerSave save) return;
       ClaimedPath = save.Path;
     }
