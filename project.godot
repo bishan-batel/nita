@@ -63,7 +63,6 @@ Global="*res://src/Global.cs"
 GameStateManager="*res://src/managers/game/GameStateManager.cs"
 Options="*res://src/managers/options/Options.cs"
 SaveManager="*res://src/managers/save/SaveManager.cs"
-SoundManager="*res://src/managers/sound/SoundManager.cs"
 DialogicSingleton="*res://addons/dialogic/Other/DialogicSingleton.gd"
 
 [display]
@@ -247,6 +246,7 @@ debugger_agent/wait_timeout=10000
 
 [physics]
 
+common/physics_jitter_fix=1.0
 common/enable_pause_aware_picking=true
 
 [rendering]

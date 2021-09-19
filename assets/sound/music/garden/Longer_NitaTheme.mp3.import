@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Longer_NitaTheme.mp3-bbe752f2d1d562ba5bf9b4529fe61c7f.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/music/garden/Longer_NitaTheme.mp3"
+dest_files=[ "res://.import/Longer_NitaTheme.mp3-bbe752f2d1d562ba5bf9b4529fe61c7f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

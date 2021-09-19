@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/managers/sound/sfx/Sfx2D.cs" type="Script" id=1]
 
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
 [node name="Sfx2D" type="AudioStreamPlayer2D"]
 max_distance = 200.0
+bus = "Game"
 script = ExtResource( 1 )
+RandomCurve = SubResource( 1 )
+Streams = [  ]

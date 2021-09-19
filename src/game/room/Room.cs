@@ -125,7 +125,12 @@ namespace Nita.game.room
 
 	  // Room-bound Persistent Node Loading
 	  var roomSave = saveFile.RoomData[RoomName];
-	  if (roomSave is null) return;
+	  if (roomSave is null)
+	  {
+		  EmitSignal(nameof(OnLoadNew));
+		  return;
+	  }
+	  EmitSignal(nameof(OnLoadFromSave));
 
 	  this.DebugPrint($"Loading {RoomName} from save file");
 
@@ -188,5 +193,11 @@ namespace Nita.game.room
 			saveFile.GlobalData[globalPersistant.UniqueName] = nodeSave;
 		  });
 	}
+
+	[Signal]
+	public delegate void OnLoadNew();
+	
+	[Signal]
+	public delegate void OnLoadFromSave();
   }
 }
