@@ -1,3 +1,3 @@
 # Nita (original)
 ## ⚠️ Deprecated as of 2021
-This is the original code for nita before we reset to a new codebase as the games scope and intention differed from the jank prototype we made.
+This is the original code for nita before we reset to a new codebase as the games scope and intention differed from the jank prototype we made. The main nita project has moved to a seperate private repository.
